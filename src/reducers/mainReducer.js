@@ -1,5 +1,5 @@
 import {
-  HANDLE_INPUT_CHANGE,
+  HANDLE_STEP_CHANGE,
   ADD_NEW_COMMENT,
   REMOVE_COMMENT
 } from "../actions/actionTypes";
@@ -9,15 +9,16 @@ const initialState = {
   fName: "",
   lName: "",
   subject: "",
-  message: ""
+  message: "",
+  stepNo:"zero"
 };
 
 const mainReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case HANDLE_INPUT_CHANGE:
+    case HANDLE_STEP_CHANGE:
       return {
         ...state,
-        [payload.name]: payload.value
+        stepNo: payload
       };
     case ADD_NEW_COMMENT:
       const { fName, lName, subject, message, comments } = state;

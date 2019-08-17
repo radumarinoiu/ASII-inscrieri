@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import "./Home.scss";
+import classnames from "classnames";
+
 import {
-  handleInputChange,
   addNewComment,
-  removeComment
+  removeComment,
+  handleStepChange
 } from "../../actions/mainActions";
 
 class Home extends Component {
@@ -14,7 +17,9 @@ class Home extends Component {
       value: e.target.value
     });
   };
-  
+  handleStepChange = stepNo => {
+    this.props.handleStepChange(stepNo);
+  };
 
   addNewComment = e => {
     console.log(e);
@@ -27,123 +32,136 @@ class Home extends Component {
     this.props.removeComment(e.target.id);
   };
   render() {
-    const { comments } = this.props;
+    const { comments, stepNo } = this.props;
+    console.log(this.props);
     return (
       <Fragment>
         {this.props && (
-          <div className="container ">
-            <div className="row s8 offset-s2">
-              <form action="" onSubmit={this.addNewComment} className="col s8 offset-s2 red-text">
-                <div className="header col s12 center darken-1-text">
-                  <h2>Add Comment</h2>
-                </div>
-                <div className="row">
-                  <div className="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input
-                      type="text"
-                      onChange={this.handleInputChange}
-                      id="fName"
-                      value={this.props.fName}
-                      name="fName"
-                      className="validate"
-                    />
-                    <label htmlFor="fName">First Name</label>
+          <div>
+            <div className="row">
+              <div className="header-image col s12 m12 l12" />
+            </div>
+            <div className="container">
+              <div className="row center">
+                <div className="register-form col s12  center">
+                  <div className="nav-list-icons col s12 m12 l12">
+                    <div className="container-for-btn">
+                      <span className="tooltip-simple">Home</span>
+                      <button
+                        className={classnames("btn-nav-list", {
+                          "active": stepNo === "zero"
+                        })}
+                        onClick={() => this.handleStepChange("zero")}
+                      >
+                        <i class="fas fa-home" />
+                      </button>
+                    </div>
+                    <div className="container-for-btn">
+                      <span className="tooltip-simple">Despre tine</span>
+                      <button
+                        className={classnames("btn-nav-list", {
+                          "active": stepNo === "one"
+                        })}
+                        onClick={() => this.handleStepChange("one")}
+                      >
+                        <i class="fas fa-info-circle" />
+                      </button>
+                    </div>
+                    <div className="container-for-btn">
+                      <span className="tooltip-simple">De ce ASII?</span>
+                      <button
+                        className={classnames("btn-nav-list", {
+                          "active ": stepNo === "two"
+                        })}
+                        onClick={() => this.handleStepChange("two")}
+                      >
+                        <i class="far fa-question-circle" />
+                      </button>
+                    </div>
+                    <div className="container-for-btn">
+                      <span className="tooltip-simple">Unde in ASII?</span>
+                      <button
+                        className={classnames("btn-nav-list", {
+                          "active": stepNo === "three"
+                        })}
+                        onClick={() => this.handleStepChange("three")}
+                      >
+                        <i class="fas fa-search-location" />
+                      </button>
+                    </div>
+
+                    {/* <button
+                      className="btn-nav-list tooltipped"
+                      data-position="bottom"
+                      data-tooltip="I am a tooltip"
+                    >
+                      <i class="fas fa-info-circle" />
+                    </button>
+                    <button className="btn-nav-list">
+                      <i class="far fa-question-circle" />
+                    </button>
+                    <button className="btn-nav-list">
+                      <i class="fas fa-search-location" />
+                    </button> */}
                   </div>
-                  <div className="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input
-                      type="text"
-                      onChange={this.handleInputChange}
-                      id="lName"
-                      value={this.props.lName}
-                      name="lName"
-                      className="validate"
-                    />
-                    <label htmlFor="lName">Last Name</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s12">
-                    <i class="material-icons prefix">chrome_reader_mode</i>
-                    <input
-                      type="text"
-                      id="subject"
-                      onChange={this.handleInputChange}
-                      name="subject"
-                      value={this.props.subject}
-                      className="validate"
-                    />
-                    <label htmlFor="subject">Subject Here</label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s12">
-                    <i class="material-icons prefix">chrome_reader_mode</i>
-                    <textarea
-                      id="message"
-                      onChange={this.handleInputChange}
-                      name="message"
-                      cols="30"
-                      value={this.props.message}
-                      rows="10"
-                      className="materialize-textarea"
-                    />
-                    <label htmlFor="message">Message</label>
-                  </div>
-                </div>
-                <div className="row center">
-                  <button
-                    onKeyDown={this.addNewComment}
-                    onClick={this.addNewComment}
-                    class="btn-floating btn-large waves-effect waves-light red"
+                  <div />
+                  <div
+                    className={classnames(
+                      "data-container z-depth-1 col s12 m12 l12",
+                      { "step-zero animated fadeIn": stepNo === "zero" }
+                    )}
                   >
-                    <i class="material-icons">add</i>
-                  </button>
+                    <p>
+                      zero Lorem, ipsum dolor sit amet consectetur adipisicing
+                      elit. Consectetur, fuga. Reiciendis repellendus, quas
+                      debitis asperiores eius excepturi, magnam ut officia neque
+                      saepe, optio tempora sed consequuntur maiores et.
+                      Officiis, nesciunt.
+                    </p>
+                  </div>
+                  <div
+                    className={classnames(
+                      "data-container z-depth-1 col s12 m12 l12",
+                      { "step-one animated fadeIn ": stepNo === "one" }
+                    )}
+                  >
+                    <p>
+                      one Lorem, ipsum dolor sit amet consectetur adipisicing
+                      elit. Consectetur, fuga. Reiciendis repellendus, quas
+                      debitis asperiores eius excepturi, magnam ut officia neque
+                      saepe, optio tempora sed consequuntur maiores et.
+                      Officiis, nesciunt.
+                    </p>
+                  </div>
+                  <div
+                    className={classnames(
+                      "data-container z-depth-1 col s12 m12 l12",
+                      { "step-two animated fadeIn": stepNo === "two" }
+                    )}
+                  >
+                    <p>
+                      two Lorem, ipsum dolor sit amet consectetur adipisicing
+                      elit. Consectetur, fuga. Reiciendis repellendus, quas
+                      debitis asperiores eius excepturi, magnam ut officia neque
+                      saepe, optio tempora sed consequuntur maiores et.
+                      Officiis, nesciunt.
+                    </p>
+                  </div>
+                  <div
+                    className={classnames(
+                      "data-container z-depth-1 col s12 m12 l12",
+                      { "step-two animated fadeIn": stepNo === "three" }
+                    )}
+                  >
+                    <p>
+                      three Lorem, ipsum dolor sit amet consectetur adipisicing
+                      elit. Consectetur, fuga. Reiciendis repellendus, quas
+                      debitis asperiores eius excepturi, magnam ut officia neque
+                      saepe, optio tempora sed consequuntur maiores et.
+                      Officiis, nesciunt.
+                    </p>
+                  </div>
                 </div>
-              </form>
-
-              <div className="row ">
-                <table className="highlight ">
-                  <thead>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Subject</th>
-                      <th>Message</th>
-                      <th>Remove</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {comments.map(comment => {
-                      return (
-                        <tr>
-                          <td>{comment.fName}</td>
-                          <td>{comment.lName}</td>
-                          <td>{comment.subject}</td>
-                          <td>{comment.message}</td>
-                          <td>
-                            <input
-                              type="hidden"
-                              name="idForElement"
-                              value={comment.id}
-                            />
-                            <button class="btn-floating waves-effect waves-light red">
-                              <i
-                                id={comment.id}
-                                onClick={this.removeComment}
-                                class="material-icons"
-                              >
-                                remove
-                              </i>
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
@@ -153,9 +171,9 @@ class Home extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  handleInputChange: objectData => dispatch(handleInputChange(objectData)),
   removeComment: id => dispatch(removeComment(id)),
-  addNewComment: () => dispatch(addNewComment())
+  addNewComment: () => dispatch(addNewComment()),
+  handleStepChange: stepNo => dispatch(handleStepChange(stepNo))
 });
 
 const mapStateToProps = state => {

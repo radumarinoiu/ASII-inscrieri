@@ -1,12 +1,12 @@
 import {
-  HANDLE_INPUT_CHANGE,
+  HANDLE_STEP_CHANGE,
   ADD_NEW_COMMENT,
   REMOVE_COMMENT
 } from "./actionTypes";
 
-export const handleInputChange = objData => dispatch => {
+export const handleStepChange = objData => dispatch => {
   dispatch({
-    type: HANDLE_INPUT_CHANGE,
+    type: HANDLE_STEP_CHANGE,
     payload: objData
   });
 };
