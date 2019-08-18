@@ -27,6 +27,10 @@
     &.step-three {
       display: block;
     }
+
+    h3.header {
+      color: #d63734;
+    }
   }
 }
 .nav-list-icons {
@@ -130,11 +134,11 @@
     background: red;
   }
 }
-.asii-button{
-    z-index: 10;
-    img{
-        height: 100%;
-    }
+.asii-button {
+  z-index: 10;
+  img {
+    height: 100%;
+  }
 }
 
 .btn-nav-list:hover,

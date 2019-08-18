@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./Home.scss";
 import classnames from "classnames";
+import CustomInputText from "../shared/CustomInputText/CustomInputText";
 import M from "materialize-css";
 import {
   addNewComment,
   removeComment,
+  handleInputChange,
   handleStepChange
 } from "../../actions/mainActions";
 
@@ -36,7 +38,15 @@ class Home extends Component {
     this.props.removeComment(e.target.id);
   };
   render() {
-    const { stepNo } = this.props;
+    const {
+      stepNo,
+      fName,
+      lName,
+      phoneNumber,
+      faculty,
+      yearOfStudy,
+      email
+    } = this.props;
     console.log(this.props);
     return (
       <Fragment>
@@ -163,40 +173,133 @@ class Home extends Component {
                         <i class="fas fa-search-location" />
                       </button>
                     </div>
-
-                    {/* <button
-                      className="btn-nav-list tooltipped"
-                      data-position="bottom"
-                      data-tooltip="I am a tooltip"
-                    >
-                      <i class="fas fa-info-circle" />
-                    </button>
-                    <button className="btn-nav-list">
-                      <i class="far fa-question-circle" />
-                    </button>
-                    <button className="btn-nav-list">
-                      <i class="fas fa-search-location" />
-                    </button> */}
                   </div>
                   <div />
                   <div
                     className={classnames(
                       "data-container z-depth-1 col s12 m12 l12",
-                      { "step-zero animated fadeIn": stepNo === "zero" }
+                      { "step-one animated fadeIn": stepNo === "one" }
                     )}
                   >
-                    <p>
-                      zero Lorem, ipsum dolor sit amet consectetur adipisicing
-                      elit. Consectetur, fuga. Reiciendis repellendus, quas
-                      debitis asperiores eius excepturi, magnam ut officia neque
-                      saepe, optio tempora sed consequuntur maiores et.
-                      Officiis, nesciunt.
-                    </p>
+                    <h3 class="header">Spune-ne despre tine</h3>
+                    <h6>Cateva detalii esentiale despre tine</h6>
+                    <div className="row">
+                      <div className="col s12 m12 l4">
+                        <CustomInputText
+                          handleChange={this.handleInputChange}
+                          iconCode="supervised_user_circle"
+                          dataError="Name is not valid.Length must be at least 3 chars."
+                          type="text"
+                          min="3"
+                          max="100"
+                          name="fName"
+                          id="fName"
+                          value={fName}
+                          label="First Name"
+                        />
+                      </div>
+                      <div className="col s12 m12 l4">
+                        <CustomInputText
+                          handleChange={this.handleInputChange}
+                          iconCode="account_circle"
+                          dataError="Name is not valid.Length must be at least 3 chars."
+                          type="text"
+                          name="lName"
+                          id="lName"
+                          min="3"
+                          max="100"
+                          value={lName}
+                          label="Last Name"
+                        />
+                      </div>
+                      <div className="col s12 m12 l4">
+                        <CustomInputText
+                          handleChange={this.handleInputChange}
+                          iconCode="email"
+                          dataError="Email is not valid!"
+                          type="email"
+                          name="email"
+                          min="3"
+                          max="100"
+                          id="emailId"
+                          value={email}
+                          label="Email"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col s12 m12 l4">
+                        <CustomInputText
+                          handleChange={this.handleInputChange}
+                          iconCode="contact_phone"
+                          dataError="Phone number invalid.Length must be 10 chars."
+                          type="tel"
+                          min="10"
+                          max="10"
+                          name="phoneNumber"
+                          id="phoneNumber"
+                          value={phoneNumber}
+                          label="Phone Number"
+                        />
+                      </div>
+                      <div className="col s12 m12 l4">
+                        <CustomInputText
+                          handleChange={this.handleInputChange}
+                          iconCode="school"
+                          dataError="Faculty is not valid"
+                          type="text"
+                          name="faculty"
+                          min="3"
+                          max="100"
+                          id="faculty"
+                          value={faculty}
+                          label="Facultate"
+                        />
+                      </div>
+                      <div className="col s12 m12 l4">
+                        <CustomInputText
+                          handleChange={this.handleInputChange}
+                          iconCode="timelapse"
+                          dataError="Name is not valid"
+                          type="number"
+                          min="1"
+                          max="10"
+                          name="yearOfStudy"
+                          id="yearOfStudy"
+                          value={yearOfStudy}
+                          label="An de studiu"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col s6 m6 l6">
+                        <button
+                          class="btn waves-effect waves-light red"
+                          type="submit1"
+                          name="action"
+                        >
+                          Inapoi
+                          <i class="material-icons left">keyboard_arrow_left</i>
+                        </button>
+                      </div>
+                      <div className="col s6 m6 l6">
+                        <button
+                          class="btn waves-effect waves-light red #d63734"
+                          type="submit1"
+                          name="action"
+                        >
+                          <i class="material-icons right">
+                            keyboard_arrow_right
+                          </i>
+                          Inainte
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <div
                     className={classnames(
                       "data-container z-depth-1 col s12 m12 l12",
-                      { "step-one animated fadeIn ": stepNo === "one" }
+                      { "step-zero animated fadeIn ": stepNo === "zero" }
                     )}
                   >
                     <p>
@@ -246,6 +349,7 @@ class Home extends Component {
 }
 const mapDispatchToProps = dispatch => ({
   removeComment: id => dispatch(removeComment(id)),
+  handleInputChange: objData => dispatch(handleInputChange(objData)),
   addNewComment: () => dispatch(addNewComment()),
   handleStepChange: stepNo => dispatch(handleStepChange(stepNo))
 });

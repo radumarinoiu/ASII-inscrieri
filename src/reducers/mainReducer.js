@@ -1,16 +1,21 @@
 import {
   HANDLE_STEP_CHANGE,
   ADD_NEW_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  HANDLE_INPUT_CHANGE
 } from "../actions/actionTypes";
 import uuid from "uuid/v4";
 const initialState = {
   comments: [],
-  fName: "",
-  lName: "",
   subject: "",
   message: "",
-  stepNo:"zero"
+  stepNo: "zero",
+  fName: "",
+  lName: "",
+  phoneNumber: "",
+  faculty: "",
+  yearOfStudy: "",
+  email: ""
 };
 
 const mainReducer = (state = initialState, { type, payload }) => {
@@ -19,6 +24,11 @@ const mainReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         stepNo: payload
+      };
+    case HANDLE_INPUT_CHANGE:
+      return {
+        ...state,
+        [payload.name]: payload.value
       };
     case ADD_NEW_COMMENT:
       const { fName, lName, subject, message, comments } = state;
