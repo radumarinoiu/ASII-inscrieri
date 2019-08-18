@@ -8,6 +8,9 @@
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
+.modify-size {
+  height: 600px !important;
+}
 .container-for-btn {
   display: inline-grid;
 }
@@ -90,7 +93,7 @@
   padding: 0;
   margin: 0 !important;
   margin-top: 0.5em !important;
-  z-index:3;
+  z-index: 3;
   &:focus {
     background: transparent !important;
   }
@@ -120,6 +123,18 @@
       display: block !important;
     }
   }
+}
+.slider.fullscreen ul.indicators {
+  top: 20px !important;
+  .indicator-item.active {
+    background: red;
+  }
+}
+.asii-button{
+    z-index: 10;
+    img{
+        height: 100%;
+    }
 }
 
 .btn-nav-list:hover,

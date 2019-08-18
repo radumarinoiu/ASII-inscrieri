@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./Home.scss";
 import classnames from "classnames";
-
+import M from "materialize-css";
 import {
   addNewComment,
   removeComment,
@@ -20,6 +20,10 @@ class Home extends Component {
   handleStepChange = stepNo => {
     this.props.handleStepChange(stepNo);
   };
+  componentDidMount() {
+    var elems = document.querySelectorAll(".slider");
+    M.Slider.init(elems);
+  }
 
   addNewComment = e => {
     console.log(e);
@@ -32,14 +36,84 @@ class Home extends Component {
     this.props.removeComment(e.target.id);
   };
   render() {
-    const { comments, stepNo } = this.props;
+    const { stepNo } = this.props;
     console.log(this.props);
     return (
       <Fragment>
         {this.props && (
           <div>
             <div className="row">
-              <div className="header-image col s12 m12 l12" />
+              <div className="header-image col s12 m12 l12">
+                <a
+                  href="https://asii.ro/"
+                  class="btn-floating btn-large waves-effect waves-light red asii-button"
+                >
+                  <img src="https://asii.ro/images/logo.png" alt="" />
+                </a>
+                <div class="slider fullscreen modify-size">
+                  <ul class="slides">
+                    <li>
+                      <img src="https://asii.ro/images/background.jpg" alt="" />
+                      <div class="caption center-align">
+                        <h3>Nu lăsa studenția să treacă pe lângă tine!!</h3>
+                        <h5 class="light grey-text text-lighten-3">
+                          Asociația Studenților Informaticieni Ieşeni
+                        </h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="https://asii.ro/images/background.jpg" alt="" />
+                      <div class="caption left-align">
+                        <h3>Implicare</h3>
+                        <h5 class="light grey-text text-lighten-3">
+                          Căutăm sa găsim soluţii la problemele din jurul nostru
+                        </h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="https://asii.ro/images/background.jpg" alt="" />
+                      <div class="caption right-align">
+                        <h3>Perfecționare continua</h3>
+                        <h5 class="light grey-text text-lighten-3">
+                          Vrem sa învățăm în permanență lucruri noi în cadrul
+                          training-urilor, proiectelor și numeroaselor
+                          activități din cadrul asociației
+                        </h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="https://asii.ro/images/background.jpg" alt="" />
+                      <div class="caption center-align">
+                        <h3>Dezvoltare personală</h3>
+                        <h5 class="light grey-text text-lighten-3">
+                          Găsim moduri de a duce la bun sfarşit proiectele
+                          noastre
+                        </h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="https://asii.ro/images/background.jpg" alt="" />
+                      <div class="caption left-align">
+                        <h3>Prietenie</h3>
+                        <h5 class="light grey-text text-lighten-3">
+                          Ne împrietenim, ne jucăm, ne distrăm și facem treaba
+                          ca la carte! Here's our small slogan.
+                        </h5>
+                      </div>
+                    </li>
+                    <li>
+                      <img src="https://asii.ro/images/background.jpg" alt="" />
+                      <div class="caption right-align">
+                        <h3>Organizare</h3>
+                        <h5 class="light grey-text text-lighten-3">
+                          Vrem să dobândim aptitudini noi și să le oferim mai
+                          departe membrilor noi
+                        </h5>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div className="container">
               <div className="row center">
@@ -49,7 +123,7 @@ class Home extends Component {
                       <span className="tooltip-simple">Home</span>
                       <button
                         className={classnames("btn-nav-list", {
-                          "active": stepNo === "zero"
+                          active: stepNo === "zero"
                         })}
                         onClick={() => this.handleStepChange("zero")}
                       >
@@ -60,7 +134,7 @@ class Home extends Component {
                       <span className="tooltip-simple">Despre tine</span>
                       <button
                         className={classnames("btn-nav-list", {
-                          "active": stepNo === "one"
+                          active: stepNo === "one"
                         })}
                         onClick={() => this.handleStepChange("one")}
                       >
@@ -82,7 +156,7 @@ class Home extends Component {
                       <span className="tooltip-simple">Unde in ASII?</span>
                       <button
                         className={classnames("btn-nav-list", {
-                          "active": stepNo === "three"
+                          active: stepNo === "three"
                         })}
                         onClick={() => this.handleStepChange("three")}
                       >
