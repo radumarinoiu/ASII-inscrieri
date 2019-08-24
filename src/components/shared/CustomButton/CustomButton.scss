@@ -1,0 +1,75 @@
+@import "../../../styles/reset", "../../../styles/grid", "../../../styles/fonts";
+.btn {
+  border: none;
+  padding: 5px 5px 5px 20px;
+  border-radius: 4em;
+  background: $base-color;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  transition: all 0.5s ease-in;
+  @media screen and (max-width: $break-small) {
+    padding: 0 !important;
+    margin: 0;
+  }
+  .titleButton {
+    @media screen and (max-width: $break-small) {
+      display: none;
+    }
+  }
+  &:disabled,
+  &[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #110c0c;
+    cursor: not-allowed;
+    i {
+      background-color: #cccccc;
+    }
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  i {
+    font-size: 20px;
+    margin-left: 10px;
+    color: $base-color;
+    border-radius: 50%;
+    background: $font-icon-color;
+    color: #fff;
+    padding: 5px;
+    transition: all 0.5s ease-in-out;
+    @media screen and (max-width: $break-small) {
+      margin: 0;
+      padding: 15px;
+      font-size: 25px;
+    }
+  }
+
+  &.btn-special {
+    &.back {
+      background: $fade-base-color;
+      flex-flow: row-reverse;
+      padding: 5px 20px 5px 5px;
+      color: $fade-icon-color;
+      
+      i {
+        background: $fade-icon-color;
+        margin-left: 0;
+        margin-right: 10px;
+        @media screen and (max-width: $break-small){
+          margin:0;
+          padding:15px;
+          font-size:25px;
+        }
+      }
+    }
+    &.next {
+      margin-left: auto;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

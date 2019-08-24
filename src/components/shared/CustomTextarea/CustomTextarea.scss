@@ -1,0 +1,41 @@
+@import "../../../styles/reset", "../../../styles/grid", "../../../styles/fonts";
+$break-small: 600px;
+.group-items {
+  label {
+    position: relative;
+    color: $dark-color;
+    top: 7px;
+    left: 10px;
+    background: #fff;
+    padding: 5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    @media screen and (max-width: $break-small) {
+      display: inline-block;
+      max-width: 90%;
+      top: 15px;
+    }
+  }
+  textarea {
+    width: 100%;
+    display: block;
+    line-height: 30px;
+    font-size: 16px;
+    color:$dark-color;
+    padding: 0.6em;
+    font-family: "Roboto", sans-serif;
+    background: transparent;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 1px solid rgb(31, 31, 31);
+    margin-bottom: 10px;
+    padding-left: 0.75em;
+    @media screen and (max-width: $break-small) {
+      padding-top: 1.2em;
+    }
+    &:focus {
+      outline-offset: none;
+      outline: none;
+    }
+  }
+}

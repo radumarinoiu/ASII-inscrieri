@@ -4,7 +4,9 @@ import { withRouter } from "react-router-dom";
 import "./Home.scss";
 import classnames from "classnames";
 import CustomInputText from "../shared/CustomInputText/CustomInputText";
-import M from "materialize-css";
+import CustomTextarea from "../shared/CustomTextarea/CustomTextarea";
+import CustomButton from "../shared/CustomButton/CustomButton";
+import CustomSelect from "../shared/CustomSelect/CustomSelect";
 import {
   addNewComment,
   removeComment,
@@ -19,13 +21,16 @@ class Home extends Component {
       value: e.target.value
     });
   };
+
+  handleClick = e => {
+    const btn = e.currentTarget.name;
+    btn === "next"
+      ? this.props.handleStepChange(this.props.stepNo + 1)
+      : this.props.handleStepChange(this.props.stepNo - 1);
+  };
   handleStepChange = stepNo => {
     this.props.handleStepChange(stepNo);
   };
-  componentDidMount() {
-    var elems = document.querySelectorAll(".slider");
-    M.Slider.init(elems);
-  }
 
   addNewComment = e => {
     console.log(e);
@@ -51,292 +56,360 @@ class Home extends Component {
     return (
       <Fragment>
         {this.props && (
-          <div>
+          <div className="main">
             <div className="row">
               <div className="header-image col s12 m12 l12">
-                <a
-                  href="https://asii.ro/"
-                  class="btn-floating btn-large waves-effect waves-light red asii-button"
-                >
-                  <img src="https://asii.ro/images/logo.png" alt="" />
-                </a>
-                <div class="slider fullscreen modify-size">
-                  <ul class="slides">
-                    <li>
-                      <img src="https://asii.ro/images/background.jpg" alt="" />
-                      <div class="caption center-align">
-                        <h3>Nu lăsa studenția să treacă pe lângă tine!!</h3>
-                        <h5 class="light grey-text text-lighten-3">
-                          Asociația Studenților Informaticieni Ieşeni
-                        </h5>
-                      </div>
-                    </li>
-                    <li>
-                      <img src="https://asii.ro/images/background.jpg" alt="" />
-                      <div class="caption left-align">
-                        <h3>Implicare</h3>
-                        <h5 class="light grey-text text-lighten-3">
-                          Căutăm sa găsim soluţii la problemele din jurul nostru
-                        </h5>
-                      </div>
-                    </li>
-                    <li>
-                      <img src="https://asii.ro/images/background.jpg" alt="" />
-                      <div class="caption right-align">
-                        <h3>Perfecționare continua</h3>
-                        <h5 class="light grey-text text-lighten-3">
-                          Vrem sa învățăm în permanență lucruri noi în cadrul
-                          training-urilor, proiectelor și numeroaselor
-                          activități din cadrul asociației
-                        </h5>
-                      </div>
-                    </li>
-                    <li>
-                      <img src="https://asii.ro/images/background.jpg" alt="" />
-                      <div class="caption center-align">
-                        <h3>Dezvoltare personală</h3>
-                        <h5 class="light grey-text text-lighten-3">
-                          Găsim moduri de a duce la bun sfarşit proiectele
-                          noastre
-                        </h5>
-                      </div>
-                    </li>
-                    <li>
-                      <img src="https://asii.ro/images/background.jpg" alt="" />
-                      <div class="caption left-align">
-                        <h3>Prietenie</h3>
-                        <h5 class="light grey-text text-lighten-3">
-                          Ne împrietenim, ne jucăm, ne distrăm și facem treaba
-                          ca la carte! Here's our small slogan.
-                        </h5>
-                      </div>
-                    </li>
-                    <li>
-                      <img src="https://asii.ro/images/background.jpg" alt="" />
-                      <div class="caption right-align">
-                        <h3>Organizare</h3>
-                        <h5 class="light grey-text text-lighten-3">
-                          Vrem să dobândim aptitudini noi și să le oferim mai
-                          departe membrilor noi
-                        </h5>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                <img
+                  src={
+                    process.env.PUBLIC_URL + "/assets/images/background1.png"
+                  }
+                  class="backgroundImage desktop"
+                  alt=""
+                />
+                <img
+                  src={process.env.PUBLIC_URL + "/assets/images/bgMobile.png"}
+                  class="backgroundImage mobile"
+                  alt=""
+                />
               </div>
             </div>
-            <div className="container">
+            <div className="container absolut-zero ">
               <div className="row center">
-                <div className="register-form col s12  center">
-                  <div className="nav-list-icons col s12 m12 l12">
-                    <div className="container-for-btn">
-                      <span className="tooltip-simple">Home</span>
-                      <button
-                        className={classnames("btn-nav-list", {
-                          active: stepNo === "zero"
-                        })}
-                        onClick={() => this.handleStepChange("zero")}
-                      >
-                        <i class="fas fa-home" />
-                      </button>
-                    </div>
-                    <div className="container-for-btn">
-                      <span className="tooltip-simple">Despre tine</span>
-                      <button
-                        className={classnames("btn-nav-list", {
-                          active: stepNo === "one"
-                        })}
-                        onClick={() => this.handleStepChange("one")}
-                      >
-                        <i class="fas fa-info-circle" />
-                      </button>
-                    </div>
-                    <div className="container-for-btn">
-                      <span className="tooltip-simple">De ce ASII?</span>
-                      <button
-                        className={classnames("btn-nav-list", {
-                          "active ": stepNo === "two"
-                        })}
-                        onClick={() => this.handleStepChange("two")}
-                      >
-                        <i class="far fa-question-circle" />
-                      </button>
-                    </div>
-                    <div className="container-for-btn">
-                      <span className="tooltip-simple">Unde in ASII?</span>
-                      <button
-                        className={classnames("btn-nav-list", {
-                          active: stepNo === "three"
-                        })}
-                        onClick={() => this.handleStepChange("three")}
-                      >
-                        <i class="fas fa-search-location" />
-                      </button>
-                    </div>
-                  </div>
-                  <div />
+                <div className="register-form col s12 m8 offset-m2 l8 offset-l2 xl6 offset-xl3 center">
                   <div
-                    className={classnames(
-                      "data-container z-depth-1 col s12 m12 l12",
-                      { "step-one animated fadeIn": stepNo === "one" }
-                    )}
+                    className={classnames("data-container col s12 m12 l12", {
+                      "step-one animated fadeIn": stepNo === 0
+                    })}
                   >
-                    <h3 class="header">Spune-ne despre tine</h3>
-                    <h6>Cateva detalii esentiale despre tine</h6>
-                    <div className="row">
-                      <div className="col s12 m12 l4">
-                        <CustomInputText
-                          handleChange={this.handleInputChange}
-                          iconCode="supervised_user_circle"
-                          dataError="Name is not valid.Length must be at least 3 chars."
-                          type="text"
-                          min="3"
-                          max="100"
-                          name="fName"
-                          id="fName"
-                          value={fName}
-                          label="First Name"
-                        />
-                      </div>
-                      <div className="col s12 m12 l4">
-                        <CustomInputText
-                          handleChange={this.handleInputChange}
-                          iconCode="account_circle"
-                          dataError="Name is not valid.Length must be at least 3 chars."
-                          type="text"
-                          name="lName"
-                          id="lName"
-                          min="3"
-                          max="100"
-                          value={lName}
-                          label="Last Name"
-                        />
-                      </div>
-                      <div className="col s12 m12 l4">
-                        <CustomInputText
-                          handleChange={this.handleInputChange}
-                          iconCode="email"
-                          dataError="Email is not valid!"
-                          type="email"
-                          name="email"
-                          min="3"
-                          max="100"
-                          id="emailId"
-                          value={email}
-                          label="Email"
-                        />
-                      </div>
+                    <div className="container-header-status col 12">
+                      <img
+                        className="progress-bar-desktop"
+                        src={
+                          process.env.PUBLIC_URL +
+                          "/assets/images/Stepper" +
+                          this.props.stepNo +
+                          ".png"
+                        }
+                        alt=""
+                      />
                     </div>
-                    <div className="row">
-                      <div className="col s12 m12 l4">
-                        <CustomInputText
-                          handleChange={this.handleInputChange}
-                          iconCode="contact_phone"
-                          dataError="Phone number invalid.Length must be 10 chars."
-                          type="tel"
-                          min="10"
-                          max="10"
-                          name="phoneNumber"
-                          id="phoneNumber"
-                          value={phoneNumber}
-                          label="Phone Number"
+                    <div className="container-body col s12">
+                      <div className="container-header-status col 12">
+                        <img
+                          className="progress-bar-mobile"
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/assets/images/Stepper" +
+                            this.props.stepNo +
+                            "M@2x.png"
+                          }
+                          alt=""
                         />
                       </div>
-                      <div className="col s12 m12 l4">
-                        <CustomInputText
-                          handleChange={this.handleInputChange}
-                          iconCode="school"
-                          dataError="Faculty is not valid"
-                          type="text"
-                          name="faculty"
-                          min="3"
-                          max="100"
-                          id="faculty"
-                          value={faculty}
-                          label="Facultate"
-                        />
+                      <h3 class="header">Spune-ne despre</h3>
+                      <h3 class="header special ">
+                        tine <i class="fas fa-smile-beam" />
+                      </h3>
+                      <div className="row">
+                        <div className="col s12 m12 l8 xl6">
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              iconCode="supervised_user_circle"
+                              dataError="Name is not valid.Length must be at least 3 chars."
+                              type="text"
+                              min="3"
+                              max="100"
+                              name="fName"
+                              id="fName"
+                              placeholder="Nume"
+                              value={fName}
+                              label="Nume"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              iconCode="account_circle"
+                              dataError="Name is not valid.Length must be at least 3 chars."
+                              type="text"
+                              name="lName"
+                              id="lName"
+                              min="3"
+                              max="100"
+                              value={lName}
+                              label="Prenume"
+                              placeholder="Prenume"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              iconCode="email"
+                              dataError="Email is not valid!"
+                              type="email"
+                              name="email"
+                              min="3"
+                              max="100"
+                              id="emailId"
+                              value={email}
+                              label="Email"
+                              placeholder="yourawesomeemail@gmail.com"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              iconCode="contact_phone"
+                              dataError="Phone number invalid.Length must be 10 chars."
+                              type="tel"
+                              min="10"
+                              max="10"
+                              name="phoneNumber"
+                              id="phoneNumber"
+                              value={phoneNumber}
+                              label="Phone Number"
+                              placeholder="07xx"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              iconCode="school"
+                              dataError="Faculty is not valid"
+                              type="text"
+                              name="faculty"
+                              min="3"
+                              max="100"
+                              id="faculty"
+                              value={faculty}
+                              label="Facultate"
+                              placeholder="Informatica"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              iconCode="timelapse"
+                              dataError="Name is not valid"
+                              type="number"
+                              min="1"
+                              max="7"
+                              name="yearOfStudy"
+                              id="yearOfStudy"
+                              value={yearOfStudy}
+                              label="An de studiu"
+                              placeholder="1"
+                            />
+                          </div>
+                        </div>
+                        <div className="col s12 m12 l4 xl6">
+                          <img
+                            class="asii-logo-right"
+                            s="asii-logo-right"
+                            src="https://png.pngtree.com/element_pic/00/16/07/115783931601b5c.jpg"
+                            alt=""
+                          />
+                        </div>
                       </div>
-                      <div className="col s12 m12 l4">
-                        <CustomInputText
-                          handleChange={this.handleInputChange}
-                          iconCode="timelapse"
-                          dataError="Name is not valid"
-                          type="number"
-                          min="1"
-                          max="10"
-                          name="yearOfStudy"
-                          id="yearOfStudy"
-                          value={yearOfStudy}
-                          label="An de studiu"
-                        />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col s6 m6 l6">
-                        <button
-                          class="btn waves-effect waves-light red"
-                          type="submit1"
-                          name="action"
-                        >
-                          Inapoi
-                          <i class="material-icons left">keyboard_arrow_left</i>
-                        </button>
-                      </div>
-                      <div className="col s6 m6 l6">
-                        <button
-                          class="btn waves-effect waves-light red #d63734"
-                          type="submit1"
-                          name="action"
-                        >
-                          <i class="material-icons right">
-                            keyboard_arrow_right
-                          </i>
-                          Inainte
-                        </button>
+                      <div className="row">
+                        <div className="container-buttons step0 col s12 m12 l12 xl12">
+                          <CustomButton
+                            disable={false}
+                            handleClick={this.handleClick}
+                          />
+                          {/* <CustomButton /> */}
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div
-                    className={classnames(
-                      "data-container z-depth-1 col s12 m12 l12",
-                      { "step-zero animated fadeIn ": stepNo === "zero" }
-                    )}
+                    className={classnames("data-container col s12 m12 l12", {
+                      "step-one animated fadeIn": stepNo === 1
+                    })}
                   >
-                    <p>
-                      one Lorem, ipsum dolor sit amet consectetur adipisicing
-                      elit. Consectetur, fuga. Reiciendis repellendus, quas
-                      debitis asperiores eius excepturi, magnam ut officia neque
-                      saepe, optio tempora sed consequuntur maiores et.
-                      Officiis, nesciunt.
-                    </p>
+                    <div className="container-header-status col 12">
+                      <img
+                        className="progress-bar-desktop"
+                        src={
+                          process.env.PUBLIC_URL +
+                          "/assets/images/Stepper" +
+                          this.props.stepNo +
+                          ".png"
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="container-body col s12">
+                      <div className="container-header-status col 12">
+                        <img
+                          className="progress-bar-mobile"
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/assets/images/Stepper" +
+                            this.props.stepNo +
+                            "M@2x.png"
+                          }
+                          alt=""
+                        />
+                      </div>
+                      <h3 class="header">vrem sa te</h3>
+                      <h3 class="header special ">
+                        cunoastem <i class="fas fa-smile-beam" />
+                      </h3>
+                      <div className="row">
+                        <div className="col s12 m12 l8 xl6">
+                          <div className="col s12 m12 l12">
+                            <CustomTextarea
+                              handleChange={this.handleInputChange}
+                              dataError="Name is not valid.Length must be at least 3 chars."
+                              type="text"
+                              min="3"
+                              max="100"
+                              name="fName"
+                              id="fName"
+                              value={fName}
+                              label="Descrie-te in minim 15 cuvinte"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomTextarea
+                              handleChange={this.handleInputChange}
+                              dataError="Name is not valid.Length must be at least 3 chars."
+                              type="text"
+                              name="lName"
+                              id="lName"
+                              min="3"
+                              max="100"
+                              value={lName}
+                              label="Cea mai importanta calitate si de ce?"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomTextarea
+                              handleChange={this.handleInputChange}
+                              dataError="Email is not valid!"
+                              type="text"
+                              name="email"
+                              min="3"
+                              max="100"
+                              id="emailId"
+                              value={email}
+                              label="De ce vrei sa te inscrii in ASII?"
+                            />
+                          </div>
+                        </div>
+                        <div className="col s12 m12 l4 xl6">
+                          <img
+                            class="asii-logo-right"
+                            src="https://png.pngtree.com/element_pic/00/16/07/115783931601b5c.jpg"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="container-buttons step0 col s12 m12 l12 xl12">
+                          <CustomButton
+                            type="back"
+                            disable={false}
+                            handleClick={this.handleClick}
+                          />
+                          <CustomButton
+                            disable={false}
+                            handleClick={this.handleClick}
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div
-                    className={classnames(
-                      "data-container z-depth-1 col s12 m12 l12",
-                      { "step-two animated fadeIn": stepNo === "two" }
-                    )}
+                    className={classnames("data-container col s12 m12 l12", {
+                      "step-one animated fadeIn": stepNo === 2
+                    })}
                   >
-                    <p>
-                      two Lorem, ipsum dolor sit amet consectetur adipisicing
-                      elit. Consectetur, fuga. Reiciendis repellendus, quas
-                      debitis asperiores eius excepturi, magnam ut officia neque
-                      saepe, optio tempora sed consequuntur maiores et.
-                      Officiis, nesciunt.
-                    </p>
-                  </div>
-                  <div
-                    className={classnames(
-                      "data-container z-depth-1 col s12 m12 l12",
-                      { "step-two animated fadeIn": stepNo === "three" }
-                    )}
-                  >
-                    <p>
-                      three Lorem, ipsum dolor sit amet consectetur adipisicing
-                      elit. Consectetur, fuga. Reiciendis repellendus, quas
-                      debitis asperiores eius excepturi, magnam ut officia neque
-                      saepe, optio tempora sed consequuntur maiores et.
-                      Officiis, nesciunt.
-                    </p>
+                    <div className="container-header-status col 12">
+                      <img
+                        className="progress-bar-desktop"
+                        src={
+                          process.env.PUBLIC_URL +
+                          "/assets/images/Stepper" +
+                          this.props.stepNo +
+                          ".png"
+                        }
+                        alt=""
+                      />
+                    </div>
+                    <div className="container-body col s12">
+                      <div className="container-header-status col 12">
+                        <img
+                          className="progress-bar-mobile"
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/assets/images/Stepper" +
+                            this.props.stepNo +
+                            "M@2x.png"
+                          }
+                          alt=""
+                        />
+                      </div>
+                      <h3 class="header">Spune-ne despre</h3>
+                      <h3 class="header special ">
+                        tine <i class="fas fa-smile-beam" />
+                      </h3>
+                      <div className="row">
+                        <div className="col s12 m12 l8 xl6">
+                          <div className="col s12 m12 l12">
+                            <CustomSelect label="Selecteaza departamentele la care vrei sa aplici (Maxim 2 departamente)" />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomTextarea
+                              handleChange={this.handleInputChange}
+                              dataError="Name is not valid.Length must be at least 3 chars."
+                              type="text"
+                              min="3"
+                              max="100"
+                              name="fName"
+                              id="fName"
+                              placeholder="Nume"
+                              value={fName}
+                              label="Cu ce se ocupa departamentul la care ai aplicat?"
+                            />
+                          </div>
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              iconCode="account_circle"
+                              dataError="Name is not valid.Length must be at least 3 chars."
+                              type="text"
+                              name="lName"
+                              id="lName"
+                              min="3"
+                              max="100"
+                              value={lName}
+                              label="Cate ore pe saptamana poti acorda asociatiei?"
+                              placeholder="Prenume"
+                            />
+                          </div>
+                        </div>
+                        <div className="col s12 m12 l4 xl6">
+                          <img
+                            class="asii-logo-right"
+                            src="https://png.pngtree.com/element_pic/00/16/07/115783931601b5c.jpg"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="container-buttons step0 col s12 m12 l12 xl12">
+                          <CustomButton
+                            type="back"
+                            disable={false}
+                            handleClick={this.handleClick}
+                          />
+                          {/* <CustomButton /> */}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

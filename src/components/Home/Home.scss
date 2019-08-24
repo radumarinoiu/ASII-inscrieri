@@ -1,13 +1,57 @@
-@import "../../styles/fonts";
+@import "../../styles/fonts", "../../styles/grid", "../../styles/reset";
+$break-small: 600px;
+.main {
+  background: #ef514c;
+  overflow: hidden;
+  display: block;
+  min-height: 120vh;
+  @media screen and (max-width: $break-small){
+    min-height:180vh;
+  }
+}
 .header-image {
   margin: 0;
   padding: 0;
   min-height: 600px !important;
-  background: url("https://asii.ro/images/background.jpg");
+
   background-size: 100%;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  @media screen and (max-width: $break-small) {
+    min-height: 100vh !important;
+  }
+
+  .backgroundImage {
+    width: 100%;
+    &.desktop {
+      display: block;
+      @media screen and (max-width: $break-small) {
+        display: none;
+      }
+    }
+    &.mobile {
+      display: none;
+      @media screen and (max-width: $break-small) {
+        display: block;
+      }
+    }
+  }
 }
+.container {
+  &.absolut-zero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    @media screen and (max-width: $break-small) {
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  }
+}
+
 .modify-size {
   height: 600px !important;
 }
@@ -16,11 +60,29 @@
 }
 
 .register-form {
+  padding: 0;
+
   .data-container {
-    margin-top: 45px;
-    background: #fff;
     transition: all 1s ease-out;
     display: none;
+    margin-top: 100px;
+    .container-header-status {
+      width: 100%;
+      .progress-bar-mobile{
+        width: 100%;
+        display: none;
+        @media screen and (max-width: 900px){
+          display: block;
+          margin-bottom: 20px;
+        }
+      }
+      .progress-bar-desktop {
+        @media screen and (max-width: 900px) {
+          display:none;
+        }
+      }
+    }
+
     &.step-zero,
     &.step-one,
     &.step-two,
@@ -28,129 +90,37 @@
       display: block;
     }
 
-    h3.header {
-      color: #d63734;
-    }
-  }
-}
-.nav-list-icons {
-  .container-for-btn {
-    margin: 10px 5%;
-    &:hover {
-      .tooltip-simple {
-        visibility: visible;
+    .container-body {
+      text-align: left;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      background: #fff;
+      border-radius: 5px;
+      margin: 1rem;
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+        0 15px 12px rgba(0, 0, 0, 0.22);
+
+      .asii-logo-right {
+        @media screen and (max-width: 900px) {
+          display: none;
+        }
+      }
+      .container-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+      .header {
+        color: $dark-color;
+        font-size: 2.5em;
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 800;
+        &.special {
+          color: $base-color;
+          margin-bottom: 30px;
+        }
       }
     }
   }
-
-  .tooltip-simple {
-    visibility: hidden;
-    background: #000;
-    color: #f2f2f2;
-    padding: 0 30px;
-    -moz-transition: all 0.25s ease-in-out;
-    -webkit-transition: all 0.25s ease-in-out;
-    -ms-transition: all 0.25s ease-in-out;
-    transition: all 0.25s ease-in-out;
-    height: 2.5em;
-    font-size: 16px;
-    line-height: 2.25em;
-    font-family: "Roboto", sans-serif;
-    color: gainsboro;
-    &:after {
-      content: "";
-      display: block;
-      position: relative;
-      left: 0;
-      top: 10%;
-      overflow: hidden;
-      margin: auto;
-      width: 10px;
-      text-align: -25%;
-      border-top: solid 0.6em #222222;
-      border-left: solid 0.6em transparent;
-      border-right: solid 0.6em transparent;
-      margin-bottom: 1em;
-    }
-  }
-}
-.btn-nav-list {
-  font-size: 2.5em !important;
-  display: inline-block;
-  color: #ffffff;
-  width: 1em;
-  height: 1em;
-  line-height: 0.9em;
-  font-size: 2.5em;
-  margin: 0 0.25em 0 0.25em;
-  opacity: 0.35;
-  outline: 0;
-  -moz-transition: opacity 0.25s ease-in-out;
-  -webkit-transition: opacity 0.25s ease-in-out;
-  -ms-transition: opacity 0.25s ease-in-out;
-  transition: opacity 0.25s ease-in-out;
-  border: none !important;
-  background: transparent;
-  color: #fff;
-  margin: 10px 5% !important;
-  width: auto;
-  padding: 0;
-  margin: 0 !important;
-  margin-top: 0.5em !important;
-  z-index: 3;
-  &:focus {
-    background: transparent !important;
-  }
-  &:after {
-    content: "";
-    display: block;
-    top: 30px;
-    position: relative;
-    margin: auto;
-    width: 50px;
-    border-bottom: solid 0em rgb(255, 255, 255);
-    border-left: solid 0.75em transparent;
-    border-right: solid 0.75em transparent;
-    -moz-transition: border-bottom-width 0.25s ease-in-out;
-    -webkit-transition: border-bottom-width 0.25s ease-in-out;
-    -ms-transition: border-bottom-width 0.25s ease-in-out;
-    transition: border-bottom-width 0.25s ease-in-out;
-    transition: opacity 1s ease-out;
-    border-bottom-width: 0.75em;
-    opacity: 0;
-  }
-  &.active:after {
-    opacity: 1;
-  }
-  &:hover {
-    .nav-list-icons .tooltip-simple {
-      display: block !important;
-    }
-  }
-}
-.slider.fullscreen ul.indicators {
-  top: 20px !important;
-  .indicator-item.active {
-    background: red;
-  }
-}
-.asii-button {
-  z-index: 10;
-  img {
-    height: 100%;
-  }
-}
-
-.btn-nav-list:hover,
-.btn-nav-list.active {
-  cursor: pointer;
-  opacity: 1;
-}
-
-.register-form {
-  min-height: 500px !important;
-  position: relative;
-  top: -200px;
-  z-index: 2;
-  margin: auto;
 }

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import "./CustomInputText.scss";
-export default class CustomInputText extends Component {
+import "./CustomTextarea.scss";
+export default class CustomTextarea extends Component {
   render() {
     const {
       dataError,
@@ -19,12 +19,13 @@ export default class CustomInputText extends Component {
         {this.props && (
           <div class="group-items col s12">
             <label for={name}>{label}</label>
-            <input
+            <textarea
               id={id}
               onChange={handleChange}
               name={name}
               minLength={min}
               maxLength={max}
+              rows={3}
               min={min}
               max={max}
               type={type}

@@ -9,7 +9,7 @@ const initialState = {
   comments: [],
   subject: "",
   message: "",
-  stepNo: "zero",
+  stepNo: 0,
   fName: "",
   lName: "",
   phoneNumber: "",
