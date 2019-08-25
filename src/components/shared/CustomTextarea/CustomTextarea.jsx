@@ -12,27 +12,30 @@ export default class CustomTextarea extends Component {
       handleChange,
       placeholder,
       min,
+      handleOnBlur,
       max
     } = this.props;
     return (
       <Fragment>
         {this.props && (
-          <div class="group-items col s12">
-            <label for={name}>{label}</label>
+          <div className="group-items col s12">
+            <label htmlFor={name}>{label}</label>
             <textarea
               id={id}
               onChange={handleChange}
               name={name}
               minLength={min}
+              onBlur={handleOnBlur}
               maxLength={max}
               rows={3}
               min={min}
               max={max}
               type={type}
-              class="validate"
+              className="validate"
               value={value}
               placeholder={placeholder}
             />
+            {dataError && dataError !== "OK" && <div>{dataError}</div>}
           </div>
         )}
       </Fragment>

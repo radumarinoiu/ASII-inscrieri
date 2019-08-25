@@ -1,6 +1,6 @@
 @import "../../../styles/reset", "../../../styles/grid", "../../../styles/fonts";
 
-label {
+.title {
   position: relative;
   color: $dark-color;
   top: 7px;
@@ -12,6 +12,11 @@ label {
   display: inline-block;
   max-width: 90%;
   top: 15px;
+  @media screen and (max-width: 600px) {
+    display: inline-block;
+    max-width: 90%;
+    top: 15px;
+  }
 }
 
 select {
@@ -37,9 +42,21 @@ select {
   appearance: none;
 
   /* Positions background arrow image */
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC");
   background-repeat: no-repeat;
   background-position: 95% center;
+  &:disabled,
+  &[disabled] {
+    border: 1px solid #999999;
+    color: #110c0c;
+    cursor: not-allowed;
+    i {
+      background-color: #cccccc;
+    }
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
 
   @media screen and (max-width: $break-small) {
     padding-top: 1.2em;
@@ -52,18 +69,18 @@ select {
     outline: none;
   }
 }
-option{
-    font-size:18px;
-    background-color:#ffffff;
+option {
+  font-size: 18px;
+  background-color: #ffffff;
 }
-option:before{
-    content: ">";
-    font-size:20px;
-    display:none;
-    padding-right:10px;
-    padding-left:5px;
-    color:#fff;
+option:before {
+  content: ">";
+  font-size: 20px;
+  display: none;
+  padding-right: 10px;
+  padding-left: 5px;
+  color: #fff;
 }
-option:hover:before{
-    display:inline;
+option:hover:before {
+  display: inline;
 }
