@@ -1,19 +1,30 @@
 import {
-  HANDLE_INPUT_CHANGE,
+  HANDLE_STEP_CHANGE,
   ADD_NEW_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  HANDLE_INPUT_CHANGE
 } from "../actions/actionTypes";
 import uuid from "uuid/v4";
 const initialState = {
   comments: [],
+  subject: "",
+  message: "",
+  stepNo: 0,
   fName: "",
   lName: "",
-  subject: "",
-  message: ""
+  phoneNumber: "",
+  faculty: "",
+  yearOfStudy: "",
+  email: ""
 };
 
 const mainReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case HANDLE_STEP_CHANGE:
+      return {
+        ...state,
+        stepNo: payload
+      };
     case HANDLE_INPUT_CHANGE:
       return {
         ...state,
