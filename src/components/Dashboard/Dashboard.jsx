@@ -4,40 +4,80 @@ import "../shared/styles/Dashboard.scss";
 
 export default class Dashboard extends Component {
 
-  constructor() {
+  constructor(props) {
     super(props);
     
     this.state = {
-      search: ''
+      search: null,
+      list:['Andrei', 'Alina', 'Marcu', 'Vlad', 'Cristian', 'Marius']
     }
+
   }
 
+  handleSearchChange = (event) => {
+    event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+  
+
+  
+  
   updateSearch(event) {
-    this.setState({ search: event.target.value.substr(0,20)});
+    this.stState({ search: event.target.value.substr(0,20)});
     console.log(this.state);
   }
 
-  filterUpdate(value) {
-    this.setState({search : value});
-  }
+  // filterUpdate(value) {
+  //   this.setState({search : value});
+  // }
   render() {
+ 
+
     return (
-      <div>
-        <div className="left-container">
-          <div className="search-input">
-            <form className="col s12">
-              <div className="row">
-                <div className="input-field col s6">
+      <div className="row page">
+        <div className="left-container col s4">
+            <form className=" container col s12">
+                <div className="input-field col s12 search-field">
                   <i className="material-icons prefix">search</i>
-                  <input id="icon_prefix" type="text" className="validate" value={this.state.search}/>
-                  {/* <label for="icon_prefix">Search</label> */}
+                  <input 
+                    id="icon_prefix" 
+                    name="search"
+                    type="text" 
+                    className="validate search-field"
+                    onChange= { this.handleSearchChange }
+                    />
                 </div>
-              </div>
               </form>
         </div>
-      </div>
-      </div>
+      
+       <div className="right-container col s8">
 
+       <div className="row header">
+        <div className= "col s12">
+        HEADER
+       </div>
+        </div>
+
+       <div className="row section">
+        <div className="col s12">
+        CONTENT
+       </div>   
+        </div>
+
+        <div class="row footer">
+          <form class="col s12  ">
+            <div class="row">
+              <div class="col s12">
+                <textarea id="textarea1" class="materialize-textarea " placeholder="Add a comment"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      </div>
     );
   }
 }
