@@ -25,7 +25,7 @@ export const submitForm = state => dispatch => {
     descriptionOfDepartments,
     phoneNumber,
     hoursPerWeek
-  } = state;
+  } = state.main;
   const volunteer = {
     name: fName,
     email,

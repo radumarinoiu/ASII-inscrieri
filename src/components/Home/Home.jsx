@@ -645,7 +645,7 @@ class Home extends Component {
   };
 
   submitForm = _ => {
-    this.props.submitForm(this.props.main);
+    this.props.submitForm(this.props);
   };
   render() {
     const {
