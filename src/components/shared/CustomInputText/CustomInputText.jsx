@@ -12,26 +12,31 @@ export default class CustomInputText extends Component {
       handleChange,
       placeholder,
       min,
-      max
+      max,
+      handleOnBlur
     } = this.props;
     return (
       <Fragment>
         {this.props && (
-          <div class="group-items col s12">
-            <label for={name}>{label}</label>
+          <div className="group-items col s12">
+            <label htmlFor={name}>{label}</label>
             <input
               id={id}
               onChange={handleChange}
               name={name}
+              onBlur={handleOnBlur}
               minLength={min}
               maxLength={max}
               min={min}
               max={max}
               type={type}
-              class="validate"
+              className="validate"
               value={value}
               placeholder={placeholder}
             />
+            <div className="errorMessage">
+              {dataError && dataError !== "OK" && <span>{dataError}</span>}
+            </div>
           </div>
         )}
       </Fragment>

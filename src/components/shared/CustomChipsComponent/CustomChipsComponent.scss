@@ -1,0 +1,23 @@
+@import "../../../styles/reset", "../../../styles/grid", "../../../styles/fonts";
+
+.chip-container{
+    display: inline-block;
+    margin:1em;
+    padding: 10px 15px;
+    background: $base-color;
+    color:#fff;
+    border-radius: 15px;
+    font-family: "Roboto",sans-serif;
+    .chip-name{
+        text-transform: uppercase;
+        margin-right: 10px;
+    }
+
+    .delete-chip{
+        img{
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}

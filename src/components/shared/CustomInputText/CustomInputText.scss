@@ -1,9 +1,16 @@
 @import "../../../styles/reset", "../../../styles/grid", "../../../styles/fonts";
 $break-small: 600px;
 .group-items {
+  .errorMessage {
+    display: block;
+    min-height: 20px;
+    color:#ef514c;
+    padding-left: 15px;
+    font-family: "Roboto",sans-serif;
+  }
   label {
     position: relative;
-    color:$dark-color;
+    color: $dark-color;
     top: 7px;
     left: 10px;
     background: #fff;
@@ -18,7 +25,7 @@ $break-small: 600px;
   }
   input {
     width: 100%;
-    color:$dark-color;
+    color: $dark-color;
     display: block;
     line-height: 30px;
     font-size: 16px;
@@ -30,7 +37,7 @@ $break-small: 600px;
     border: 1px solid rgb(31, 31, 31);
     margin-bottom: 10px;
     padding-left: 0.75em;
-    @media screen and (max-width: $break-small){
+    @media screen and (max-width: $break-small) {
       padding-top: 1.2em;
     }
     &:focus {
