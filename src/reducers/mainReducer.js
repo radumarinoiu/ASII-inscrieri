@@ -209,7 +209,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
               },
 
               {
-                title: "De unde te inspiri atunci când lucrezi pe un proiect?",
+                title: "Ce software-uri/tool-uri folosești? ",
                 answer: ""
               }
             ]
