@@ -7,6 +7,19 @@ $break-small: 600px;
   @media screen and (max-width: $break-small) {
     min-height: 180vh;
   }
+  .asii-logo-site {
+    img {
+      position: absolute;
+      top: 10;
+      left: 10;
+      display: block;
+      width: 80px;
+      border-radius: 10px;
+      z-index: 9999;
+      margin: 10px;
+      box-sizing: border-box;
+    }
+  }
 }
 .header-image {
   margin: 0;
@@ -66,10 +79,10 @@ $break-small: 600px;
     display: none;
     margin-top: 100px;
     margin-bottom: 100px;
-    .departmentTitleHeader{
-      font-family: "Roboto",sans-serif;
+    .departmentTitleHeader {
+      font-family: "Roboto", sans-serif;
       font-size: 20px;
-      color:$base-color;
+      color: $base-color;
       margin-top: 20px;
     }
     .container-header-status {

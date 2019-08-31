@@ -669,6 +669,11 @@ class Home extends Component {
       <Fragment>
         {this.props && (
           <div className="main">
+            <div className="asii-logo-site">
+              <a title="ASII Page" href="https://asii.ro/" rel="noopener noreferrer"  target="_blank">
+              <img src="https://asii.ro/images/logo.png" alt="asii"/>
+              </a>
+            </div>
             <div className="row">
               <div className="header-image col s12 m12 l12">
                 <img
