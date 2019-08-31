@@ -10,22 +10,22 @@ import CustomButton from "../shared/CustomButton/CustomButton";
 import CustomSelect from "../shared/CustomSelect/CustomSelect";
 import CustomChipsComponent from "../shared/CustomChipsComponent/CustomChipsComponent";
 import {
-  addNewComment,
-  removeComment,
   handleInputChange,
   handleStepChange,
   handleErrorChange,
   handleOptionChange,
-  submitForm
+  submitForm,
+  handleCustomErrorChange
 } from "../../actions/mainActions";
 
 class Home extends Component {
   updateSelectedDepartments = (department, operation) => {
-    var selectedDepartments = [...this.props.selectedDepartments];
+    var selectedDepartments = [...this.props.main.selectedDepartments];
 
     if (operation === "add") {
       selectedDepartments.push(department);
     } else if (operation === "remove") {
+      this.clearAllAnswersForDepartment(department);
       selectedDepartments = selectedDepartments.filter(e => e !== department);
     }
     this.props.handleInputChange(
@@ -37,8 +37,25 @@ class Home extends Component {
     );
   };
 
+  clearAllAnswersForDepartment = department => {
+    let departments = Object.assign({}, this.props.main.departments);
+    if (department in departments) {
+      let questions = departments[department].questions;
+      questions.map(q => {
+        q.answer = "";
+        return null;
+      });
+      departments[department].questions = questions;
+
+      this.props.handleOptionChange(
+        { name: "departments", departments },
+        () => null
+      );
+    }
+  };
+
   toggleOptionDepartment = (department, state) => {
-    let departments = Object.assign({}, this.props.departments);
+    let departments = Object.assign({}, this.props.main.departments);
     if (department in departments) departments[department].selected = state;
     if (departments[department].selected) {
       this.props.handleOptionChange({ name: "departments", departments }, () =>
@@ -50,27 +67,56 @@ class Home extends Component {
       );
     }
   };
+
+  handleCustomTextarea = e => {
+    this.handleOnBlurChange(e);
+    const name = e.target.name.split("-");
+    const value = e.target.value;
+    const department = name[1];
+    const questionIndex = name[0].slice(-1);
+    let departments = Object.assign({}, this.props.main.departments);
+    if (department in departments) {
+      departments[department].questions[questionIndex].answer = value;
+    }
+    this.props.handleOptionChange(
+      { name: "departments", departments },
+      () => null
+    );
+  };
   handleRemoveOption = e => {
     const department = e.currentTarget.name;
     this.toggleOptionDepartment(department, false);
   };
 
+  updateCustomErrors = (name, value) => {
+    const arrayOfElements = name.split("-");
+    const department = arrayOfElements[1];
+    const indexOfQuestion = arrayOfElements[0].slice(-1);
+    const nameOfQuestion = "question" + indexOfQuestion;
+    let departments = Object.assign({}, this.props.error.errors.departments);
+    if (department in departments) {
+      departments[department][indexOfQuestion][nameOfQuestion] = value;
+      this.props.handleCustomErrorChange(
+        { name: "departments", departments },
+        this.checkStepTwo
+      );
+    }
+  };
+
   checkStepZero = _ => {
     const {
       fName,
-      lName,
       phoneNumber,
       faculty,
-      yearOfStudy,
       email
-    } = this.props.errors;
+    } = this.props.error.errors;
 
     if (
       fName === "OK" &&
-      lName === "OK" &&
+      // lName === "OK" &&
       phoneNumber === "OK" &&
       faculty === "OK" &&
-      yearOfStudy === "OK" &&
+      // yearOfStudy === "OK" &&
       email === "OK"
     ) {
       this.props.handleInputChange({
@@ -86,9 +132,19 @@ class Home extends Component {
   };
 
   checkStepOne = _ => {
-    const { description, bestQuality, whyASII } = this.props.errors;
+    const {
+      description,
+      bestQuality,
+      whyASII,
+      hoursPerWeek
+    } = this.props.error.errors;
 
-    if (description === "OK" && bestQuality === "OK" && whyASII === "OK") {
+    if (
+      description === "OK" &&
+      bestQuality === "OK" &&
+      whyASII === "OK" &&
+      hoursPerWeek === "OK"
+    ) {
       this.props.handleInputChange({
         name: "stepOneNextButton",
         value: true
@@ -101,13 +157,23 @@ class Home extends Component {
     }
   };
   checkStepTwo = _ => {
-    const { descriptionOfDepartments, hoursPerWeek } = this.props.errors;
+    const { departments } = this.props.error.errors;
+    const { selectedDepartments } = this.props.main;
 
-    if (
-      descriptionOfDepartments === "OK" &&
-      hoursPerWeek === "OK" &&
-      this.props.selectedDepartments.length
-    ) {
+    let status = true;
+    selectedDepartments.map((department, index) => {
+      return Object.entries(departments).map(([key, value]) => {
+        if (key === department)
+          value.map((q, index) => {
+            const questionIndex = "question" + index;
+            if (q[questionIndex] !== "OK") status = false;
+            return null;
+          });
+          return null;
+      });
+    });
+
+    if (status && selectedDepartments.length) {
       this.props.handleInputChange({
         name: "stepTwoNextButton",
         value: true
@@ -127,44 +193,20 @@ class Home extends Component {
   };
 
   handleOnBlurChange = ({ target }) => {
-    const name = target.name;
+    let name = target.name;
     const value = target.value;
+    const cName = name;
+    const checkForSpecialText = name.includes("question");
+    if (checkForSpecialText) {
+      name = "customText";
+    }
     switch (name) {
-      case "yearOfStudy": {
-        if (validator.isEmpty(value)) {
-          this.props.handleErrorChange(
-            {
-              name,
-              value: "Anul de studiu trebuie completat"
-            },
-            this.checkStepZero
-          );
-        } else if (value < 1 || value > 7) {
-          this.props.handleErrorChange(
-            {
-              name,
-              value: "Anul de studiu trebuie sa fie intre 1,7"
-            },
-            this.checkStepZero
-          );
-        } else {
-          this.props.handleErrorChange(
-            {
-              name,
-              value: "OK"
-            },
-            this.checkStepZero
-          );
-        }
-
-        break;
-      }
       case "faculty": {
         if (validator.isEmpty(value)) {
           this.props.handleErrorChange(
             {
               name,
-              value: "Facultatea trebuie completata"
+              value: "Facultatea si anul de studiu trebuie completata"
             },
             this.checkStepZero
           );
@@ -172,7 +214,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Facultatea trebuie sa aiba minim 3 chars"
+              value: "Facultatea trebuie sa aiba minim 3 caractere"
             },
             this.checkStepZero
           );
@@ -339,7 +381,7 @@ class Home extends Component {
               name,
               value: "Cea mai importanta calitate este necesara "
             },
-            this.checkStepZero
+            this.checkStepOne
           );
         } else if (!validator.isLength(value, { min: 2 })) {
           this.props.handleErrorChange(
@@ -367,7 +409,7 @@ class Home extends Component {
               name,
               value: "Vrem sa stim parerea ta.Te rog sa completezi."
             },
-            this.checkStepZero
+            this.checkStepOne
           );
         } else if (!validator.isLength(value, { min: 5 })) {
           this.props.handleErrorChange(
@@ -388,20 +430,21 @@ class Home extends Component {
         }
         break;
       }
-      case "descriptionOfDepartments": {
+
+      case "hoursPerWeek": {
         if (validator.isEmpty(value)) {
           this.props.handleErrorChange(
             {
               name,
-              value: "Nu poti lasa necompletat"
+              value: "Este necesar sa stim cate ore poti aloca asociatiei"
             },
-            this.checkStepZero
+            this.checkStepOne
           );
-        } else if (!validator.isLength(value, { min: 20 })) {
+        } else if (value < 2) {
           this.props.handleErrorChange(
             {
               name,
-              value: "Hmm...Poti mai mult de atat!Minim 20 caractere"
+              value: "Credem ca poti mai mult de atat"
             },
             this.checkStepOne
           );
@@ -411,35 +454,7 @@ class Home extends Component {
               name,
               value: "OK"
             },
-            this.checkStepTwo
-          );
-        }
-        break;
-      }
-      case "hoursPerWeek": {
-        if (validator.isEmpty(value)) {
-          this.props.handleErrorChange(
-            {
-              name,
-              value: "Este necesar sa stim cate ore poti aloca asociatiei"
-            },
-            this.checkStepTwo
-          );
-        } else if (value < 2) {
-          this.props.handleErrorChange(
-            {
-              name,
-              value: "Credem ca poti mai mult de atat"
-            },
-            this.checkStepTwo
-          );
-        } else {
-          this.props.handleErrorChange(
-            {
-              name,
-              value: "OK"
-            },
-            this.checkStepTwo
+            this.checkStepOne
           );
         }
 
@@ -465,6 +480,14 @@ class Home extends Component {
         }
         break;
       }
+      case "customText": {
+        if (validator.isEmpty(value)) {
+          this.updateCustomErrors(cName, "Acest camp trebuie completat!");
+        } else {
+          this.updateCustomErrors(cName, "OK");
+        }
+        break;
+      }
 
       default: {
         return 0;
@@ -484,11 +507,132 @@ class Home extends Component {
     this.props.handleStepChange(stepNo);
   };
 
+  componentDidMount() {
+    const {
+      fName,
+      phoneNumber,
+      faculty,
+      email,
+      selectedDepartments,
+      description,
+      bestQuality,
+      whyASII,
+      departments,
+      hoursPerWeek
+    } = this.props.main;
+
+    if (!validator.isEmpty(fName) && validator.isLength(fName, { min: 3 })) {
+      this.props.handleErrorChange(
+        {
+          name: "fName",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+    if (
+      !validator.isEmpty(faculty) &&
+      validator.isLength(faculty, { min: 3 })
+    ) {
+      this.props.handleErrorChange(
+        {
+          name: "faculty",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+    if (!validator.isEmpty(email) && validator.isEmail(email)) {
+      this.props.handleErrorChange(
+        {
+          name: "email",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+    if (
+      !validator.isEmpty(phoneNumber) &&
+      validator.isMobilePhone(phoneNumber, ["ro-RO"])
+    ) {
+      this.props.handleErrorChange(
+        {
+          name: "phoneNumber",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+    if (
+      !validator.isEmpty(description) &&
+      validator.isLength(description, { min: 60 })
+    ) {
+      this.props.handleErrorChange(
+        {
+          name: "description",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+    if (
+      !validator.isEmpty(bestQuality) &&
+      validator.isLength(bestQuality, { min: 1 })
+    ) {
+      this.props.handleErrorChange(
+        {
+          name: "bestQuality",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+    if (
+      !validator.isEmpty(whyASII) &&
+      validator.isLength(whyASII, { min: 5 })
+    ) {
+      this.props.handleErrorChange(
+        {
+          name: "whyASII",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+    if (!validator.isEmpty(hoursPerWeek) && hoursPerWeek >= 2) {
+      this.props.handleErrorChange(
+        {
+          name: "hoursPerWeek",
+          value: "OK"
+        },
+        this.checkStepZero
+      );
+    }
+
+    if (selectedDepartments.length) {
+      selectedDepartments.map((department, index) => {
+        return Object.entries(departments).map(([key, value]) => {
+          if (key === department) {
+            value.questions.map((q, index) => {
+              const { answer } = q;
+              const name = `question${index}-${department}`;
+              if (answer.length) {
+                this.updateCustomErrors(name, "OK");
+              }
+              return null;
+            });
+          }
+          return null;
+        });
+      });
+    }
+  }
+
   handleClick = e => {
     const btn = e.currentTarget.name;
     btn === "next"
-      ? this.props.handleStepChange(this.props.stepNo + 1)
-      : this.props.handleStepChange(this.props.stepNo - 1);
+      ? this.props.handleStepChange(this.props.main.stepNo + 1)
+      : this.props.handleStepChange(this.props.main.stepNo - 1);
   };
   addNewComment = e => {
     e.preventDefault();
@@ -501,16 +645,14 @@ class Home extends Component {
   };
 
   submitForm = _ => {
-    this.props.submitForm(this.props);
+    this.props.submitForm(this.props.main);
   };
   render() {
     const {
       stepNo,
       fName,
-      lName,
       phoneNumber,
       faculty,
-      yearOfStudy,
       email,
       selectedDepartments,
       stepZeroNextButton,
@@ -519,11 +661,10 @@ class Home extends Component {
       description,
       bestQuality,
       whyASII,
-      descriptionOfDepartments,
       departments,
-      hoursPerWeek,
-      errors
-    } = this.props;
+      hoursPerWeek
+    } = this.props.main;
+    const { errors } = this.props.error;
     return (
       <Fragment>
         {this.props && (
@@ -551,6 +692,7 @@ class Home extends Component {
                     className={classnames("data-container col s12 m12 l12", {
                       "step-one animated fadeIn": stepNo === 0
                     })}
+                    ref={divElement => (this.divElement = divElement)}
                   >
                     <div className="container-header-status col 12">
                       <img
@@ -558,7 +700,7 @@ class Home extends Component {
                         src={
                           process.env.PUBLIC_URL +
                           "/assets/images/Stepper" +
-                          this.props.stepNo +
+                          this.props.main.stepNo +
                           ".png"
                         }
                         alt=""
@@ -571,7 +713,7 @@ class Home extends Component {
                           src={
                             process.env.PUBLIC_URL +
                             "/assets/images/Stepper" +
-                            this.props.stepNo +
+                            this.props.main.stepNo +
                             "M@2x.png"
                           }
                           alt=""
@@ -593,12 +735,12 @@ class Home extends Component {
                               max="100"
                               name="fName"
                               id="fName"
-                              placeholder="Nume"
+                              placeholder="Ion Popescu"
                               value={fName}
                               label="Nume"
                             />
                           </div>
-                          <div className="col s12 m12 l12">
+                          {/* <div className="col s12 m12 l12">
                             <CustomInputText
                               handleChange={this.handleInputChange}
                               handleOnBlur={this.handleOnBlurChange}
@@ -612,7 +754,7 @@ class Home extends Component {
                               label="Prenume"
                               placeholder="Prenume"
                             />
-                          </div>
+                          </div> */}
                           <div className="col s12 m12 l12">
                             <CustomInputText
                               handleChange={this.handleInputChange}
@@ -655,23 +797,8 @@ class Home extends Component {
                               max="100"
                               id="faculty"
                               value={faculty}
-                              label="Facultate"
-                              placeholder="Informatica"
-                            />
-                          </div>
-                          <div className="col s12 m12 l12">
-                            <CustomInputText
-                              handleChange={this.handleInputChange}
-                              handleOnBlur={this.handleOnBlurChange}
-                              dataError={errors.yearOfStudy}
-                              type="number"
-                              min="1"
-                              max="7"
-                              name="yearOfStudy"
-                              id="yearOfStudy"
-                              value={yearOfStudy}
-                              label="An de studiu"
-                              placeholder="1"
+                              label="Facultatea si anul de studiu"
+                              placeholder="Facultatea si anul de studiu"
                             />
                           </div>
                         </div>
@@ -681,7 +808,7 @@ class Home extends Component {
                             src={
                               process.env.PUBLIC_URL +
                               "/assets/images/card" +
-                              this.props.stepNo +
+                              this.props.main.stepNo +
                               "@2x.png"
                             }
                             alt=""
@@ -711,7 +838,7 @@ class Home extends Component {
                         src={
                           process.env.PUBLIC_URL +
                           "/assets/images/Stepper" +
-                          this.props.stepNo +
+                          this.props.main.stepNo +
                           ".png"
                         }
                         alt=""
@@ -724,7 +851,7 @@ class Home extends Component {
                           src={
                             process.env.PUBLIC_URL +
                             "/assets/images/Stepper" +
-                            this.props.stepNo +
+                            this.props.main.stepNo +
                             "M@2x.png"
                           }
                           alt=""
@@ -778,6 +905,21 @@ class Home extends Component {
                               label="De ce vrei sa te inscrii in ASII?"
                             />
                           </div>
+                          <div className="col s12 m12 l12">
+                            <CustomInputText
+                              handleChange={this.handleInputChange}
+                              handleOnBlur={this.handleOnBlurChange}
+                              dataError={errors.hoursPerWeek}
+                              type="text"
+                              name="hoursPerWeek"
+                              id="hoursPerWeek"
+                              min="2"
+                              max="100"
+                              value={hoursPerWeek}
+                              label="Cate ore pe saptamana poti acorda asociatiei?"
+                              placeholder="1,1,2,3,5,8,13,21..."
+                            />
+                          </div>
                         </div>
                         <div className="col s12 m12 l4 xl6">
                           <img
@@ -785,7 +927,7 @@ class Home extends Component {
                             src={
                               process.env.PUBLIC_URL +
                               "/assets/images/card" +
-                              this.props.stepNo +
+                              this.props.main.stepNo +
                               "@2x.png"
                             }
                             alt=""
@@ -819,7 +961,7 @@ class Home extends Component {
                         src={
                           process.env.PUBLIC_URL +
                           "/assets/images/Stepper" +
-                          this.props.stepNo +
+                          this.props.main.stepNo +
                           ".png"
                         }
                         alt=""
@@ -832,7 +974,7 @@ class Home extends Component {
                           src={
                             process.env.PUBLIC_URL +
                             "/assets/images/Stepper" +
-                            this.props.stepNo +
+                            this.props.main.stepNo +
                             "M@2x.png"
                           }
                           alt=""
@@ -863,40 +1005,56 @@ class Home extends Component {
                                 label="Departamentele selectate: (In ordinea preferintelor)"
                                 departments={departments}
                                 selectedDepartments={
-                                  this.props.selectedDepartments
+                                  this.props.main.selectedDepartments
                                 }
                               />
                             ) : null}
                           </div>
-
                           <div className="col s12 m12 l12">
-                            <CustomTextarea
-                              handleChange={this.handleInputChange}
-                              handleOnBlur={this.handleOnBlurChange}
-                              dataError={errors.descriptionOfDepartments}
-                              type="text"
-                              min="3"
-                              max="100"
-                              name="descriptionOfDepartments"
-                              id="descriptionOfDepartments"
-                              value={descriptionOfDepartments}
-                              label="Cu ce se ocupa departamentul/ele la care ai aplicat?"
-                            />
-                          </div>
-                          <div className="col s12 m12 l12">
-                            <CustomInputText
-                              handleChange={this.handleInputChange}
-                              handleOnBlur={this.handleOnBlurChange}
-                              dataError={errors.hoursPerWeek}
-                              type="text"
-                              name="hoursPerWeek"
-                              id="hoursPerWeek"
-                              min="2"
-                              max="100"
-                              value={hoursPerWeek}
-                              label="Cate ore pe saptamana poti acorda asociatiei?"
-                              placeholder="1,1,2,3,5,8,13,21..."
-                            />
+                            {selectedDepartments.length > 0 &&
+                              departments &&
+                              selectedDepartments.map((department, index) => {
+                                return Object.entries(departments).map(
+                                  ([key, value]) => {
+                                    if (key === department)
+                                      return (
+                                        <div className="div col s12 m12 l12">
+                                          <h1 className="departmentTitleHeader">{`${index +
+                                            1}.${value.name}`}</h1>
+                                          <div className="col s12 m12 l11 offset-l1">
+                                            {value.questions.map((q, index) => {
+                                              const { title, answer } = q;
+                                              const questionIndex =
+                                                "question" + index;
+                                              const errorForText =
+                                                errors.departments[department][
+                                                  index
+                                                ][questionIndex];
+                                              return (
+                                                <CustomTextarea
+                                                  handleChange={
+                                                    this.handleCustomTextarea
+                                                  }
+                                                  dataError={errorForText}
+                                                  handleOnBlur={
+                                                    this.handleOnBlurChange
+                                                  }
+                                                  type="text"
+                                                  min="3"
+                                                  max="100"
+                                                  name={`question${index}-${department}`}
+                                                  value={answer}
+                                                  label={title}
+                                                />
+                                              );
+                                            })}
+                                          </div>
+                                        </div>
+                                      );
+                                      return null;
+                                  }
+                                );
+                              })}
                           </div>
                         </div>
                         <div className="col s12 m12 l4 xl6">
@@ -905,7 +1063,7 @@ class Home extends Component {
                             src={
                               process.env.PUBLIC_URL +
                               "/assets/images/card" +
-                              this.props.stepNo +
+                              this.props.main.stepNo +
                               "@2x.png"
                             }
                             alt=""
@@ -940,21 +1098,21 @@ class Home extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  removeComment: id => dispatch(removeComment(id)),
   handleInputChange: (objData, callback = () => null) =>
     dispatch(handleInputChange(objData)).then(() => callback()),
-  addNewComment: () => dispatch(addNewComment()),
   handleStepChange: stepNo => dispatch(handleStepChange(stepNo)),
   handleErrorChange: (errorType, callback) =>
     dispatch(handleErrorChange(errorType)).then(() => callback()),
   handleOptionChange: (objData, callback) =>
     dispatch(handleOptionChange(objData)).then(() => callback()),
+  handleCustomErrorChange: (objData, callback) =>
+    dispatch(handleCustomErrorChange(objData)).then(() => callback()),
   submitForm: props => dispatch(submitForm(props))
 });
 
 const mapStateToProps = state => {
   return {
-    ...state.main
+    ...state
   };
 };
 

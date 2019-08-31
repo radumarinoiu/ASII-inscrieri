@@ -2,11 +2,10 @@
 $break-small: 600px;
 .main {
   background: #ef514c;
-  overflow: hidden;
   display: block;
-  min-height: 120vh;
-  @media screen and (max-width: $break-small){
-    min-height:180vh;
+  height: 700px;
+  @media screen and (max-width: $break-small) {
+    min-height: 180vh;
   }
 }
 .header-image {
@@ -66,19 +65,27 @@ $break-small: 600px;
     transition: all 1s ease-out;
     display: none;
     margin-top: 100px;
+    margin-bottom: 100px;
+    .departmentTitleHeader{
+      font-family: "Roboto",sans-serif;
+      font-size: 20px;
+      color:$base-color;
+      margin-top: 20px;
+    }
     .container-header-status {
+      margin-bottom: 25px;
       width: 100%;
-      .progress-bar-mobile{
+      .progress-bar-mobile {
         width: 100%;
         display: none;
-        @media screen and (max-width: 900px){
+        @media screen and (max-width: 900px) {
           display: block;
           margin-bottom: 20px;
         }
       }
       .progress-bar-desktop {
         @media screen and (max-width: 900px) {
-          display:none;
+          display: none;
         }
       }
     }
@@ -92,21 +99,24 @@ $break-small: 600px;
 
     .container-body {
       text-align: left;
-      padding: 30px 20px;
       box-sizing: border-box;
       background: #fff;
       border-radius: 5px;
-      margin: 1rem;
       box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
         0 15px 12px rgba(0, 0, 0, 0.22);
-
+      margin: 0;
+      padding: 30px;
+      box-sizing: border-box;
       .asii-logo-right {
-        width:100%;
+        padding-left: 25px;
+        box-sizing: border-box;
+        width: 100%;
         @media screen and (max-width: 900px) {
           display: none;
         }
       }
       .container-buttons {
+        margin-top: 30px;
         display: flex;
         justify-content: space-between;
       }

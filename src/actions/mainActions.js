@@ -1,11 +1,10 @@
 import {
   HANDLE_STEP_CHANGE,
-  ADD_NEW_COMMENT,
-  REMOVE_COMMENT,
   HANDLE_INPUT_CHANGE,
   HANDLE_ERROR_CHANGE,
   HANDLE_OPTION_CHANGE,
-  CLEAR_ALL_FIELDS
+  CLEAR_ALL_FIELDS,
+  HANDLE_CUSTOM_ERROR_CHANGE
 } from "./actionTypes";
 
 export const handleStepChange = objData => dispatch => {
@@ -17,10 +16,8 @@ export const handleStepChange = objData => dispatch => {
 export const submitForm = state => dispatch => {
   const {
     fName,
-    lName,
     email,
     faculty,
-    yearOfStudy,
     description,
     bestQuality,
     whyASII,
@@ -30,11 +27,9 @@ export const submitForm = state => dispatch => {
     hoursPerWeek
   } = state;
   const volunteer = {
-    firstName: fName,
-    lastName: lName,
+    name: fName,
     email,
     faculty,
-    yearOfStudy,
     description,
     bestQuality,
     whyASII,
@@ -74,6 +69,15 @@ export const handleOptionChange = objData => dispatch => {
   });
   return Promise.resolve();
 };
+  
+  export const handleCustomErrorChange = objData => dispatch => {
+    console.log(objData,'mmmmm');
+  dispatch({
+    type: HANDLE_CUSTOM_ERROR_CHANGE,
+    payload: objData
+  });
+  return Promise.resolve();
+};
 
 export const handleErrorChange = errorType => dispatch => {
   dispatch({
@@ -90,16 +94,4 @@ export const handleInputChange = objData => dispatch => {
     payload: objData
   });
   return Promise.resolve();
-};
-
-export const addNewComment = _ => dispatch => {
-  dispatch({
-    type: ADD_NEW_COMMENT
-  });
-};
-export const removeComment = id => dispatch => {
-  dispatch({
-    type: REMOVE_COMMENT,
-    payload: id
-  });
 };

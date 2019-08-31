@@ -34,7 +34,9 @@ export default class CustomInputText extends Component {
               value={value}
               placeholder={placeholder}
             />
-            {dataError && dataError !== "OK" && <div>{dataError}</div>}
+            <div className="errorMessage">
+              {dataError && dataError !== "OK" && <span>{dataError}</span>}
+            </div>
           </div>
         )}
       </Fragment>

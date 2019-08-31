@@ -4,12 +4,14 @@ $break-small: 600px;
   label {
     position: relative;
     color: $dark-color;
-    top: 7px;
-    left: 10px;
     background: #fff;
     padding: 5px;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
+    display: inline-block;
+    left: 10px;
+    top: 15px;
+    max-width: 90%;
     @media screen and (max-width: $break-small) {
       display: inline-block;
       max-width: 90%;

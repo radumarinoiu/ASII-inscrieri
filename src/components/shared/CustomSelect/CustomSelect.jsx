@@ -21,7 +21,12 @@ export default class CustomSelect extends Component {
             {departments &&
               Object.entries(departments).map(([key, value]) => {
                 if (!value.selected)
-                  return <option key={key} value={key}>{value.name}</option>;
+                  return (
+                    <option key={key} value={key}>
+                      {value.name}
+                    </option>
+                  );
+                return null;
               })}
           </select>
           {dataError && dataError !== "OK" && <div>{dataError}</div>}
