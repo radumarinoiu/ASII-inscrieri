@@ -599,7 +599,7 @@ class Home extends Component {
         this.checkStepZero
       );
     }
-    if (!validator.isEmpty(hoursPerWeek) && hoursPerWeek >= 2) {
+    if (hoursPerWeek >= 2) {
       this.props.handleErrorChange(
         {
           name: "hoursPerWeek",
