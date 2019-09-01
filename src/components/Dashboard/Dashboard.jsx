@@ -10,7 +10,8 @@ export default class Dashboard extends Component {
     this.state = {
       search: "",
       list: ["Andrei", "Alina", "Marcu", "Vlad", "Cristian", "Marius"],
-      listSearch: ["Andrei", "Alina", "Marcu", "Vlad", "Cristian", "Marius"]
+      listSearch: ["Andrei", "Alina", "Marcu", "Vlad", "Cristian", "Marius"],
+      comment: ""
     };
   }
 
@@ -25,14 +26,28 @@ export default class Dashboard extends Component {
     });
   };
 
-  updateSearch(event) {
-    this.setState({ search: event.target.value.substr(0, 20) });
-    console.log(this.state);
+  handleCommentChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
-  // filterUpdate(value) {
-  //   this.setState({search : value});
-  // }
+  postCommentText = e => {
+    if(e.key === 'Enter'){
+      console.log(e.target.value);
+      this.addCommentToContent(e.target.value);
+      e.target.value = '';
+    }
+
+  }
+
+  addCommentToContent(value) {
+    const content = document.querySelector('.section');
+    const commentValue = document.createElement('p');
+    commentValue.innerHTML = value;
+    content.appendChild(commentValue);
+  }
+  
   render() {
     return (
       <div className="row page">
@@ -83,8 +98,12 @@ export default class Dashboard extends Component {
                 <div class="col s12">
                   <textarea
                     id="textarea1"
-                    class="materialize-textarea "
+                    class="comment-area "
                     placeholder="Add a comment"
+                    value={ this.state.comment }
+                    name="comment"
+                    onChange={ this.handleCommentChange }
+                    onKeyPress = { this.postCommentText }
                   ></textarea>
                 </div>
               </div>
