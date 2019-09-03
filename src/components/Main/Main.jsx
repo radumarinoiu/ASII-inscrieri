@@ -5,6 +5,7 @@ import NotFound from '../NotFound/NotFound';
 import ComplexTextInput from '../shared/ComplexTextInput/ComplexTextInput';
 import Dashboard from "../Dashboard/Dashboard";
 import SuccessSubmit from '../SuccessSubmit/SuccessSubmit';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 export default class Main extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class Main extends Component {
           <Route path="/input" component= { ComplexTextInput }/>
           <Route path="/dashboard" component= { Dashboard }/>
           <Route exact path="/success" component={SuccessSubmit} />
+          <Route path="/load" component={LoadingPage} />
           <Route component={NotFound} />
         </Switch>
       </Fragment>

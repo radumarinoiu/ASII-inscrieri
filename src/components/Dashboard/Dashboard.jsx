@@ -9,9 +9,10 @@ export default class Dashboard extends Component {
 
     this.state = {
       search: "",
-      list: ["Andrei", "Alina", "Marcu", "Vlad", "Cristian", "Marius"],
+      list: [],
       listSearch: ["Andrei", "Alina", "Marcu", "Vlad", "Cristian", "Marius"],
-      comment: ""
+      comment: "",
+      myName: "Mindrisoru Tudor"
     };
   }
 
@@ -30,24 +31,41 @@ export default class Dashboard extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-  }
+  };
 
   postCommentText = e => {
-    if(e.key === 'Enter'){
+    if (e.key === "Enter") {
       console.log(e.target.value);
       this.addCommentToContent(e.target.value);
-      e.target.value = '';
+      e.target.value = "";
     }
-
-  }
+  };
 
   addCommentToContent(value) {
-    const content = document.querySelector('.section');
-    const commentValue = document.createElement('p');
-    commentValue.innerHTML = value;
+    const content = document.querySelector(".section");
+    const commentValue = document.createElement("p");
+    commentValue.innerHTML = this.state.myName + ` : ` + value;
+    commentValue.className = "comment-added";
+    
+
     content.appendChild(commentValue);
   }
-  
+
+  // componentDidMount() {
+  //   fetch('https://asii-join-api.herokuapp.com/api/v1/volunteers')
+  // .then(function(response) {
+  //   return response.json();
+  // })
+  // .then(function(myJson) {
+  //   const data = (JSON.stringify(myJson));
+  //   for(let it of data) {
+  //     var joined = this.state.list.push(`${it.firstName}` + `${it.lastName}`);
+  //     this.setState({ list: joined })
+  //     console.log(it.lastName);
+  //   }
+  // });
+  // }
+
   render() {
     return (
       <div className="row page">
@@ -89,24 +107,21 @@ export default class Dashboard extends Component {
           </div>
 
           <div className="row section">
-            <div className="col s12">CONTENT</div>
+            <div className="col s12"></div>
           </div>
 
-          <div class="row footer">
-            <form class="col s12  ">
-              <div class="row">
-                <div class="col s12">
-                  <textarea
-                    id="textarea1"
-                    class="comment-area "
-                    placeholder="Add a comment"
-                    value={ this.state.comment }
-                    name="comment"
-                    onChange={ this.handleCommentChange }
-                    onKeyPress = { this.postCommentText }
-                  ></textarea>
-                </div>
-              </div>
+          <div className="footer">
+            <form className="comment-form ">
+                <textarea
+                  id="textarea1"
+                  className="comment-area"
+                  placeholder="Add a comment"
+                  value={this.state.comment}
+                  name="comment"
+                  onChange={this.handleCommentChange}
+                  onKeyPress={this.postCommentText}
+                ></textarea>
+
             </form>
           </div>
         </div>
