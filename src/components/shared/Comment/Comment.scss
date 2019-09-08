@@ -1,0 +1,29 @@
+.comment{
+    
+    display: inline-block;
+    text-align: right;
+    clear: both;
+    span{
+        margin:5px;
+        font-size: 18px;
+        color:#fff;
+        display: inline-block;
+        padding: 10px;
+        border-radius: 10px;
+        background:red;
+        box-shadow: 0 0 5px red;
+       
+    }
+    &:first-child{
+        span{
+            padding: 10px 20px;
+            border-radius: 10px 10px 3px 10px;  
+        }
+    }
+    &:last-child{
+        span{
+            padding: 10px 20px;
+            border-radius: 10px 3px 10px 10px;
+        }
+    }
+}

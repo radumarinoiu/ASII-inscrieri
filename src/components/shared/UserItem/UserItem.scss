@@ -1,0 +1,31 @@
+.userItem {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 10px;
+  box-sizing: border-box;
+  &:hover,&.active{
+    background: #eceff1;
+    border-right: 4px solid #000;
+    cursor: pointer;
+  }
+  
+  .avatar {
+      padding: 10px 0;
+    i {
+        border-radius: 50%;
+        font-size: 30px;
+      box-shadow: 0 0 10px #f2f2f2;
+    }
+  }
+  .userInfo{
+      .name{
+          font-size: 20px;
+      }
+      padding: 10px;
+      .quality{
+          font-size: 16px;
+          margin-top: 10px;
+      }
+  }
+}
