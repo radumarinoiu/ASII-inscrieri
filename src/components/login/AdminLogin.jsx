@@ -6,14 +6,23 @@ export default class AdminLogin extends Component {
         super();
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            auth: false
           }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+
+
     handleSubmit(e){
         e.preventDefault();
         if (this.state.email == "admin@asii.ro" && this.state.password == "asii2019"){
-            alert('succes')
+            this.setState({
+                auth: true
+            });
+            console.log(this.state.auth);
+            window.location.replace('/dashboard');
+            
         } else alert("try again")
     }
     handleChange (event) {

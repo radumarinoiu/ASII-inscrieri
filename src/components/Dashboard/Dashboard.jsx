@@ -91,9 +91,9 @@ export default class Dashboard extends Component {
                 return (
                   <div className="col s12 m12 l12 ">
                     <div className="col s1 m1 l1">
-                      <i class="fas fa-smile-beam" />
+                      <i className="fas fa-smile-beam" />
                     </div>
-                    <div className="col s9 m9 l9">{item}</div>
+                    <div className="col s9 m9 l9">{this.item}</div>
                   </div>
                 );
               })}

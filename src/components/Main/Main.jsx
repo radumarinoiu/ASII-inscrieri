@@ -6,6 +6,7 @@ import ComplexTextInput from '../shared/ComplexTextInput/ComplexTextInput';
 import Dashboard from "../Dashboard/Dashboard";
 import SuccessSubmit from '../SuccessSubmit/SuccessSubmit';
 import LoadingPage from '../LoadingPage/LoadingPage';
+import AdminLogin from '../login/AdminLogin';
 
 export default class Main extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class Main extends Component {
           <Route path="/dashboard" component= { Dashboard }/>
           <Route exact path="/success" component={SuccessSubmit} />
           <Route path="/load" component={LoadingPage} />
+          <Route exact path="/login" component={AdminLogin}/>
           <Route component={NotFound} />
         </Switch>
       </Fragment>
