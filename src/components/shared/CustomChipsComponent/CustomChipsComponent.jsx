@@ -10,7 +10,7 @@ export default class CustomChipsComponent extends Component {
     return (
       <Fragment>
         {this.props && (
-          <div class="group-items col s12">
+          <div className="group-items col s12">
             <label>{label}</label>
             <div className="chips-all">
               {selectedDepartments &&

@@ -72,7 +72,6 @@ const initialState = {
 const errorReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case HANDLE_CUSTOM_ERROR_CHANGE:
-      console.log(payload.departments);
       return {
         ...state,
         errors: {

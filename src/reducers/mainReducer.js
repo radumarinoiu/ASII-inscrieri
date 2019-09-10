@@ -129,6 +129,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
         descriptionOfDepartments: "",
         selectedDepartments: [],
         selectingDepartment: "",
+        
         departments: {
           RI: {
             name: "Departamentul Relatii Interne",

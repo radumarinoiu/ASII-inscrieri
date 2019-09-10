@@ -71,7 +71,6 @@ export const handleOptionChange = objData => dispatch => {
 };
   
   export const handleCustomErrorChange = objData => dispatch => {
-    console.log(objData,'mmmmm');
   dispatch({
     type: HANDLE_CUSTOM_ERROR_CHANGE,
     payload: objData

@@ -1,9 +1,9 @@
 import React from "react";
 import "./Comment.scss";
-export default function Comment() {
+export default function Comment(props) {
   return (
     <div className="comment">
-      <span>I am comment</span>
+      <span>{props.comment.value}</span>
     </div>
   );
 }
