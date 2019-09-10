@@ -1,0 +1,150 @@
+@import "../../styles/fonts", "../../styles/grid", "../../styles/reset";
+$break-small: 600px;
+.main {
+  background: #ef514c;
+  display: block;
+  height: 700px;
+  @media screen and (max-width: $break-small) {
+    min-height: 180vh;
+  }
+  .asii-logo-site {
+    img {
+      position: absolute;
+      top: 10;
+      left: 10;
+      display: block;
+      width: 80px;
+      border-radius: 10px;
+      z-index: 9999;
+      margin: 10px;
+      box-sizing: border-box;
+    }
+  }
+}
+.header-image {
+  margin: 0;
+  padding: 0;
+  min-height: 600px !important;
+
+  background-size: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  @media screen and (max-width: $break-small) {
+    min-height: 100vh !important;
+  }
+
+  .backgroundImage {
+    width: 100%;
+    &.desktop {
+      display: block;
+      @media screen and (max-width: $break-small) {
+        display: none;
+      }
+    }
+    &.mobile {
+      display: none;
+      @media screen and (max-width: $break-small) {
+        display: block;
+      }
+    }
+  }
+}
+.container {
+  &.absolut-zero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    @media screen and (max-width: $break-small) {
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.modify-size {
+  height: 600px !important;
+}
+.container-for-btn {
+  display: inline-grid;
+}
+
+.register-form {
+  padding: 0;
+
+  .data-container {
+    transition: all 1s ease-out;
+    display: none;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    .departmentTitleHeader {
+      font-family: "Roboto", sans-serif;
+      font-size: 20px;
+      color: $base-color;
+      margin-top: 20px;
+    }
+    .container-header-status {
+      margin-bottom: 25px;
+      width: 100%;
+      .progress-bar-mobile {
+        width: 100%;
+        display: none;
+        @media screen and (max-width: 900px) {
+          display: block;
+          margin-bottom: 20px;
+        }
+      }
+      .progress-bar-desktop {
+        @media screen and (max-width: 900px) {
+          display: none;
+        }
+      }
+    }
+
+    &.step-zero,
+    &.step-one,
+    &.step-two,
+    &.step-three {
+      display: block;
+    }
+
+    .container-body {
+      text-align: left;
+      box-sizing: border-box;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+        0 15px 12px rgba(0, 0, 0, 0.22);
+      margin: 0;
+      padding: 30px;
+      box-sizing: border-box;
+      .asii-logo-right {
+        padding-left: 25px;
+        box-sizing: border-box;
+        width: 100%;
+        @media screen and (max-width: 900px) {
+          display: none;
+        }
+      }
+      .container-buttons {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .header {
+        color: $dark-color;
+        font-size: 2.5em;
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 800;
+        &.special {
+          color: $base-color;
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}

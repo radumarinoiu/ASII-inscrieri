@@ -1,0 +1,86 @@
+@import "../../../styles/reset", "../../../styles/grid", "../../../styles/fonts";
+
+.title {
+  position: relative;
+  color: $dark-color;
+  top: 7px;
+  left: 10px;
+  background: #fff;
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  display: inline-block;
+  max-width: 90%;
+  top: 15px;
+  @media screen and (max-width: 600px) {
+    display: inline-block;
+    max-width: 90%;
+    top: 15px;
+  }
+}
+
+select {
+  width: 100%;
+  display: block;
+  line-height: 30px;
+  font-size: 16px;
+  color: $dark-color;
+  padding: 0.6em;
+  font-family: "Roboto", sans-serif;
+  background: transparent;
+  border-radius: 15px;
+  box-sizing: border-box;
+  border: 1px solid rgb(31, 31, 31);
+  margin-bottom: 10px;
+  padding-left: 0.75em;
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+  /* Removes the default <select> styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Positions background arrow image */
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC");
+  background-repeat: no-repeat;
+  background-position: 95% center;
+  &:disabled,
+  &[disabled] {
+    border: 1px solid #999999;
+    color: #110c0c;
+    cursor: not-allowed;
+    i {
+      background-color: #cccccc;
+    }
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  @media screen and (max-width: $break-small) {
+    padding-top: 1.2em;
+  }
+  @media screen and (max-width: $break-small) {
+    padding-top: 1.2em;
+  }
+  &:focus {
+    outline-offset: none;
+    outline: none;
+  }
+}
+option {
+  font-size: 18px;
+  background-color: #ffffff;
+}
+option:before {
+  content: ">";
+  font-size: 20px;
+  display: none;
+  padding-right: 10px;
+  padding-left: 5px;
+  color: #fff;
+}
+option:hover:before {
+  display: inline;
+}
