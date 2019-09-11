@@ -138,7 +138,7 @@ class Dashboard extends Component {
     textareaField.value = "";
   };
   render() {
-    const { hideUserList } = this.state;
+    // const { hideUserList } = this.state;
     const { selectedVolunteer, volunteers, isLoading } = this.props.admin;
     if (isLoading) return <h1>ingis load</h1>;
 
