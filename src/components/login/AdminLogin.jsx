@@ -16,7 +16,7 @@ export default class AdminLogin extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        if (this.state.email == "admin@asii.ro" && this.state.password == "asii2019"){
+        if (this.state.email === "admin@asii.ro" && this.state.password === "asii2019"){
             this.setState({
                 auth: true
             });

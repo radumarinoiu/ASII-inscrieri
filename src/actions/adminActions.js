@@ -8,7 +8,6 @@ export const loadingData = status => dispatch => {
 };
 
 export const getData = _ => dispatch => {
-  
   fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers")
     .then(res => res.json())
     .then(res => {
@@ -34,6 +33,48 @@ export const selectVolunteer = id => dispatch => {
   });
 };
 
+export const setStatus = (status, id) => dispatch => {
+  console.log(status, id);
+  fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + id, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    method: "PATCH",
+    body: JSON.stringify({ status })
+  })
+    .then(res => res.json())
+    .then(r => {
+      // fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + id)
+      //   .then(res => res.json())
+      //   .then(res => {
+      //     dispatch({
+      //       type: T.SET_ONE_VOLUNTEER,
+      //       payload: res
+      //     });
+      //   });
+      dispatch({
+        type: T.LOADING_DATA,
+        payload: true
+      });
+      fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers")
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) throw res.error;
+          dispatch({
+            type: T.SET_DATA,
+            payload: {
+              total: res.total,
+              volunteers: res.volunteers
+            }
+          });
+          dispatch({
+            type: T.LOADING_DATA,
+            payload: false
+          });
+        });
+    });
+};
 export const addCommentToVolunteer = comm => dispatch => {
   fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + comm.id, {
     headers: {
