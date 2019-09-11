@@ -55,9 +55,9 @@ export default class SuccessSubmit extends Component {
                           alt=""
                         />
                       </div>
-                      <h3 className="header">Multumim pentru</h3>
+                      <h3 className="header">Mulțumim pentru</h3>
                       <h3 className="header special ">
-                        inscriere <i className="fas fa-smile-beam" />
+                        înscriere <i className="fas fa-smile-beam" />
                       </h3>
                       <div className="row">
                         <div className="col s12 m12 l4 xl6">
@@ -77,7 +77,7 @@ export default class SuccessSubmit extends Component {
                         <div className="container-buttons step0 col s12 m12 l12 xl12">
                           <CustomButton
                             type="back"
-                            title="Prima pagina"
+                            title="Prima pagină"
                             disable={false}
                             handleClick={this.handleClick}
                           />

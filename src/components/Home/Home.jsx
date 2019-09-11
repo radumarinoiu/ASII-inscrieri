@@ -206,7 +206,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Facultatea si anul de studiu trebuie completata"
+              value: "Facultatea și anul de studiu trebuie completate"
             },
             this.checkStepZero
           );
@@ -214,7 +214,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Facultatea trebuie sa aiba minim 3 caractere"
+              value: "Facultatea trebuie să aibă minim 3 caractere"
             },
             this.checkStepZero
           );
@@ -272,7 +272,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Numele trebuie sa contina minim 3 caractere!"
+              value: "Numele trebuie să conțină minim 3 caractere!"
             },
             this.checkStepZero
           );
@@ -301,7 +301,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Prenumele trebuie sa aiba minim 3 caractere!"
+              value: "Prenumele trebuie să aibă minim 3 caractere!"
             },
             this.checkStepZero
           );
@@ -322,7 +322,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Numarul de telefon trebuie completat"
+              value: "Numărul de telefon trebuie completat"
             },
             this.checkStepZero
           );
@@ -330,7 +330,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Numarul de telefon nu este valid"
+              value: "Numărul de telefon nu este valid"
             },
             this.checkStepZero
           );
@@ -351,15 +351,15 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Descrierea este necesara"
+              value: "Descrierea este necesară!"
             },
             this.checkStepOne
           );
-        } else if (!validator.isLength(value, { min: 60 })) {
+        } else if (!validator.isLength(value, { min: 15 })) {
           this.props.handleErrorChange(
             {
               name,
-              value: "Hmm...Poti mai mult de atat.Minim 60 caractere!"
+              value: "Hmm...Poți mai mult de atât.Minim 15 caractere!"
             },
             this.checkStepOne
           );
@@ -379,7 +379,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Cea mai importanta calitate este necesara "
+              value: "Cea mai importantă calitate este necesară!"
             },
             this.checkStepOne
           );
@@ -387,7 +387,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Hmm...Poti mai mult de atat!"
+              value: "Hmm...Poți mai mult de atât!"
             },
             this.checkStepOne
           );
@@ -407,7 +407,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Vrem sa stim parerea ta.Te rog sa completezi."
+              value: "Vrem să știm părerea ta.Te rog să completezi."
             },
             this.checkStepOne
           );
@@ -415,7 +415,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Hmm...Poti mai mult de atat!"
+              value: "Hmm...Poți mai mult de atât!"
             },
             this.checkStepOne
           );
@@ -436,7 +436,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Este necesar sa stim cate ore poti aloca asociatiei"
+              value: "Este necesar să știm câte ore poți aloca asociației"
             },
             this.checkStepOne
           );
@@ -444,7 +444,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name,
-              value: "Credem ca poti mai mult de atat"
+              value: "Credem că poți mai mult de atât"
             },
             this.checkStepOne
           );
@@ -465,7 +465,7 @@ class Home extends Component {
           this.props.handleErrorChange(
             {
               name: "selectingDepartment",
-              value: "Trebuie sa alegi minim un departament"
+              value: "Trebuie să alegi minim un departament"
             },
             this.checkStepTwo
           );
@@ -482,7 +482,7 @@ class Home extends Component {
       }
       case "customText": {
         if (validator.isEmpty(value)) {
-          this.updateCustomErrors(cName, "Acest camp trebuie completat!");
+          this.updateCustomErrors(cName, "Acest câmp trebuie completat!");
         } else {
           this.updateCustomErrors(cName, "OK");
         }
@@ -742,7 +742,7 @@ class Home extends Component {
                               id="fName"
                               placeholder="Ion Popescu"
                               value={fName}
-                              label="Nume"
+                              label="Nume întreg"
                             />
                           </div>
                           {/* <div className="col s12 m12 l12">
@@ -787,7 +787,7 @@ class Home extends Component {
                               name="phoneNumber"
                               id="phoneNumber"
                               value={phoneNumber}
-                              label="Phone Number"
+                              label="Numărul de telefon"
                               placeholder="07xx"
                             />
                           </div>
@@ -802,8 +802,8 @@ class Home extends Component {
                               max="100"
                               id="faculty"
                               value={faculty}
-                              label="Facultatea si anul de studiu"
-                              placeholder="Facultatea si anul de studiu"
+                              label="Facultatea și anul de studiu"
+                              placeholder="Facultatea și anul de studiu"
                             />
                           </div>
                         </div>
@@ -862,9 +862,9 @@ class Home extends Component {
                           alt=""
                         />
                       </div>
-                      <h3 className="header">vrem sa te</h3>
+                      <h3 className="header">vrem să te</h3>
                       <h3 className="header special ">
-                        cunoastem <i className="fas fa-smile-beam" />
+                        cunoaștem <i className="fas fa-smile-beam" />
                       </h3>
                       <div className="row">
                         <div className="col s12 m12 l8 xl6">
@@ -879,7 +879,7 @@ class Home extends Component {
                               name="description"
                               id="description"
                               value={description}
-                              label="Descrie-te in minim 15 cuvinte"
+                              label="Descrie-te în câteva cuvinte"
                             />
                           </div>
                           <div className="col s12 m12 l12">
@@ -893,7 +893,7 @@ class Home extends Component {
                               min="3"
                               max="100"
                               value={bestQuality}
-                              label="Cea mai importanta calitate si de ce?"
+                              label="Cea mai importantă calitate și de ce?"
                             />
                           </div>
                           <div className="col s12 m12 l12">
@@ -907,7 +907,7 @@ class Home extends Component {
                               max="100"
                               id="whyASII"
                               value={whyASII}
-                              label="De ce vrei sa te inscrii in ASII?"
+                              label="De ce vrei să te înscrii în ASII?"
                             />
                           </div>
                           <div className="col s12 m12 l12">
@@ -921,7 +921,7 @@ class Home extends Component {
                               min="2"
                               max="100"
                               value={hoursPerWeek}
-                              label="Cate ore pe saptamana poti acorda asociatiei?"
+                              label="Câte ore pe săptămână poți acorda asociației?"
                               placeholder="1,1,2,3,5,8,13,21..."
                             />
                           </div>
@@ -999,7 +999,7 @@ class Home extends Component {
                               handleOnBlur={this.handleOnBlurChange}
                               dataError={errors.selectingDepartment}
                               departments={departments}
-                              label="Selecteaza departamentele la care vrei sa aplici (Maxim 2 departamente)"
+                              label="Selectează departamentele la care vrei să aplici (Maxim 2 departamente)"
                             />
                           </div>
 
@@ -1007,7 +1007,7 @@ class Home extends Component {
                             {selectedDepartments.length ? (
                               <CustomChipsComponent
                                 handleRemoveOption={this.handleRemoveOption}
-                                label="Departamentele selectate: (In ordinea preferintelor)"
+                                label="Departamentele selectate: (În ordinea preferințelor)"
                                 departments={departments}
                                 selectedDepartments={
                                   this.props.main.selectedDepartments
