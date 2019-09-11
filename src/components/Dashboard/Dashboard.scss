@@ -1,0 +1,272 @@
+.m0 {
+  margin: 0 !important;
+}
+.p0 {
+  padding: 0 !important;
+}
+.collection .collection-item {
+  padding: 10px 0 10px 5px !important;
+}
+
+body {
+  overflow: hidden;
+}
+
+.hideClass {
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.btnBack {
+  display: none;
+  @media screen and (max-width: 1000px) {
+    display: block;
+  }
+  background: transparent;
+  border: none;
+  font-size: 25px;
+}
+.buttonNormal {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 10px 20px;
+  color: #777474;
+  background: #ffffff;
+  box-shadow: 0 0 1px #f2f2f2;
+  margin: 0 10px;
+  transition: all 0.5s;
+  &:hover {
+    cursor: pointer;
+  }
+  &.accept {
+    &:hover {
+      color: #fff;
+      background: green;
+      box-shadow: 0 0 1px green;
+    }
+    &.active {
+      color: #fff;
+      background: green;
+      
+      &:hover {
+        box-shadow: 0 0 1px green;
+      }
+    }
+  }
+  &.denided {
+    &:hover {
+      color: #fff;
+      background: red;
+      box-shadow: 0 0 1px red;
+    }
+    &.active {
+      color: #fff;
+      background: red;
+      &:hover {
+        box-shadow: 0 0 1px red;
+      }
+    }
+  }
+  &.maybe {
+    &.active {
+      color: #fff;
+      background: #777474;
+      &:hover {
+        box-shadow: 0 0 1px #777474;
+      }
+    }
+    &:hover {
+      color: #fff;
+      background: #777474;
+      box-shadow: 0 0 1px #777474;
+    }
+  }
+}
+.addCommentBtn {
+  background: red;
+  border: 1px solid red;
+  box-shadow: 0 0 5px red;
+  padding: 10px;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 10px;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.mainContainer {
+  width: 74%;
+  @media screen and (max-width: 1000px) {
+    min-width: 100%;
+  }
+
+  padding: 0;
+  margin: 0;
+}
+.containerDashboard {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 20px);
+  margin: 10px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0 0 10px #f2f2f2;
+
+  .userHeaderInfo {
+    min-height: 100vh !important;
+    background-image: url("https://render.fineartamerica.com/images/rendered/default/print/8.000/8.000/break/images-medium-5/seamless-minimalist-pattern-geometric-background-with-shapes-lines-black-and-white-color-retro-style-80s-90s-khjaproduction.jpg");
+    display: block;
+    margin: 0;
+    padding: 0;
+    .userInfo-name {
+      background: #fff;
+      padding: 10px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #f2f2f2;
+      font-size: 20px;
+      h4 {
+        margin: 0;
+      }
+    }
+    .userInfo-responses {
+      position: absolute;
+      top: 3em;
+      right: 0;
+      display: block;
+      margin-left: auto;
+      &.hideDetailsResponses {
+        display: none;
+      }
+      overflow: hidden;
+      margin: 0;
+      padding: 20px 0;
+      display: block;
+      background: #fff;
+      margin: 20px 0;
+      padding: 0;
+      .response {
+        span {
+          font-size: 20px;
+          color: rgb(240, 164, 164);
+        }
+        p {
+          font-size: 18px;
+          line-height: 1.4;
+          color: #777474;
+          margin: 5px;
+        }
+      }
+    }
+  }
+  .comments {
+    display: block;
+    height: 77vh;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: #f5f5f5;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #777474;
+    }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #f5f5f5;
+    }
+  }
+  .inputComments {
+    padding: 0;
+    margin-top: -11em;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    textarea {
+      width: 100%;
+      height: 5em;
+      margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 1px solid #f2f2f2;
+      font-size: 25px;
+      background: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+.leftMenu {
+  min-width: 25%;
+  border-right: 2px solid #f2f2f2;
+  @media screen and (max-width: 1000px) {
+    // display:none;
+    min-width: 100%;
+  }
+}
+
+.shadow1 {
+  box-shadow: 0 0 5px #f2f2f2;
+}
+.filtersMeniu {
+  margin: 0;
+  padding: 0;
+  .filterZone {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    label {
+      margin: 5px;
+    }
+  }
+  .filtersHeader {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+    }
+  }
+}
+.usersList {
+  &:hover {
+    overflow-y: scroll;
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f5f5f5;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #777474;
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+  }
+  height: 75vh;
+  border-top: 2px solid #f2f2f2;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+.searchZone {
+  padding: 10px 10px 0 10px;
+  box-sizing: border-box;
+}

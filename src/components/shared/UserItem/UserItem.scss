@@ -1,0 +1,49 @@
+.userItem {
+  .departmentName {
+    color: #fff;
+    background: gray;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+  .qualityD {
+    display: flex;
+    justify-content: space-between;
+  }
+  .selectedDepartments {
+    display: flex;
+    justify-content: flex-end;
+  }
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  box-sizing: border-box;
+  &:hover,
+  &.active {
+    background: #eceff1;
+    border-right: 4px solid #000;
+    cursor: pointer;
+  }
+
+  .avatar {
+    padding: 10px 0;
+    i {
+      border-radius: 50%;
+      font-size: 30px;
+      box-shadow: 0 0 10px #f2f2f2;
+    }
+  }
+  .userInfo {
+    width: 100%;
+    .name {
+      font-size: 20px;
+    }
+    padding: 10px;
+    .quality {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
+}

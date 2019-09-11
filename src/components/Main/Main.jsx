@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
-import Home from "../Home/Home";
+// import Home from "../Home/Home";
+import Dashboard from "../Dashboard/Dashboard";
 import NotFound from '../NotFound/NotFound';
 import ComplexTextInput from '../shared/ComplexTextInput/ComplexTextInput';
-import Dashboard from "../Dashboard/Dashboard";
+import Home from "../Home/Home";
 import SuccessSubmit from '../SuccessSubmit/SuccessSubmit';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import AdminLogin from '../login/AdminLogin';
