@@ -14,7 +14,7 @@ export default class CustomSelect extends Component {
         <div className="box col s12 m12 l12 xl12">
           <span className="title">{label}</span>
           <select
-            disabled={selectedDepartments.length > 1}
+            disabled={selectedDepartments && selectedDepartments.length > 1}
             onChange={handleChange}
           >
             <option value="">Selecteaza departament</option>

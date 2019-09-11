@@ -104,12 +104,7 @@ class Home extends Component {
   };
 
   checkStepZero = _ => {
-    const {
-      fName,
-      phoneNumber,
-      faculty,
-      email
-    } = this.props.error.errors;
+    const { fName, phoneNumber, faculty, email } = this.props.error.errors;
 
     if (
       fName === "OK" &&
@@ -169,7 +164,7 @@ class Home extends Component {
             if (q[questionIndex] !== "OK") status = false;
             return null;
           });
-          return null;
+        return null;
       });
     });
 
@@ -609,7 +604,7 @@ class Home extends Component {
       );
     }
 
-    if (selectedDepartments.length) {
+    if (selectedDepartments && selectedDepartments.length) {
       selectedDepartments.map((department, index) => {
         return Object.entries(departments).map(([key, value]) => {
           if (key === department) {
@@ -670,8 +665,13 @@ class Home extends Component {
         {this.props && (
           <div className="main">
             <div className="asii-logo-site">
-              <a title="ASII Page" href="https://asii.ro/" rel="noopener noreferrer"  target="_blank">
-              <img src="https://asii.ro/images/logo.png" alt="asii"/>
+              <a
+                title="ASII Page"
+                href="https://asii.ro/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <img src="https://asii.ro/images/logo.png" alt="asii" />
               </a>
             </div>
             <div className="row">
@@ -695,7 +695,7 @@ class Home extends Component {
                 <div className="register-form col s12 m8 offset-m2 l8 offset-l2 xl6 offset-xl3 center">
                   <div
                     className={classnames("data-container col s12 m12 l12", {
-                      "step-one animated fadeIn": stepNo === 0
+                      "step-one": stepNo === 0
                     })}
                     ref={divElement => (this.divElement = divElement)}
                   >
@@ -834,7 +834,7 @@ class Home extends Component {
                   </div>
                   <div
                     className={classnames("data-container col s12 m12 l12", {
-                      "step-one animated fadeIn": stepNo === 1
+                      "step-one": stepNo === 1
                     })}
                   >
                     <div className="container-header-status col 12">
@@ -957,7 +957,7 @@ class Home extends Component {
                   </div>
                   <div
                     className={classnames("data-container col s12 m12 l12", {
-                      "step-one animated fadeIn": stepNo === 2
+                      "step-one": stepNo === 2
                     })}
                   >
                     <div className="container-header-status col 12">
@@ -1004,19 +1004,23 @@ class Home extends Component {
                           </div>
 
                           <div className="col s12 m12 l12">
-                            {selectedDepartments.length ? (
-                              <CustomChipsComponent
-                                handleRemoveOption={this.handleRemoveOption}
-                                label="Departamentele selectate: (In ordinea preferintelor)"
-                                departments={departments}
-                                selectedDepartments={
-                                  this.props.main.selectedDepartments
-                                }
-                              />
-                            ) : null}
+                            {selectedDepartments &&
+                              selectedDepartments.length > 0 &&
+                              departments && (
+                                <CustomChipsComponent
+                                  handleRemoveOption={this.handleRemoveOption}
+                                  label="Departamentele selectate: (In ordinea preferintelor)"
+                                  departments={departments}
+                                  selectedDepartments={
+                                    this.props.main.selectedDepartments
+                                  }
+                                />
+                              )}
+                            {/* {selectedDepartments.length > 0 ?  : null} */}
                           </div>
                           <div className="col s12 m12 l12">
-                            {selectedDepartments.length > 0 &&
+                            {selectedDepartments &&
+                              selectedDepartments.length > 0 &&
                               departments &&
                               selectedDepartments.map((department, index) => {
                                 return Object.entries(departments).map(
@@ -1056,7 +1060,7 @@ class Home extends Component {
                                           </div>
                                         </div>
                                       );
-                                      return null;
+                                    return null;
                                   }
                                 );
                               })}
