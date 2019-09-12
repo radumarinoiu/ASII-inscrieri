@@ -25,9 +25,6 @@ const initialState = {
         },
         {
           question1: ""
-        },
-        {
-          question2: ""
         }
       ],
       IT: [
@@ -106,9 +103,6 @@ const errorReducer = (state = initialState, { type, payload }) => {
               },
               {
                 question1: ""
-              },
-              {
-                question2: ""
               }
             ],
             IT: [

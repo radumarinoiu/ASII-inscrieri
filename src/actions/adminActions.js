@@ -24,27 +24,22 @@ export const addingFakeData = _ => {
       status: "maybe",
       departments: {
         RI: {
-          name: "Departamentul Relatii Interne",
+          name: "Departamentul Relații Interne",
           selected: false,
           questions: [
             {
-              title: "5 lucruri de tinut cont in organizarea unei petreceri?",
+              title: "5 lucruri de ținut cont în organizarea unei petreceri?",
               answer: ""
             },
             {
               title:
-                "Un motiv pentru care nu ar trebui sa te chem la interviu?",
-              answer: ""
-            },
-            {
-              title:
-                "Argumenteaza altfel incat sa ma răzgandesc in legatura cu punctul anterior",
+                "Definește în stil propriu ce înseamnă o studenție reușită pentru tine",
               answer: ""
             }
           ]
         },
         RE: {
-          name: "Departamentul Relatii Externe",
+          name: "Departamentul Relatii  Externe",
           selected: false,
           questions: [
             {
@@ -60,16 +55,16 @@ export const addingFakeData = _ => {
         },
         IT: {
           name: "Departamentul IT",
-          selected: true,
+          selected: false,
           questions: [
             {
               title:
-                "Ce sectiuni importante crezi ca ar trebui sa contina un site?",
-              answer: "head, main"
+                "Ce secțiuni importante crezi că ar trebui să conțină un site?",
+              answer: ""
             },
             {
-              title: "Zi-mi cel mai nebun lucru pe care l-ai facut.",
-              answer: "site-uri"
+              title: "Zi-mi cel mai nebun lucru pe care l-ai făcut.",
+              answer: ""
             }
           ]
         },
@@ -100,13 +95,14 @@ export const addingFakeData = _ => {
               title: "De unde te inspiri atunci când lucrezi pe un proiect?",
               answer: ""
             },
+
             {
-              title: "De unde te inspiri atunci când lucrezi pe un proiect?",
+              title: "Ce software-uri/tool-uri folosești? ",
               answer: ""
             }
           ]
         }
-      }
+      },
     };
     fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers", {
       method: "POST",

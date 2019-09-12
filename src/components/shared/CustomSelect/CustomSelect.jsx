@@ -17,7 +17,7 @@ export default class CustomSelect extends Component {
             disabled={selectedDepartments && selectedDepartments.length > 1}
             onChange={handleChange}
           >
-            <option value="">Selecteaza departament</option>
+            <option value="">Selectează  departament</option>
             {departments &&
               Object.entries(departments).map(([key, value]) => {
                 if (!value.selected)
