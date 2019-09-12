@@ -11,7 +11,64 @@
 body {
   overflow: hidden;
 }
-
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 1s ease-in infinite;
+  -moz-animation: rotating 1s ease-in infinite;
+  -ms-animation: rotating 1s ease-in infinite;
+  -o-animation: rotating 1s ease-in infinite;
+  animation: rotating 1s ease-in infinite;
+}
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  &.show {
+    display: block;
+  }
+  .loaderBody {
+    display: block;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgb(0, 0, 0);
+    border-left: 2px solid rgb(255, 0, 0);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 .hideClass {
   @media screen and (max-width: 1000px) {
     display: none;
@@ -49,7 +106,7 @@ body {
     &.active {
       color: #fff;
       background: green;
-      
+
       &:hover {
         box-shadow: 0 0 1px green;
       }
@@ -96,6 +153,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  &.accepted {
+    background: green;
+    border: 1px solid green;
+    box-shadow: 0 0 5px green;
+  }
+  &.denided {
+    background: red;
+    border: 1px solid red;
+    box-shadow: 0 0 5px red;
+  }
+  &.maybe {
+    background: #777474;
+    border: 1px solid #777474;
+    box-shadow: 0 0 5px #777474;
+  }
   &:hover {
     cursor: pointer;
   }
@@ -109,6 +181,7 @@ body {
   padding: 0;
   margin: 0;
 }
+
 .containerDashboard {
   display: flex;
   flex-wrap: wrap;

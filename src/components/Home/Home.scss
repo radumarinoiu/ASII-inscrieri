@@ -7,17 +7,23 @@ $break-small: 600px;
   @media screen and (max-width: $break-small) {
     min-height: 180vh;
   }
-  .asii-logo-site {
+
+  .asiiLogoLink {
+    display: block;
+    /* width: 80px; */
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 4px;
+    width: 100px;
+    overflow: hidden;
+    z-index: 999;
     img {
-      position: absolute;
-      top: 10;
-      left: 10;
-      display: block;
-      width: 80px;
-      border-radius: 10px;
-      z-index: 9999;
-      margin: 10px;
-      box-sizing: border-box;
+      width: 100%;
     }
   }
 }

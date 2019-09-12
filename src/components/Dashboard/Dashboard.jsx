@@ -156,16 +156,17 @@ class Dashboard extends Component {
   };
   render() {
     const { selectedVolunteer, volunteers, isLoading } = this.props.admin;
-    const { status } = this.state.selectedVolunteerObjectStatus;
-    if (isLoading) return <h1>ingis load</h1>;
-    this.props.admin &&
-      console.log(
-        _.has(this.props.admin.volunteers[selectedVolunteer], "name")
-      );
+    // if (isLoading) return <h1>ingis load</h1>;
+
     if (this.props.admin.volunteers) {
+      let j = 0;
+      for (let i in volunteers) {
+        if (volunteers[i._id === selectVolunteer]) j = i;
+      }
+      let newVol = Object.assign({}, volunteers[j]);
       return (
-        true && (
-          <div className="row containerDashboard">
+        <Fragment>
+          <div className={classnames("row containerDashboard")}>
             <div
               id="leftM"
               className={classnames("leftMenu 25min", {
@@ -253,7 +254,10 @@ class Dashboard extends Component {
             <div
               if="mainM"
               className={classnames("mainContainer 75min", {
-                hideClass: !this.state.hideUserList
+                hideClass: !this.state.hideUserList,
+                accepted: newVol.status === "accepted",
+                denided: newVol.status === "denided",
+                maybe: newVol.status === "maybe"
               })}
             >
               {volunteers.map(volunteer => {
@@ -270,7 +274,7 @@ class Dashboard extends Component {
                           >
                             <i className="fas fa-chevron-left"></i>
                           </button>
-                          <h4>{volunteer.name} </h4>
+                          <h4>{volunteer.name}</h4>
                           <div className="decisionButtons">
                             <button
                               onClick={_ =>
@@ -281,9 +285,7 @@ class Dashboard extends Component {
                               }
                               className={classnames("buttonNormal accept", {
                                 // active: true
-                                active:
-                                  this.state.selectedVolunteerObjectStatus
-                                    .status === "accepted"
+                                active: volunteer.status === "accepted"
                               })}
                             >
                               Acceptat
@@ -297,9 +299,7 @@ class Dashboard extends Component {
                                 )
                               }
                               className={classnames("buttonNormal denided", {
-                                active:
-                                  this.state.selectedVolunteerObjectStatus
-                                    .status === "denided"
+                                active: volunteer.status === "denided"
                               })}
                             >
                               Respins
@@ -307,12 +307,13 @@ class Dashboard extends Component {
 
                             <button
                               onClick={_ =>
-                                this.handleChangeStatus("", selectedVolunteer)
+                                this.handleChangeStatus(
+                                  "maybe",
+                                  selectedVolunteer
+                                )
                               }
                               className={classnames("buttonNormal maybe", {
-                                active:
-                                  this.state.selectedVolunteerObjectStatus
-                                    .status === ""
+                                active: volunteer.status === "maybe"
                               })}
                             >
                               Poate
@@ -396,17 +397,15 @@ class Dashboard extends Component {
                         <div className="comments">
                           {volunteer.comments ? (
                             volunteer.comments.map(com => {
-                              return <Comment comment={com} />;
+                              return (
+                                <Comment volunteer={volunteer} comment={com} />
+                              );
                             })
                           ) : (
                             <span className="noComments">
                               Adauga comentarii
                             </span>
                           )}
-                          {/* <Comment />
-                        <Comment />
-                        <Comment />
-                        <Comment /> */}
                         </div>
                       </div>
                       <div className="inputComments col s12">
@@ -417,7 +416,11 @@ class Dashboard extends Component {
                         ></textarea>
                         <button
                           onClick={this.addCommentToVolunteer}
-                          className="addCommentBtn"
+                          className={classnames("addCommentBtn", {
+                            accepted: volunteer.status === "accepted",
+                            denided: volunteer.status === "denided",
+                            maybe: volunteer.status === "maybe"
+                          })}
                         >
                           Adauga
                         </button>
@@ -429,7 +432,14 @@ class Dashboard extends Component {
               })}
             </div>
           </div>
-        )
+          <div
+            className={classnames("loader", {
+              show: isLoading
+            })}
+          >
+            <div className="loaderBody rotating"></div>
+          </div>
+        </Fragment>
       );
     }
   }

@@ -1,4 +1,25 @@
 .userItem {
+  &.accepted {
+    .avatar {
+      i {
+        color: green;
+      }
+    }
+  }
+  &.denided {
+    .avatar {
+      i {
+        color: red;
+      }
+    }
+  }
+  &.maybe {
+    .avatar {
+      i {
+        columns: #777777;
+      }
+    }
+  }
   .departmentName {
     color: #fff;
     background: gray;
