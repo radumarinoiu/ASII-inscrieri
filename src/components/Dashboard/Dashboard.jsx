@@ -77,6 +77,9 @@ class Dashboard extends Component {
       this.addCommentToVolunteer();
       document.getElementById("commentAdd").value = "";
     }
+    if ((e.key = "Backspace")) {
+      this.handleChange(e);
+    }
   };
   filterByString = (arr, text) => {
     return arr.filter(el => {
@@ -116,10 +119,7 @@ class Dashboard extends Component {
         filteredVolunteers,
         e.target.value
       );
-      filteredVolunteers = this.filterByString(
-        filteredVolunteers,
-        this.state.searchText
-      );
+      console.log("dupa 2", filteredVolunteers);
       this.setState({
         filteredVolunteers,
         searchText: e.target.value
@@ -235,6 +235,7 @@ class Dashboard extends Component {
                       className="validate"
                       onChange={this.handleChange}
                       placeholder="Cauta.."
+                      onKeyDown={this.handleKeyDown}
                     />
                   </div>
                 </div>
