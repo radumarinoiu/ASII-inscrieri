@@ -1,7 +1,7 @@
 import * as T from "./actionTypes";
-
+import * as APIs from "../endpoints";
 const jwtAuthentification = token => {
-  return fetch("http://localhost:5000/api/v1/users/verify", {
+  return fetch(APIs.VOLUNTEERS_API + APIs.AUHTENTICATE_ROUTE + "verify/", {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -31,7 +31,6 @@ export const authenticate = _ => dispatch => {
           type: T.SET_AUTH,
           payload: false
         });
-        //   window.location = "/login";
       }
     });
   } else {
@@ -48,7 +47,7 @@ export const login = dataObj => dispatch => {
     email: dataObj.email,
     password: dataObj.password
   };
-  fetch("http://localhost:5000/api/v1/users/login", {
+  fetch(APIs.VOLUNTEERS_API + APIs.AUHTENTICATE_ROUTE + "login/", {
     method: "POST",
     headers: {
       Accept: "application/json",

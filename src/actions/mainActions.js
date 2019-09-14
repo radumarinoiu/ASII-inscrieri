@@ -6,7 +6,7 @@ import {
   CLEAR_ALL_FIELDS,
   HANDLE_CUSTOM_ERROR_CHANGE
 } from "./actionTypes";
-
+import * as APIs from "../endpoints";
 export const handleStepChange = objData => dispatch => {
   dispatch({
     type: HANDLE_STEP_CHANGE,
@@ -39,7 +39,7 @@ export const submitForm = state => dispatch => {
     hoursPerWeek
   };
 
-  const url = "https://asii-join-api.herokuapp.com/api/v1/volunteers";
+  const url  =APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE;
   fetch(url, {
     method: "POST",
     headers: {
