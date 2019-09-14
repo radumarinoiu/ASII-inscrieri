@@ -1,4 +1,3 @@
-const VOLUNTEERS_API = "https://asii-join-api.herokuapp.com/api/v1/";
-const VOLUNTEER_ROUTE = "volunteers/";
-const AUHTENTICATE_ROUTE = "users/";
-
+export const VOLUNTEERS_API = "https://asii-join-api.herokuapp.com/api/v1/";
+export const VOLUNTEER_ROUTE = "volunteers/";
+export const AUHTENTICATE_ROUTE = "users/";

@@ -169,7 +169,10 @@ class Dashboard extends Component {
       let newVol = Object.assign({}, volunteers[j]);
       return (
         <Fragment>
-          <div className={classnames("row containerDashboard")}>
+          <div
+            key={Math.floor(Math.random() * 10000)}
+            className={classnames("row containerDashboard")}
+          >
             <div
               id="leftM"
               className={classnames("leftMenu 25min", {
@@ -184,60 +187,60 @@ class Dashboard extends Component {
                   </span>
                 </div>
                 <div className="filterZone">
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">
+                  <div className="checkbox-container">
+                    <label className="checkbox-label">
                       <input
                         id="PRO"
                         type="checkbox"
                         onClick={this.handleCheckbox}
                       />
-                      <span class="checkbox-custom rectangular"></span>
+                      <span className="checkbox-custom rectangular"></span>
                     </label>
-                    <div class="input-title">PRO</div>
+                    <div className="input-title">PRO</div>
                   </div>
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">
+                  <div className="checkbox-container">
+                    <label className="checkbox-label">
                       <input
                         id="PR&MEDIA"
                         type="checkbox"
                         onClick={this.handleCheckbox}
                       />
-                      <span class="checkbox-custom rectangular"></span>
+                      <span className="checkbox-custom rectangular"></span>
                     </label>
-                    <div class="input-title">PR&MEDIA</div>
+                    <div className="input-title">PR&MEDIA</div>
                   </div>
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">
+                  <div className="checkbox-container">
+                    <label className="checkbox-label">
                       <input
                         id="RE"
                         type="checkbox"
                         onClick={this.handleCheckbox}
                       />
-                      <span class="checkbox-custom rectangular"></span>
+                      <span className="checkbox-custom rectangular"></span>
                     </label>
-                    <div class="input-title">RE</div>
+                    <div className="input-title">RE</div>
                   </div>
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">
+                  <div className="checkbox-container">
+                    <label className="checkbox-label">
                       <input
                         id="RI"
                         type="checkbox"
                         onClick={this.handleCheckbox}
                       />
-                      <span class="checkbox-custom rectangular"></span>
+                      <span className="checkbox-custom rectangular"></span>
                     </label>
-                    <div class="input-title">RI</div>
+                    <div className="input-title">RI</div>
                   </div>
-                  <div class="checkbox-container">
-                    <label class="checkbox-label">
+                  <div className="checkbox-container">
+                    <label className="checkbox-label">
                       <input
                         id="IT"
                         onClick={this.handleCheckbox}
                         type="checkbox"
                       />
-                      <span class="checkbox-custom rectangular"></span>
+                      <span className="checkbox-custom rectangular"></span>
                     </label>
-                    <div htmlFor="IT" class="input-title">
+                    <div htmlFor="IT" className="input-title">
                       IT
                     </div>
                   </div>
@@ -284,7 +287,7 @@ class Dashboard extends Component {
               </div>
             </div>
             <div
-              if="mainM"
+              key={Math.floor(Math.random() * 10000)}
               className={classnames("mainContainer 75min", {
                 hideClass: !this.state.hideUserList,
                 accepted: newVol.status === "accepted",
@@ -295,8 +298,11 @@ class Dashboard extends Component {
               {volunteers.map(volunteer => {
                 if (volunteer._id === selectedVolunteer) {
                   return (
-                    <Fragment>
-                      <div className="userHeaderInfo col s12">
+                    <Fragment key={Math.floor(Math.random() * 1000)}>
+                      <div
+                        key={Math.floor(Math.random() * 10000)}
+                        className="userHeaderInfo col s12"
+                      >
                         <div className="userInfo-name">
                           <button
                             onClick={() =>
@@ -368,6 +374,7 @@ class Dashboard extends Component {
                           </span>
                         </div>
                         <div
+                          key={Math.floor(Math.random() * 10000)}
                           className={classnames(
                             "userInfo-responses col s12 m12 l9",
                             {
@@ -430,9 +437,13 @@ class Dashboard extends Component {
                         </div>
                         <div className="comments">
                           {volunteer.comments ? (
-                            volunteer.comments.map(com => {
+                            volunteer.comments.map((com, index) => {
                               return (
-                                <Comment volunteer={volunteer} comment={com} />
+                                <Comment
+                                  key={index * Math.floor(Math.random() * 1000)}
+                                  volunteer={volunteer}
+                                  comment={com}
+                                />
                               );
                             })
                           ) : (
