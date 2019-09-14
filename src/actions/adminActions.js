@@ -141,7 +141,6 @@ export const selectVolunteer = id => dispatch => {
 };
 
 export const setStatus = (status, id) => dispatch => {
-  console.log(status, id);
   fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + id, {
     headers: {
       Accept: "application/json",
@@ -193,7 +192,6 @@ export const addCommentToVolunteer = comm => dispatch => {
   })
     .then(res => res.json())
     .then(r => {
-      // console.log("done");
       fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + comm.id)
         .then(res => res.json())
         .then(res => {

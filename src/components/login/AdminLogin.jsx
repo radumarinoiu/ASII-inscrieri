@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import styles from "./AdminLogin.module.scss";
 import CustomInputText from "../shared/CustomInputText/CustomInputText";
-import CustomTextarea from "../shared/CustomTextarea/CustomTextarea";
 import CustomButton from "../shared/CustomButton/CustomButton";
-
-export default class AdminLogin extends Component {
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { login } from "../../actions/authActions";
+import { authenticate } from "../../actions/authActions";
+class AdminLogin extends Component {
   constructor() {
     super();
     this.state = {
@@ -16,24 +17,23 @@ export default class AdminLogin extends Component {
       },
       auth: false
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
+  componentWillMount() {
+    const token = window.sessionStorage.token;
+    if (token) this.props.authenticate();
+  }
+
+  handleSubmit = e => {
     e.preventDefault();
-    if (
-      this.state.email === "admin@asii.ro" &&
-      this.state.password === "asii2019"
-    ) {
-      this.setState({
-        auth: true
-      });
-      window.location.replace("/dashboard");
-    }
-  }
-  handleChange(event) {
+    this.props.login({
+      email: this.state.email,
+      password: this.state.password
+    });
+  };
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-  }
+  };
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -121,6 +121,7 @@ export default class AdminLogin extends Component {
                           />
                         </div>
                       </div>
+                      {this.props.auth.loginError}
                       <div className="row">
                         <div className="container-buttons step0 col s12 m12 l12 xl12">
                           <CustomButton
@@ -142,3 +143,22 @@ export default class AdminLogin extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  // handleInputChange: (objData, callback = () => null) =>
+  //   dispatch(handleInputChange(objData)).then(() => callback()),
+  login: objDate => dispatch(login(objDate)),
+  authenticate: () => dispatch(authenticate())
+});
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AdminLogin)
+);

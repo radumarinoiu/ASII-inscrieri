@@ -28,7 +28,6 @@ export default class UserItem extends Component {
                 <div className="selectedDepartments">
                   {Object.entries(this.props.volunteer.departments).map(
                     ([key, value]) => {
-                      // console.log(key, value);
                       if (value.selected)
                         return (
                           <span className="departmentName" key={key}>

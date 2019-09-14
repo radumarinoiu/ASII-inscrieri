@@ -5,14 +5,14 @@ import Comment from "../shared/Comment/Comment";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
-import * as _ from "lodash";
+import CustomInputText from "../shared/CustomInputText/CustomInputText";
 import {
   getData,
   selectVolunteer,
   addCommentToVolunteer,
   setStatus
 } from "../../actions/adminActions";
-
+import { authenticate } from "../../actions/authActions";
 class Dashboard extends Component {
   state = {
     searchText: "",
@@ -26,6 +26,14 @@ class Dashboard extends Component {
       status: ""
     }
   };
+
+  componentWillMount() {
+    const token = window.sessionStorage.token;
+    if (!token) {
+      this.props.history.push("/login");
+      // return <Redirect to="/login" />;
+    } else this.props.authenticate();
+  }
 
   componentDidMount() {
     this.props.getData();
@@ -48,7 +56,6 @@ class Dashboard extends Component {
 
   handleChangeStatus = (status, id) => {
     this.props.setStatus(status, id);
-    // alert(status);
   };
 
   handleCheckbox = e => {
@@ -95,7 +102,6 @@ class Dashboard extends Component {
     return arr.filter(el => {
       if (el.departments.length !== 0 && el.departments !== []) {
         let ok = true;
-        // console.log("el", el);
         arrOfDep.map(dep => {
           if (!el.departments[dep].selected) {
             ok = false;
@@ -119,7 +125,6 @@ class Dashboard extends Component {
         filteredVolunteers,
         e.target.value
       );
-      console.log("dupa 2", filteredVolunteers);
       this.setState({
         filteredVolunteers,
         searchText: e.target.value
@@ -156,8 +161,6 @@ class Dashboard extends Component {
   };
   render() {
     const { selectedVolunteer, volunteers, isLoading } = this.props.admin;
-    // if (isLoading) return <h1>ingis load</h1>;
-
     if (this.props.admin.volunteers) {
       let j = 0;
       for (let i in volunteers) {
@@ -180,55 +183,83 @@ class Dashboard extends Component {
                     <i className="fas fa-sort-down"></i>
                   </span>
                 </div>
-
                 <div className="filterZone">
-                  <label>
-                    <input
-                      id="IT"
-                      onClick={this.handleCheckbox}
-                      type="checkbox"
-                    />
-                    <span htmlFor="IT">IT</span>
-                  </label>
-                  <label>
-                    <input
-                      id="RI"
-                      type="checkbox"
-                      onClick={this.handleCheckbox}
-                    />
-                    <span htmlFor="RI">RI</span>
-                  </label>
-                  <label>
-                    <input
-                      id="RE"
-                      type="checkbox"
-                      onClick={this.handleCheckbox}
-                    />
-                    <span htmlFor="RE">RE</span>
-                  </label>
-                  <label>
-                    <input
-                      id="PR&MEDIA"
-                      type="checkbox"
-                      onClick={this.handleCheckbox}
-                    />
-                    <span htmlFor="PR&MEDIA">PR&MEDIA</span>
-                  </label>
-
-                  <label>
-                    <input
-                      id="PRO"
-                      type="checkbox"
-                      onClick={this.handleCheckbox}
-                    />
-                    <span htmlFor="PRO">PRO</span>
-                  </label>
+                  <div class="checkbox-container">
+                    <label class="checkbox-label">
+                      <input
+                        id="PRO"
+                        type="checkbox"
+                        onClick={this.handleCheckbox}
+                      />
+                      <span class="checkbox-custom rectangular"></span>
+                    </label>
+                    <div class="input-title">PRO</div>
+                  </div>
+                  <div class="checkbox-container">
+                    <label class="checkbox-label">
+                      <input
+                        id="PR&MEDIA"
+                        type="checkbox"
+                        onClick={this.handleCheckbox}
+                      />
+                      <span class="checkbox-custom rectangular"></span>
+                    </label>
+                    <div class="input-title">PR&MEDIA</div>
+                  </div>
+                  <div class="checkbox-container">
+                    <label class="checkbox-label">
+                      <input
+                        id="RE"
+                        type="checkbox"
+                        onClick={this.handleCheckbox}
+                      />
+                      <span class="checkbox-custom rectangular"></span>
+                    </label>
+                    <div class="input-title">RE</div>
+                  </div>
+                  <div class="checkbox-container">
+                    <label class="checkbox-label">
+                      <input
+                        id="RI"
+                        type="checkbox"
+                        onClick={this.handleCheckbox}
+                      />
+                      <span class="checkbox-custom rectangular"></span>
+                    </label>
+                    <div class="input-title">RI</div>
+                  </div>
+                  <div class="checkbox-container">
+                    <label class="checkbox-label">
+                      <input
+                        id="IT"
+                        onClick={this.handleCheckbox}
+                        type="checkbox"
+                      />
+                      <span class="checkbox-custom rectangular"></span>
+                    </label>
+                    <div htmlFor="IT" class="input-title">
+                      IT
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="searchZone">
                 <div className="row">
                   <div className="input-field col s12">
-                    <input
+                    <div className="col s12 m12 l12">
+                      <CustomInputText
+                        handleChange={this.handleChange}
+                        type="text"
+                        min="3"
+                        max="100"
+                        name="search"
+                        id="userSearch"
+                        placeholder="Cauta.."
+                        value={this.state.searchText}
+                        label="Cauta dupa nume"
+                      />
+                    </div>
+                    {/* <input
                       value={this.state.searchText}
                       id="userSearch"
                       type="text"
@@ -236,7 +267,7 @@ class Dashboard extends Component {
                       onChange={this.handleChange}
                       placeholder="Cauta.."
                       onKeyDown={this.handleKeyDown}
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -345,55 +376,57 @@ class Dashboard extends Component {
                             }
                           )}
                         >
-                          <div className="response col s12 m6 l6">
-                            <span>Email:</span>
-                            <p>{volunteer.email}</p>
-                          </div>
-                          <div className="response col s12 m6 l6">
-                            <span>Telefon:</span>
-                            <p>{volunteer.phoneNumber}</p>
-                          </div>
-                          <div className="response col s12 m6 l6">
-                            <span>Facultate si an de studiu:</span>
-                            <p>{volunteer.faculty}</p>
-                          </div>
-                          <div className="response col s12 m6 l6">
-                            <span>Descriete in minim 15 cuvinte:</span>
-                            <p>{volunteer.description}</p>
-                          </div>
-                          <div className="response col s12 m6 l6">
-                            <span>Cea mai importanta calitate si de ce?</span>
-                            <p>{volunteer.bestQuality}</p>
-                          </div>
-                          <div className="response col s12 m6 l6">
-                            <span>De ce vrei sa te inscrii in ASII?</span>
-                            <p>{volunteer.whyASII}</p>
-                          </div>
-                          <div className="response col s12 m6 l6">
-                            <span>
-                              Cate ore pe saptamana poti acorda asociatiei?
-                            </span>
-                            <p>{volunteer.hoursPerweek}</p>
-                          </div>
-                          {Object.entries(volunteer.departments).map(
-                            ([key, value]) => {
-                              if (value.selected) {
-                                return value.questions.map((q, index) => {
-                                  return (
-                                    <Fragment>
-                                      <div className="response col s12 m6 l6">
-                                        <span>
-                                          {key}:{index + 1}.{q.title}
-                                        </span>
-                                        <p>{q.answer}</p>
-                                      </div>
-                                    </Fragment>
-                                  );
-                                });
+                          <div className="responsesContainer">
+                            <div className="response col s12 m6 l6">
+                              <span>Email:</span>
+                              <p>{volunteer.email}</p>
+                            </div>
+                            <div className="response col s12 m6 l6">
+                              <span>Telefon:</span>
+                              <p>{volunteer.phoneNumber}</p>
+                            </div>
+                            <div className="response col s12 m6 l6">
+                              <span>Facultate si an de studiu:</span>
+                              <p>{volunteer.faculty}</p>
+                            </div>
+                            <div className="response col s12 m6 l6">
+                              <span>Descriete in minim 15 cuvinte:</span>
+                              <p>{volunteer.description}</p>
+                            </div>
+                            <div className="response col s12 m6 l6">
+                              <span>Cea mai importanta calitate si de ce?</span>
+                              <p>{volunteer.bestQuality}</p>
+                            </div>
+                            <div className="response col s12 m6 l6">
+                              <span>De ce vrei sa te inscrii in ASII?</span>
+                              <p>{volunteer.whyASII}</p>
+                            </div>
+                            <div className="response col s12 m6 l6">
+                              <span>
+                                Cate ore pe saptamana poti acorda asociatiei?
+                              </span>
+                              <p>{volunteer.hoursPerweek}</p>
+                            </div>
+                            {Object.entries(volunteer.departments).map(
+                              ([key, value]) => {
+                                if (value.selected) {
+                                  return value.questions.map((q, index) => {
+                                    return (
+                                      <Fragment>
+                                        <div className="response col s12 m6 l6">
+                                          <span>
+                                            {key}:{index + 1}.{q.title}
+                                          </span>
+                                          <p>{q.answer}</p>
+                                        </div>
+                                      </Fragment>
+                                    );
+                                  });
+                                }
+                                return null;
                               }
-                              return null;
-                            }
-                          )}
+                            )}
+                          </div>
                         </div>
                         <div className="comments">
                           {volunteer.comments ? (
@@ -447,6 +480,7 @@ class Dashboard extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
+  authenticate: () => dispatch(authenticate()),
   getData: () => dispatch(getData()),
   selectVolunteer: id => dispatch(selectVolunteer(id)),
   addCommentToVolunteer: comm => dispatch(addCommentToVolunteer(comm)),
