@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './AdminLogin.module.scss'
+import AuthService from '../AuthService/authService';
 
 export default class AdminLogin extends Component {
     constructor() {
@@ -9,31 +10,40 @@ export default class AdminLogin extends Component {
             password: '',
             auth: false
           }
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.Auth = new AuthService();
     }
 
+    componentWillMount(){
+        if(this.Auth.loggedIn())
+            this.props.history.replace('/dashboard');
+    }
 
-
-    handleSubmit(e){
+    handleFormSubmit(e){
         e.preventDefault();
-        if (this.state.email === "admin@asii.ro" && this.state.password === "asii2019"){
-            this.setState({
-                auth: true
-            });
-            console.log(this.state.auth);
-            window.location.replace('/dashboard');
-            
-        } else alert("try again")
+        this.Auth.login(this.state.email, this.state.password)
+            .then(res =>{
+                this.setState({
+                    auth: true
+                });
+            })
+            .catch(err =>{
+                alert(err);
+            })
     }
+
+
     handleChange (event) {
         this.setState({ [event.target.name]: event.target.value} )
-      }
+    }
+    
     render() {
         
         return (
             <div>
                 <div className={styles.container}>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleFormSubmit}>
                         <label>Email
                             <input 
                                 type="email" 
