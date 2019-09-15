@@ -80,11 +80,11 @@ class Dashboard extends Component {
   };
 
   handleKeyDown = e => {
-    if (e.key === "Enter") {
-      this.addCommentToVolunteer();
-      document.getElementById("commentAdd").value = "";
-    }
-    if ((e.key = "Backspace")) {
+    if (e.target.id === "commentAdd") {
+      if (e.key === "Enter") {
+        this.addCommentToVolunteer();
+      }
+    } else if ((e.key = "Backspace")) {
       this.handleChange(e);
     }
   };
@@ -143,10 +143,11 @@ class Dashboard extends Component {
   };
 
   addCommentToVolunteer = _ => {
-    let textareaField = document.getElementById("commentAdd");
-    const value = textareaField.value;
+    const value = this.state.textareaValue;
     const currentDate = new Date();
     const id = this.props.admin.selectedVolunteer;
+    this.setState({ textareaValue: "" });
+
     this.props.admin.volunteers.map(volunteer => {
       if (volunteer._id === id) {
         let comments = volunteer.comments;
@@ -157,7 +158,6 @@ class Dashboard extends Component {
       }
       return null;
     });
-    textareaField.value = "";
   };
   render() {
     const { selectedVolunteer, volunteers, isLoading } = this.props.admin;
@@ -169,10 +169,7 @@ class Dashboard extends Component {
       let newVol = Object.assign({}, volunteers[j]);
       return (
         <Fragment>
-          <div
-            key={Math.floor(Math.random() * 10000)}
-            className={classnames("row containerDashboard")}
-          >
+          <div className={classnames("row containerDashboard")}>
             <div
               id="leftM"
               className={classnames("leftMenu 25min", {
@@ -192,7 +189,8 @@ class Dashboard extends Component {
                       <input
                         id="PRO"
                         type="checkbox"
-                        onClick={this.handleCheckbox}
+                        checked={this.state.departmentsSelected.includes("PRO")}
+                        onChange={this.handleCheckbox}
                       />
                       <span className="checkbox-custom rectangular"></span>
                     </label>
@@ -202,8 +200,11 @@ class Dashboard extends Component {
                     <label className="checkbox-label">
                       <input
                         id="PR&MEDIA"
+                        checked={this.state.departmentsSelected.includes(
+                          "PR&MEDIA"
+                        )}
                         type="checkbox"
-                        onClick={this.handleCheckbox}
+                        onChange={this.handleCheckbox}
                       />
                       <span className="checkbox-custom rectangular"></span>
                     </label>
@@ -214,7 +215,8 @@ class Dashboard extends Component {
                       <input
                         id="RE"
                         type="checkbox"
-                        onClick={this.handleCheckbox}
+                        checked={this.state.departmentsSelected.includes("RE")}
+                        onChange={this.handleCheckbox}
                       />
                       <span className="checkbox-custom rectangular"></span>
                     </label>
@@ -225,7 +227,8 @@ class Dashboard extends Component {
                       <input
                         id="RI"
                         type="checkbox"
-                        onClick={this.handleCheckbox}
+                        checked={this.state.departmentsSelected.includes("RI")}
+                        onChange={this.handleCheckbox}
                       />
                       <span className="checkbox-custom rectangular"></span>
                     </label>
@@ -235,7 +238,8 @@ class Dashboard extends Component {
                     <label className="checkbox-label">
                       <input
                         id="IT"
-                        onClick={this.handleCheckbox}
+                        onChange={this.handleCheckbox}
+                        checked={this.state.departmentsSelected.includes("IT")}
                         type="checkbox"
                       />
                       <span className="checkbox-custom rectangular"></span>
@@ -287,7 +291,6 @@ class Dashboard extends Component {
               </div>
             </div>
             <div
-              key={Math.floor(Math.random() * 10000)}
               className={classnames("mainContainer 75min", {
                 hideClass: !this.state.hideUserList,
                 accepted: newVol.status === "accepted",
@@ -298,11 +301,8 @@ class Dashboard extends Component {
               {volunteers.map(volunteer => {
                 if (volunteer._id === selectedVolunteer) {
                   return (
-                    <Fragment key={Math.floor(Math.random() * 1000)}>
-                      <div
-                        key={Math.floor(Math.random() * 10000)}
-                        className="userHeaderInfo col s12"
-                      >
+                    <Fragment>
+                      <div className="userHeaderInfo col s12">
                         <div className="userInfo-name">
                           <button
                             onClick={() =>
@@ -374,7 +374,6 @@ class Dashboard extends Component {
                           </span>
                         </div>
                         <div
-                          key={Math.floor(Math.random() * 10000)}
                           className={classnames(
                             "userInfo-responses col s12 m12 l9",
                             {
@@ -440,7 +439,7 @@ class Dashboard extends Component {
                             volunteer.comments.map((com, index) => {
                               return (
                                 <Comment
-                                  key={index * Math.floor(Math.random() * 1000)}
+                                  key={index}
                                   volunteer={volunteer}
                                   comment={com}
                                 />
@@ -457,6 +456,10 @@ class Dashboard extends Component {
                         <textarea
                           id="commentAdd"
                           type="text"
+                          onChange={e =>
+                            this.setState({ textareaValue: e.target.value })
+                          }
+                          value={this.state.textareaValue}
                           onKeyDown={this.handleKeyDown}
                         ></textarea>
                         <button
