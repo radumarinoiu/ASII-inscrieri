@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./Home.scss";
 import classnames from "classnames";
+import * as APIs from "../../endpoints";
 import validator from "validator";
 import CustomInputText from "../shared/CustomInputText/CustomInputText";
 import CustomTextarea from "../shared/CustomTextarea/CustomTextarea";
@@ -243,13 +244,25 @@ class Home extends Component {
             this.checkStepZero
           );
         } else {
-          this.props.handleErrorChange(
-            {
-              name,
-              value: "OK"
-            },
-            this.checkStepZero
-          );
+          this.checkEmailIfExist(value).then(emailExist => {
+            if (emailExist) {
+              this.props.handleErrorChange(
+                {
+                  name,
+                  value: "Email-ul exista deja!"
+                },
+                this.checkStepZero
+              );
+            } else {
+              this.props.handleErrorChange(
+                {
+                  name,
+                  value: "OK"
+                },
+                this.checkStepZero
+              );
+            }
+          });
         }
 
         break;
@@ -642,6 +655,22 @@ class Home extends Component {
   submitForm = _ => {
     this.props.submitForm(this.props);
   };
+  checkEmailIfExist = async email => {
+    const url =
+      APIs.VOLUNTEERS_API +
+      APIs.VOLUNTEER_ROUTE +
+      APIs.CHECK_EMAIL +
+      email +
+      "/";
+    return await fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        return res.exist;
+      });
+
+    // console.log(typeof existE);
+    // return existE;
+  };
   render() {
     const {
       stepNo,
@@ -660,10 +689,19 @@ class Home extends Component {
       hoursPerWeek
     } = this.props.main;
     const { errors } = this.props.error;
+    const { isLoading } = this.props.admin;
+
     return (
       <Fragment>
         {this.props && (
           <div className="main">
+            <div
+              className={classnames("loader", {
+                show: isLoading
+              })}
+            >
+              <div className="loaderBody rotating"></div>
+            </div>
             <a
               className="asiiLogoLink"
               title="ASII Page"
@@ -1086,7 +1124,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-                  )}
+        )}
       </Fragment>
     );
   }

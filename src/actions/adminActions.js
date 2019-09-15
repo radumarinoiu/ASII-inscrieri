@@ -7,6 +7,8 @@ export const loadingData = status => dispatch => {
   });
 };
 
+
+
 export const addingFakeData = _ => {
   let i = 0;
   while (i++ < 2) {
@@ -102,7 +104,7 @@ export const addingFakeData = _ => {
             }
           ]
         }
-      },
+      }
     };
     fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers", {
       method: "POST",
@@ -115,6 +117,10 @@ export const addingFakeData = _ => {
 };
 
 export const getData = _ => dispatch => {
+  dispatch({
+    type: T.LOADING_DATA,
+    payload: true
+  });
   fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers")
     .then(res => res.json())
     .then(res => {
