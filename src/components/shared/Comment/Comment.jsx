@@ -1,9 +1,19 @@
 import React from "react";
 import "./Comment.scss";
+import classnames from "classnames";
 export default function Comment(props) {
+  console.log("props", props);
   return (
-    <div className="comment">
-      <span>{props.comment.value}</span>
-    </div>
+    props.volunteer && (
+      <div
+        className={classnames("comment", {
+          accepted: props.volunteer.status === "accepted",
+          denided: props.volunteer.status === "denided",
+          maybe: props.volunteer.status === "maybe"
+        })}
+      >
+        <span>{props.comment.value}</span>
+      </div>
+    )
   );
 }

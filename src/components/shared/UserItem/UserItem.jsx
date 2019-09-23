@@ -9,9 +9,15 @@ export default class UserItem extends Component {
     return (
       this.props.volunteer && (
         <Fragment>
-          <div 
-          className={classnames('userItem',{'active':this.props.volunteer._id === this.props.activeID})}
-           onClick={this.handleClickContainer}>
+          <div
+            className={classnames("userItem", {
+              active: this.props.volunteer._id === this.props.activeID,
+              accepted: this.props.volunteer.status === "accepted",
+              denided: this.props.volunteer.status === "denided",
+              maybe: this.props.volunteer.status === "maybe"
+            })}
+            onClick={this.handleClickContainer}
+          >
             <div className="avatar">
               <i className="far fa-user-circle"></i>
             </div>

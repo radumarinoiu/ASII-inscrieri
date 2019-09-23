@@ -23,26 +23,22 @@ const initialState = {
   selectingDepartment: "",
   departments: {
     RI: {
-      name: "Departamentul Relatii Interne",
+      name: "Departamentul Relații Interne",
       selected: false,
       questions: [
         {
-          title: "5 lucruri de tinut cont in organizarea unei petreceri?",
-          answer: ""
-        },
-        {
-          title: "Un motiv pentru care nu ar trebui sa te chem la interviu?",
+          title: "5 lucruri de ținut cont în organizarea unei petreceri?",
           answer: ""
         },
         {
           title:
-            "Argumenteaza altfel incat sa ma răzgandesc in legatura cu punctul anterior",
+            "Definește în stil propriu ce înseamnă o studenție reușită pentru tine",
           answer: ""
         }
       ]
     },
     RE: {
-      name: "Departamentul Relatii Externe",
+      name: "Departamentul Relații Externe",
       selected: false,
       questions: [
         {
@@ -61,11 +57,11 @@ const initialState = {
       questions: [
         {
           title:
-            "Ce sectiuni importante crezi ca ar trebui sa contina un site?",
+            "Ce secțiuni importante crezi că ar trebui sa conțina un site?",
           answer: ""
         },
         {
-          title: "Zi-mi cel mai nebun lucru pe care l-ai facut.",
+          title: "Zi-mi cel mai nebun lucru pe care l-ai făcut.",
           answer: ""
         }
       ]
@@ -99,7 +95,7 @@ const initialState = {
         },
 
         {
-          title: "De unde te inspiri atunci când lucrezi pe un proiect?",
+          title: "Ce software-uri/tool-uri folosești? ",
           answer: ""
         }
       ]
@@ -129,30 +125,25 @@ const mainReducer = (state = initialState, { type, payload }) => {
         descriptionOfDepartments: "",
         selectedDepartments: [],
         selectingDepartment: "",
-        
+
         departments: {
           RI: {
-            name: "Departamentul Relatii Interne",
+            name: "Departamentul Relații Interne",
             selected: false,
             questions: [
               {
-                title: "5 lucruri de tinut cont in organizarea unei petreceri?",
+                title: "5 lucruri de ținut cont în organizarea unei petreceri?",
                 answer: ""
               },
               {
                 title:
-                  "Un motiv pentru care nu ar trebui sa te chem la interviu?",
-                answer: ""
-              },
-              {
-                title:
-                  "Argumenteaza altfel incat sa ma răzgandesc in legatura cu punctul anterior",
+                  "Definește în stil propriu ce înseamnă o studenție reușită pentru tine",
                 answer: ""
               }
             ]
           },
           RE: {
-            name: "Departamentul Relatii Externe",
+            name: "Departamentul Relatii  Externe",
             selected: false,
             questions: [
               {
@@ -172,11 +163,11 @@ const mainReducer = (state = initialState, { type, payload }) => {
             questions: [
               {
                 title:
-                  "Ce sectiuni importante crezi ca ar trebui sa contina un site?",
+                  "Ce secțiuni importante crezi că ar trebui să conțină un site?",
                 answer: ""
               },
               {
-                title: "Zi-mi cel mai nebun lucru pe care l-ai facut.",
+                title: "Zi-mi cel mai nebun lucru pe care l-ai făcut.",
                 answer: ""
               }
             ]
@@ -232,7 +223,6 @@ const mainReducer = (state = initialState, { type, payload }) => {
           ...payload.value
         }
       };
-    
 
     case HANDLE_INPUT_CHANGE:
       return {
