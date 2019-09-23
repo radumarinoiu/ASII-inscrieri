@@ -1,11 +1,13 @@
 import * as T from "./actionTypes";
-
+import * as APIs from "../endpoints";
 export const loadingData = status => dispatch => {
   dispatch({
     type: T.LOADING_DATA,
     payload: status
   });
 };
+
+
 
 export const addingFakeData = _ => {
   let i = 0;
@@ -102,7 +104,7 @@ export const addingFakeData = _ => {
             }
           ]
         }
-      },
+      }
     };
     fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers", {
       method: "POST",
@@ -115,6 +117,10 @@ export const addingFakeData = _ => {
 };
 
 export const getData = _ => dispatch => {
+  dispatch({
+    type: T.LOADING_DATA,
+    payload: true
+  });
   fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers")
     .then(res => res.json())
     .then(res => {
@@ -141,8 +147,7 @@ export const selectVolunteer = id => dispatch => {
 };
 
 export const setStatus = (status, id) => dispatch => {
-  console.log(status, id);
-  fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + id, {
+  fetch(APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE + id, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
@@ -164,7 +169,7 @@ export const setStatus = (status, id) => dispatch => {
         type: T.LOADING_DATA,
         payload: true
       });
-      fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers")
+      fetch(APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE)
         .then(res => res.json())
         .then(res => {
           if (res.error) throw res.error;
@@ -183,7 +188,7 @@ export const setStatus = (status, id) => dispatch => {
     });
 };
 export const addCommentToVolunteer = comm => dispatch => {
-  fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + comm.id, {
+  fetch(APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE + comm.id, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
@@ -193,8 +198,7 @@ export const addCommentToVolunteer = comm => dispatch => {
   })
     .then(res => res.json())
     .then(r => {
-      // console.log("done");
-      fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers/" + comm.id)
+      fetch(APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE + comm.id)
         .then(res => res.json())
         .then(res => {
           dispatch({

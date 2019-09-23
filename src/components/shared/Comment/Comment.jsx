@@ -2,7 +2,6 @@ import React from "react";
 import "./Comment.scss";
 import classnames from "classnames";
 export default function Comment(props) {
-  console.log("props", props);
   return (
     props.volunteer && (
       <div

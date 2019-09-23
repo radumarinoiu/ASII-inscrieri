@@ -11,7 +11,7 @@ const initialState = {
   total: 0,
   selectedVolunteer: "",
   volunteers: [],
-  isLoading: true
+  isLoading: false
 };
 
 const adminReducer = (state = initialState, { type, payload }) => {

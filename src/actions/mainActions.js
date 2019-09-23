@@ -6,7 +6,8 @@ import {
   CLEAR_ALL_FIELDS,
   HANDLE_CUSTOM_ERROR_CHANGE
 } from "./actionTypes";
-
+import { loadingData } from "./adminActions";
+import * as APIs from "../endpoints";
 export const handleStepChange = objData => dispatch => {
   dispatch({
     type: HANDLE_STEP_CHANGE,
@@ -26,6 +27,7 @@ export const submitForm = state => dispatch => {
     phoneNumber,
     hoursPerWeek
   } = state.main;
+  dispatch(loadingData(true));
   const volunteer = {
     name: fName,
     email,
@@ -39,7 +41,8 @@ export const submitForm = state => dispatch => {
     hoursPerWeek
   };
 
-  const url = "https://asii-join-api.herokuapp.com/api/v1/volunteers";
+  const url = APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE;
+
   fetch(url, {
     method: "POST",
     headers: {
@@ -52,12 +55,12 @@ export const submitForm = state => dispatch => {
     )
     .then(res => {
       if ((res.ok && res.status === 200) || res.status === 201) {
+        dispatch(loadingData(false));
         dispatch({
           type: CLEAR_ALL_FIELDS
         });
         state.history.push("/success");
-      }else{
-        
+      } else {
         state.history.push("/error-on-submit");
       }
     });
@@ -69,8 +72,10 @@ export const handleOptionChange = objData => dispatch => {
   });
   return Promise.resolve();
 };
-  
-  export const handleCustomErrorChange = objData => dispatch => {
+
+
+
+export const handleCustomErrorChange = objData => dispatch => {
   dispatch({
     type: HANDLE_CUSTOM_ERROR_CHANGE,
     payload: objData

@@ -7,7 +7,7 @@ import _ from "lodash";
 
 const persistedState = loadState();
 const middleware = [thunk];
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "development") {
   const { logger } = require("redux-logger");
   middleware.push(logger);
 }
