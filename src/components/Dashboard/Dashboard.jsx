@@ -179,9 +179,6 @@ class Dashboard extends Component {
               <div className="filtersMeniu">
                 <div className="filtersHeader shadow1">
                   <h2>Filtre</h2>
-                  <span>
-                    <i className="fas fa-sort-down"></i>
-                  </span>
                 </div>
                 <div className="filterZone">
                   <div className="checkbox-container">
@@ -367,7 +364,7 @@ class Dashboard extends Component {
                             }
                           >
                             {this.state.hideDetailsResponses ? (
-                              <i className="fas fa-chevron-down"></i>
+                              <span className="info-button">Informatii</span>
                             ) : (
                               <i className="fas fa-chevron-up"></i>
                             )}
