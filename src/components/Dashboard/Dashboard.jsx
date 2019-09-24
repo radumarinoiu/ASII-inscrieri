@@ -10,7 +10,8 @@ import {
   getData,
   selectVolunteer,
   addCommentToVolunteer,
-  setStatus
+  setStatus,
+  setListOfFilteredUsers
 } from "../../actions/adminActions";
 import { authenticate } from "../../actions/authActions";
 class Dashboard extends Component {
@@ -31,7 +32,6 @@ class Dashboard extends Component {
     const token = window.sessionStorage.token;
     if (!token) {
       this.props.history.push("/login");
-      // return <Redirect to="/login" />;
     } else this.props.authenticate();
   }
 
@@ -39,7 +39,6 @@ class Dashboard extends Component {
     this.props.getData();
   }
   componentWillReceiveProps() {
-    this.setState({ filteredVolunteers: this.props.admin.volunteers });
     for (let i in this.props.admin.volunteers) {
       if (
         this.props.admin.volunteers[i]._id ===
@@ -75,8 +74,8 @@ class Dashboard extends Component {
       filteredVolunteers,
       this.state.searchText
     );
-
-    this.setState({ filteredVolunteers });
+    this.props.setListOfFilteredUsers(filteredVolunteers);
+    // this.setState({ filteredVolunteers });
   };
 
   handleKeyDown = e => {
@@ -125,13 +124,17 @@ class Dashboard extends Component {
         filteredVolunteers,
         e.target.value
       );
+      this.props.setListOfFilteredUsers(filteredVolunteers);
       this.setState({
-        filteredVolunteers,
         searchText: e.target.value
       });
     } else {
+      let filteredVolunteers = this.filterByDepartment(
+        this.props.admin.volunteers,
+        this.state.departmentsSelected
+      );
+      this.props.setListOfFilteredUsers(filteredVolunteers);
       this.setState({
-        filteredVolunteers: this.props.admin.volunteers,
         searchText: e.target.value
       });
     }
@@ -170,103 +173,109 @@ class Dashboard extends Component {
       return (
         <Fragment>
           <div className={classnames("row containerDashboard")}>
-            <div
-              id="leftM"
-              className={classnames("leftMenu 25min", {
-                hideClass: this.state.hideUserList
-              })}
-            >
-              <div className="filtersMeniu">
-                <div className="filtersHeader shadow1">
-                  <h2>Filtre</h2>
-                  <span>
-                    <i className="fas fa-sort-down"></i>
-                  </span>
-                </div>
-                <div className="filterZone">
-                  <div className="checkbox-container">
-                    <label className="checkbox-label">
-                      <input
-                        id="PRO"
-                        type="checkbox"
-                        checked={this.state.departmentsSelected.includes("PRO")}
-                        onChange={this.handleCheckbox}
-                      />
-                      <span className="checkbox-custom rectangular"></span>
-                    </label>
-                    <div className="input-title">PRO</div>
+            <div className="containerDefault">
+              <div
+                id="leftM"
+                className={classnames("leftMenu 25min", {
+                  hideClass: this.state.hideUserList
+                })}
+              >
+                <div className="filtersMeniu">
+                  <div className="filtersHeader shadow1">
+                    <h2>Filtre</h2>
                   </div>
-                  <div className="checkbox-container">
-                    <label className="checkbox-label">
-                      <input
-                        id="PR&MEDIA"
-                        checked={this.state.departmentsSelected.includes(
-                          "PR&MEDIA"
-                        )}
-                        type="checkbox"
-                        onChange={this.handleCheckbox}
-                      />
-                      <span className="checkbox-custom rectangular"></span>
-                    </label>
-                    <div className="input-title">PR&MEDIA</div>
-                  </div>
-                  <div className="checkbox-container">
-                    <label className="checkbox-label">
-                      <input
-                        id="RE"
-                        type="checkbox"
-                        checked={this.state.departmentsSelected.includes("RE")}
-                        onChange={this.handleCheckbox}
-                      />
-                      <span className="checkbox-custom rectangular"></span>
-                    </label>
-                    <div className="input-title">RE</div>
-                  </div>
-                  <div className="checkbox-container">
-                    <label className="checkbox-label">
-                      <input
-                        id="RI"
-                        type="checkbox"
-                        checked={this.state.departmentsSelected.includes("RI")}
-                        onChange={this.handleCheckbox}
-                      />
-                      <span className="checkbox-custom rectangular"></span>
-                    </label>
-                    <div className="input-title">RI</div>
-                  </div>
-                  <div className="checkbox-container">
-                    <label className="checkbox-label">
-                      <input
-                        id="IT"
-                        onChange={this.handleCheckbox}
-                        checked={this.state.departmentsSelected.includes("IT")}
-                        type="checkbox"
-                      />
-                      <span className="checkbox-custom rectangular"></span>
-                    </label>
-                    <div htmlFor="IT" className="input-title">
-                      IT
+                  <div className="filterZone">
+                    <div className="checkbox-container">
+                      <label className="checkbox-label">
+                        <input
+                          id="PRO"
+                          type="checkbox"
+                          checked={this.state.departmentsSelected.includes(
+                            "PRO"
+                          )}
+                          onChange={this.handleCheckbox}
+                        />
+                        <span className="checkbox-custom rectangular"></span>
+                      </label>
+                      <div className="input-title">PRO</div>
+                    </div>
+                    <div className="checkbox-container">
+                      <label className="checkbox-label">
+                        <input
+                          id="PR&MEDIA"
+                          checked={this.state.departmentsSelected.includes(
+                            "PR&MEDIA"
+                          )}
+                          type="checkbox"
+                          onChange={this.handleCheckbox}
+                        />
+                        <span className="checkbox-custom rectangular"></span>
+                      </label>
+                      <div className="input-title">PR&MEDIA</div>
+                    </div>
+                    <div className="checkbox-container">
+                      <label className="checkbox-label">
+                        <input
+                          id="RE"
+                          type="checkbox"
+                          checked={this.state.departmentsSelected.includes(
+                            "RE"
+                          )}
+                          onChange={this.handleCheckbox}
+                        />
+                        <span className="checkbox-custom rectangular"></span>
+                      </label>
+                      <div className="input-title">RE</div>
+                    </div>
+                    <div className="checkbox-container">
+                      <label className="checkbox-label">
+                        <input
+                          id="RI"
+                          type="checkbox"
+                          checked={this.state.departmentsSelected.includes(
+                            "RI"
+                          )}
+                          onChange={this.handleCheckbox}
+                        />
+                        <span className="checkbox-custom rectangular"></span>
+                      </label>
+                      <div className="input-title">RI</div>
+                    </div>
+                    <div className="checkbox-container">
+                      <label className="checkbox-label">
+                        <input
+                          id="IT"
+                          onChange={this.handleCheckbox}
+                          checked={this.state.departmentsSelected.includes(
+                            "IT"
+                          )}
+                          type="checkbox"
+                        />
+                        <span className="checkbox-custom rectangular"></span>
+                      </label>
+                      <div htmlFor="IT" className="input-title">
+                        IT
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="searchZone">
-                <div className="row">
-                  <div className="input-field col s12">
-                    <div className="col s12 m12 l12">
-                      <CustomInputText
-                        handleChange={this.handleChange}
-                        type="text"
-                        min="3"
-                        max="100"
-                        name="search"
-                        id="userSearch"
-                        placeholder="Cauta.."
-                        value={this.state.searchText}
-                        label="Cauta dupa nume"
-                      />
-                    </div>
-                    {/* <input
+                <div className="searchZone">
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <div className="col s12 m12 l12">
+                        <CustomInputText
+                          handleChange={this.handleChange}
+                          type="text"
+                          min="3"
+                          max="100"
+                          name="search"
+                          id="userSearch"
+                          placeholder="Cauta.."
+                          value={this.state.searchText}
+                          label="Cauta dupa nume"
+                        />
+                      </div>
+                      {/* <input
                       value={this.state.searchText}
                       id="userSearch"
                       type="text"
@@ -275,217 +284,227 @@ class Dashboard extends Component {
                       placeholder="Cauta.."
                       onKeyDown={this.handleKeyDown}
                     /> */}
+                    </div>
                   </div>
                 </div>
+                <div className="usersList">
+                  {this.props.admin.filteredUsers !== [] &&
+                    this.props.admin.filteredUsers.map(volunteer => (
+                      <UserItem
+                        key={volunteer._id}
+                        activeID={selectedVolunteer}
+                        handleClick={this.handleClick}
+                        volunteer={volunteer}
+                      />
+                    ))}
+                </div>
               </div>
-              <div className="usersList">
-                {this.state.filteredVolunteers !== [] &&
-                  this.state.filteredVolunteers.map(volunteer => (
-                    <UserItem
-                      key={volunteer._id}
-                      activeID={selectedVolunteer}
-                      handleClick={this.handleClick}
-                      volunteer={volunteer}
-                    />
-                  ))}
+              <div
+                className={classnames("mainContainer 75min", {
+                  hideClass: !this.state.hideUserList,
+                  accepted: newVol.status === "accepted",
+                  denided: newVol.status === "denided",
+                  maybe: newVol.status === "maybe"
+                })}
+              >
+                {volunteers.map((volunteer, index) => {
+                  if (volunteer._id === selectedVolunteer) {
+                    return (
+                      <Fragment key={index + "f"}>
+                        <div className="userHeaderInfo col s12">
+                          <div className="userInfo-name">
+                            <button
+                              onClick={() =>
+                                this.setState({ hideUserList: false })
+                              }
+                              className="btnBack"
+                            >
+                              <i className="fas fa-chevron-left"></i>
+                            </button>
+                            <h4>{volunteer.name}</h4>
+                            <div className="decisionButtons">
+                              <button
+                                onClick={_ =>
+                                  this.handleChangeStatus(
+                                    "accepted",
+                                    selectedVolunteer
+                                  )
+                                }
+                                className={classnames("buttonNormal accept", {
+                                  // active: true
+                                  active: volunteer.status === "accepted"
+                                })}
+                              >
+                                Acceptat
+                              </button>
+
+                              <button
+                                onClick={_ =>
+                                  this.handleChangeStatus(
+                                    "denided",
+                                    selectedVolunteer
+                                  )
+                                }
+                                className={classnames("buttonNormal denided", {
+                                  active: volunteer.status === "denided"
+                                })}
+                              >
+                                Respins
+                              </button>
+
+                              <button
+                                onClick={_ =>
+                                  this.handleChangeStatus(
+                                    "maybe",
+                                    selectedVolunteer
+                                  )
+                                }
+                                className={classnames("buttonNormal maybe", {
+                                  active: volunteer.status === "maybe"
+                                })}
+                              >
+                                Poate
+                              </button>
+                            </div>
+                            <div
+                              className="showHideDetails"
+                              onClick={() =>
+                                this.setState({
+                                  hideDetailsResponses: !this.state
+                                    .hideDetailsResponses
+                                })
+                              }
+                            >
+                              {this.state.hideDetailsResponses ? (
+                                <Fragment>
+                                  <span className="info-button">
+                                    Informatii
+                                  </span>
+                                  <i className="fas fa-chevron-down"></i>
+                                </Fragment>
+                              ) : (
+                                <Fragment>
+                                  <span className="info-button">
+                                    Informatii
+                                  </span>
+                                  <i className="fas fa-chevron-up"></i>
+                                </Fragment>
+                              )}
+                            </div>
+                          </div>
+                          <div
+                            className={classnames("userInfo-responses ", {
+                              hideDetailsResponses: this.state
+                                .hideDetailsResponses
+                            })}
+                          >
+                            <div className="responsesContainer">
+                              <div className="response col s12 m6 l6">
+                                <span>Email:</span>
+                                <p>{volunteer.email}</p>
+                              </div>
+                              <div className="response col s12 m6 l6">
+                                <span>Telefon:</span>
+                                <p>{volunteer.phoneNumber}</p>
+                              </div>
+                              <div className="response col s12 m6 l6">
+                                <span>Facultate si an de studiu:</span>
+                                <p>{volunteer.faculty}</p>
+                              </div>
+                              <div className="response col s12 m6 l6">
+                                <span>Descriete in minim 15 cuvinte:</span>
+                                <p>{volunteer.description}</p>
+                              </div>
+                              <div className="response col s12 m6 l6">
+                                <span>
+                                  Cea mai importanta calitate si de ce?
+                                </span>
+                                <p>{volunteer.bestQuality}</p>
+                              </div>
+                              <div className="response col s12 m6 l6">
+                                <span>De ce vrei sa te inscrii in ASII?</span>
+                                <p>{volunteer.whyASII}</p>
+                              </div>
+                              <div className="response col s12 m6 l6">
+                                <span>
+                                  Cate ore pe saptamana poti acorda asociatiei?
+                                </span>
+                                <p>{volunteer.hoursPerWeek}</p>
+                              </div>
+                              {Object.entries(volunteer.departments).map(
+                                ([key, value]) => {
+                                  if (value.selected) {
+                                    return value.questions.map((q, index) => {
+                                      return (
+                                        <Fragment>
+                                          <div className="response col s12 m6 l6">
+                                            <span>
+                                              {key}:{index + 1}.{q.title}
+                                            </span>
+                                            <p>{q.answer}</p>
+                                          </div>
+                                        </Fragment>
+                                      );
+                                    });
+                                  }
+                                  return null;
+                                }
+                              )}
+                            </div>
+                          </div>
+                          <div className="comments">
+                            {volunteer.comments ? (
+                              volunteer.comments.map((com, index) => {
+                                return (
+                                  <Comment
+                                    key={index}
+                                    volunteer={volunteer}
+                                    comment={com}
+                                  />
+                                );
+                              })
+                            ) : (
+                              <span className="noComments">
+                                Adauga comentarii
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="inputComments col s12">
+                          <textarea
+                            id="commentAdd"
+                            type="text"
+                            onChange={e =>
+                              this.setState({ textareaValue: e.target.value })
+                            }
+                            value={this.state.textareaValue}
+                            onKeyDown={this.handleKeyDown}
+                          ></textarea>
+                          <button
+                            onClick={this.addCommentToVolunteer}
+                            className={classnames("addCommentBtn", {
+                              accepted: volunteer.status === "accepted",
+                              denided: volunteer.status === "denided",
+                              maybe: volunteer.status === "maybe"
+                            })}
+                          >
+                            Adauga
+                          </button>
+                        </div>
+                      </Fragment>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             </div>
             <div
-              className={classnames("mainContainer 75min", {
-                hideClass: !this.state.hideUserList,
-                accepted: newVol.status === "accepted",
-                denided: newVol.status === "denided",
-                maybe: newVol.status === "maybe"
+              className={classnames("loader", {
+                show: isLoading
               })}
             >
-              {volunteers.map(volunteer => {
-                if (volunteer._id === selectedVolunteer) {
-                  return (
-                    <Fragment>
-                      <div className="userHeaderInfo col s12">
-                        <div className="userInfo-name">
-                          <button
-                            onClick={() =>
-                              this.setState({ hideUserList: false })
-                            }
-                            className="btnBack"
-                          >
-                            <i className="fas fa-chevron-left"></i>
-                          </button>
-                          <h4>{volunteer.name}</h4>
-                          <div className="decisionButtons">
-                            <button
-                              onClick={_ =>
-                                this.handleChangeStatus(
-                                  "accepted",
-                                  selectedVolunteer
-                                )
-                              }
-                              className={classnames("buttonNormal accept", {
-                                // active: true
-                                active: volunteer.status === "accepted"
-                              })}
-                            >
-                              Acceptat
-                            </button>
-
-                            <button
-                              onClick={_ =>
-                                this.handleChangeStatus(
-                                  "denided",
-                                  selectedVolunteer
-                                )
-                              }
-                              className={classnames("buttonNormal denided", {
-                                active: volunteer.status === "denided"
-                              })}
-                            >
-                              Respins
-                            </button>
-
-                            <button
-                              onClick={_ =>
-                                this.handleChangeStatus(
-                                  "maybe",
-                                  selectedVolunteer
-                                )
-                              }
-                              className={classnames("buttonNormal maybe", {
-                                active: volunteer.status === "maybe"
-                              })}
-                            >
-                              Poate
-                            </button>
-                          </div>
-                          <span
-                            className="showHideDetails"
-                            onClick={() =>
-                              this.setState({
-                                hideDetailsResponses: !this.state
-                                  .hideDetailsResponses
-                              })
-                            }
-                          >
-                            {this.state.hideDetailsResponses ? (
-                              <i className="fas fa-chevron-down"></i>
-                            ) : (
-                              <i className="fas fa-chevron-up"></i>
-                            )}
-                          </span>
-                        </div>
-                        <div
-                          className={classnames(
-                            "userInfo-responses col s12 m12 l9",
-                            {
-                              hideDetailsResponses: this.state
-                                .hideDetailsResponses
-                            }
-                          )}
-                        >
-                          <div className="responsesContainer">
-                            <div className="response col s12 m6 l6">
-                              <span>Email:</span>
-                              <p>{volunteer.email}</p>
-                            </div>
-                            <div className="response col s12 m6 l6">
-                              <span>Telefon:</span>
-                              <p>{volunteer.phoneNumber}</p>
-                            </div>
-                            <div className="response col s12 m6 l6">
-                              <span>Facultate si an de studiu:</span>
-                              <p>{volunteer.faculty}</p>
-                            </div>
-                            <div className="response col s12 m6 l6">
-                              <span>Descriete in minim 15 cuvinte:</span>
-                              <p>{volunteer.description}</p>
-                            </div>
-                            <div className="response col s12 m6 l6">
-                              <span>Cea mai importanta calitate si de ce?</span>
-                              <p>{volunteer.bestQuality}</p>
-                            </div>
-                            <div className="response col s12 m6 l6">
-                              <span>De ce vrei sa te inscrii in ASII?</span>
-                              <p>{volunteer.whyASII}</p>
-                            </div>
-                            <div className="response col s12 m6 l6">
-                              <span>
-                                Cate ore pe saptamana poti acorda asociatiei?
-                              </span>
-                              <p>{volunteer.hoursPerweek}</p>
-                            </div>
-                            {Object.entries(volunteer.departments).map(
-                              ([key, value]) => {
-                                if (value.selected) {
-                                  return value.questions.map((q, index) => {
-                                    return (
-                                      <Fragment>
-                                        <div className="response col s12 m6 l6">
-                                          <span>
-                                            {key}:{index + 1}.{q.title}
-                                          </span>
-                                          <p>{q.answer}</p>
-                                        </div>
-                                      </Fragment>
-                                    );
-                                  });
-                                }
-                                return null;
-                              }
-                            )}
-                          </div>
-                        </div>
-                        <div className="comments">
-                          {volunteer.comments ? (
-                            volunteer.comments.map((com, index) => {
-                              return (
-                                <Comment
-                                  key={index}
-                                  volunteer={volunteer}
-                                  comment={com}
-                                />
-                              );
-                            })
-                          ) : (
-                            <span className="noComments">
-                              Adauga comentarii
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div className="inputComments col s12">
-                        <textarea
-                          id="commentAdd"
-                          type="text"
-                          onChange={e =>
-                            this.setState({ textareaValue: e.target.value })
-                          }
-                          value={this.state.textareaValue}
-                          onKeyDown={this.handleKeyDown}
-                        ></textarea>
-                        <button
-                          onClick={this.addCommentToVolunteer}
-                          className={classnames("addCommentBtn", {
-                            accepted: volunteer.status === "accepted",
-                            denided: volunteer.status === "denided",
-                            maybe: volunteer.status === "maybe"
-                          })}
-                        >
-                          Adauga
-                        </button>
-                      </div>
-                    </Fragment>
-                  );
-                }
-                return null;
-              })}
+              <div className="loaderBody rotating"></div>
             </div>
-          </div>
-          <div
-            className={classnames("loader", {
-              show: isLoading
-            })}
-          >
-            <div className="loaderBody rotating"></div>
           </div>
         </Fragment>
       );
@@ -497,6 +516,7 @@ const mapDispatchToProps = dispatch => ({
   authenticate: () => dispatch(authenticate()),
   getData: () => dispatch(getData()),
   selectVolunteer: id => dispatch(selectVolunteer(id)),
+  setListOfFilteredUsers: list => dispatch(setListOfFilteredUsers(list)),
   addCommentToVolunteer: comm => dispatch(addCommentToVolunteer(comm)),
   setStatus: (status, id) => dispatch(setStatus(status, id))
   // handleInputChange: (objData, callback = () => null) =>

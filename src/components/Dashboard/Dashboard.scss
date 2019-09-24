@@ -1,6 +1,9 @@
+// @import "../../styles/fonts", "../../styles/grid", "../../styles/reset";
+
 .m0 {
   margin: 0 !important;
 }
+
 .p0 {
   padding: 0 !important;
 }
@@ -193,11 +196,6 @@
     transform: translate(-50%, -50%);
   }
 }
-.hideClass {
-  @media screen and (max-width: 1000px) {
-    display: none;
-  }
-}
 
 .btnBack {
   display: none;
@@ -299,44 +297,69 @@
   }
 }
 .mainContainer {
-  width: 74%;
+  width: 75%;
   @media screen and (max-width: 1000px) {
     min-width: 100%;
   }
 
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
+  height: 97vh;
+  justify-content: space-between;
+  overflow: hidden;
+  justify-content: space-between;
 }
 
 .decisionButtons {
-  width: 100%;
   display: flex;
   justify-content: center;
 }
 
+.showHideDetails {
+  .info-button {
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  i.fas {
+    cursor: pointer;
+  }
+}
 .containerDashboard {
-  display: flex;
-  flex-wrap: wrap;
-  width: calc(100% - 20px);
-  margin: 10px auto;
+  width: 100%;
+  margin: 0;
   padding: 10px;
+  font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   border-radius: 10px;
-  border: 1px solid #f2f2f2;
-  box-shadow: 0 0 10px #f2f2f2;
+  overflow: hidden;
+  height: 100vh;
+
+  .containerDefault {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0 0 10px #f2f2f2;
+    height: 100%;
+  }
 
   .userHeaderInfo {
     background-image: url("https://render.fineartamerica.com/images/rendered/default/print/8.000/8.000/break/images-medium-5/seamless-minimalist-pattern-geometric-background-with-shapes-lines-black-and-white-color-retro-style-80s-90s-khjaproduction.jpg");
     display: block;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    max-height: calc(100% - 125px);
     .userInfo-name {
       background: #fff;
       padding: 10px;
       box-sizing: border-box;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
       border-bottom: 2px solid #f2f2f2;
       font-size: 20px;
       @media screen and (max-width: 1000px) {
@@ -347,21 +370,34 @@
       }
     }
     .userInfo-responses {
-      background: rgba(255, 255, 255, 0.849);
+      background: rgba(255, 255, 255, 0.95);
+      z-index: 999;
       &.hideDetailsResponses {
         display: none;
       }
+      @media screen and (max-width: 1000px) {
+        width: 94%;
+        margin: auto;
+        padding: 20px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
       padding: 20px;
       display: block;
+      overflow: hidden;
+      position: absolute;
+      box-sizing: border-box;
+      width: calc(100% - 30%);
       .response {
         span {
           font-size: 20px;
-          color: rgb(240, 164, 164);
+          font-weight: 500;
+          color: rgb(0, 0, 0);
         }
         p {
-          font-size: 18px;
+          font-size: 16px;
           line-height: 1.4;
-          color: #777474;
+          color: #000000;
           margin: 5px;
         }
       }
@@ -369,10 +405,16 @@
   }
   .comments {
     display: block;
-    height: 55vh;
+    height: calc(100% - 80px);
     padding: 20px 10px;
     box-sizing: border-box;
     overflow-y: scroll;
+    min-height: 55vh;
+    width: 100%;
+
+    @media screen and (max-width: 1000px) {
+      height: calc(100% - 133px);
+    }
     &::-webkit-scrollbar {
       width: 6px;
       background-color: #f5f5f5;
@@ -395,7 +437,7 @@
     textarea {
       z-index: 9;
       width: 100%;
-      height: 5em;
+      height: 120px;
       margin: 0;
       padding: 10px;
       box-sizing: border-box;
@@ -407,11 +449,21 @@
   }
 }
 .leftMenu {
-  min-width: 25%;
+  width: 25%;
   border-right: 2px solid #f2f2f2;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
+  height: 97vh;
+  overflow: hidden;
+
   @media screen and (max-width: 1000px) {
-    // display:none;
-    min-width: 100%;
+    width: 100%;
+    &.hideClass {
+      display: none;
+    }
   }
 }
 
@@ -445,25 +497,26 @@
   }
 }
 .usersList {
-  &:hover {
-    overflow-y: scroll;
-  }
   &::-webkit-scrollbar {
     width: 6px;
     background-color: #f5f5f5;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #777474;
+    background-color: transparent;
   }
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
-  height: 75vh;
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #777777;
+    }
+  }
   border-top: 2px solid #f2f2f2;
   transition: all 0.5s;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 .searchZone {
   padding: 0 10px;

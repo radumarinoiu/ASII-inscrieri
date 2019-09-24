@@ -11,7 +11,9 @@ export default function Comment(props) {
           maybe: props.volunteer.status === "maybe"
         })}
       >
-        <span>{props.comment.value}</span>
+        <p className="comment-title">
+          {props.comment.value}
+        </p>
       </div>
     )
   );

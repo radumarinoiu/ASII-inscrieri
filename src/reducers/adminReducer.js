@@ -2,7 +2,8 @@ import {
   SET_DATA,
   SELECT_VOLUNTEER,
   SET_ONE_VOLUNTEER,
-  LOADING_DATA
+  LOADING_DATA,
+  SET_LIST_USERS
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   total: 0,
   selectedVolunteer: "",
   volunteers: [],
+  filteredUsers: [],
   isLoading: false
 };
 
@@ -20,7 +22,8 @@ const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         total: payload.total,
-        volunteers: payload.volunteers
+        volunteers: payload.volunteers,
+        filteredUsers: payload.volunteers
       };
     case LOADING_DATA:
       return {
@@ -31,6 +34,11 @@ const adminReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         selectedVolunteer: payload
+      };
+    case SET_LIST_USERS:
+      return {
+        ...state,
+        filteredUsers: payload
       };
     case SET_ONE_VOLUNTEER:
       const vols = state.volunteers;

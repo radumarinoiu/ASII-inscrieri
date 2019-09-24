@@ -41,6 +41,13 @@
   align-items: flex-start;
   padding: 10px;
   box-sizing: border-box;
+  border-right: 4px solid transparent;
+  // &:hover,
+  // &.active {
+  //   background: #eceff1;
+  //   border-right: 4px solid #000;
+  //   cursor: pointer;
+  // }
   &:hover,
   &.active {
     background: #eceff1;

@@ -118,6 +118,7 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -142,9 +143,9 @@ input:-webkit-autofill:active {
 :-ms-input-placeholder {
   font-style: italic;
 }
-$break-small:600px;
+$break-small: 600px;
 $base-color: #ef514c;
 $font-icon-color: #bc3838;
 $dark-color: #222121;
 $fade-base-color: #ffc4c2;
-$fade-icon-color:#EE504B;
+$fade-icon-color: #ee504b;

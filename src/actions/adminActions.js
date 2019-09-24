@@ -187,6 +187,13 @@ export const setStatus = (status, id) => dispatch => {
         });
     });
 };
+
+export const setListOfFilteredUsers = list => dispatch => {
+  dispatch({
+    type: T.SET_LIST_USERS,
+    payload: list
+  });
+}
 export const addCommentToVolunteer = comm => dispatch => {
   fetch(APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE + comm.id, {
     headers: {

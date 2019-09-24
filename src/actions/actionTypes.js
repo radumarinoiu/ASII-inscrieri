@@ -16,3 +16,4 @@ export const SET_ONE_VOLUNTEER = "SET_ONE_VOLUNTEER";
 export const LOADING_DATA = "LOADING_DATA";
 export const SET_AUTH = "SET_AUTH";
 export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";
+export const SET_LIST_USERS = "SET_LIST_USERS";
