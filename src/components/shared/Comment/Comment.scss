@@ -1,18 +1,18 @@
 .comment {
   &.accepted {
-    .comment-title span {
+    .comment-title {
       background: green;
       box-shadow: 0 0 5px green;
     }
   }
   &.denided {
-    .comment-title span {
+    .comment-title {
       background: red;
       box-shadow: 0 0 5px red;
     }
   }
   &.maybe {
-    .comment-title span {
+    .comment-title {
       background: #777474;
       box-shadow: 0 0 5px #777474;
     }
