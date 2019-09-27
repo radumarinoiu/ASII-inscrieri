@@ -106,7 +106,7 @@ export const addingFakeData = _ => {
         }
       }
     };
-    fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers", {
+    fetch(APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE, {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -121,7 +121,7 @@ export const getData = _ => dispatch => {
     type: T.LOADING_DATA,
     payload: true
   });
-  fetch("https://asii-join-api.herokuapp.com/api/v1/volunteers")
+  fetch(APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE)
     .then(res => res.json())
     .then(res => {
       if (res.error) throw res.error;
