@@ -25,6 +25,7 @@ const initialState = {
     RI: {
       name: "Departamentul Relații Interne",
       selected: false,
+      position: null,
       questions: [
         {
           title: "5 lucruri de ținut cont în organizarea unei petreceri?",
@@ -40,6 +41,7 @@ const initialState = {
     RE: {
       name: "Departamentul Relații Externe",
       selected: false,
+      position: null,
       questions: [
         {
           title: "Cum te descurci când cunoști o persoană nouă (importantă)?",
@@ -54,6 +56,7 @@ const initialState = {
     IT: {
       name: "Departamentul IT",
       selected: false,
+      position: null,
       questions: [
         {
           title:
@@ -69,6 +72,7 @@ const initialState = {
     PRO: {
       name: "Departamentul Proiecte",
       selected: false,
+      position: null,
       questions: [
         {
           title:
@@ -84,6 +88,7 @@ const initialState = {
     "PR&MEDIA": {
       name: "Departamentul Pr&Media",
       selected: false,
+      position: null,
       questions: [
         {
           title: "În ce constă procesul tău de creare a unui material?",
@@ -130,6 +135,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
           RI: {
             name: "Departamentul Relații Interne",
             selected: false,
+            position: null,
             questions: [
               {
                 title: "5 lucruri de ținut cont în organizarea unei petreceri?",
@@ -145,6 +151,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
           RE: {
             name: "Departamentul Relatii  Externe",
             selected: false,
+            position: null,
             questions: [
               {
                 title:
@@ -160,6 +167,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
           IT: {
             name: "Departamentul IT",
             selected: false,
+            position: null,
             questions: [
               {
                 title:
@@ -175,6 +183,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
           PRO: {
             name: "Departamentul Proiecte",
             selected: false,
+            position: null,
             questions: [
               {
                 title:
@@ -190,6 +199,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
           "PR&MEDIA": {
             name: "Departamentul Pr&Media",
             selected: false,
+            position: null,
             questions: [
               {
                 title: "În ce constă procesul tău de creare a unui material?",

@@ -23,12 +23,15 @@ class Home extends Component {
   updateSelectedDepartments = (department, operation) => {
     var selectedDepartments = [...this.props.main.selectedDepartments];
 
+    console.log(this.props.main);
+
     if (operation === "add") {
       selectedDepartments.push(department);
     } else if (operation === "remove") {
       this.clearAllAnswersForDepartment(department);
       selectedDepartments = selectedDepartments.filter(e => e !== department);
     }
+
     this.props.handleInputChange(
       {
         name: "selectedDepartments",
@@ -58,6 +61,7 @@ class Home extends Component {
   toggleOptionDepartment = (department, state) => {
     let departments = Object.assign({}, this.props.main.departments);
     if (department in departments) departments[department].selected = state;
+
     if (departments[department].selected) {
       this.props.handleOptionChange({ name: "departments", departments }, () =>
         this.updateSelectedDepartments(department, "add")
@@ -667,9 +671,6 @@ class Home extends Component {
       .then(res => {
         return res.exist;
       });
-
-    // console.log(typeof existE);
-    // return existE;
   };
   render() {
     const {

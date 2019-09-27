@@ -23,6 +23,7 @@ export const submitForm = state => dispatch => {
     bestQuality,
     whyASII,
     departments,
+    selectedDepartments,
     descriptionOfDepartments,
     phoneNumber,
     hoursPerWeek
@@ -38,7 +39,8 @@ export const submitForm = state => dispatch => {
     departments,
     descriptionOfDepartments,
     phoneNumber,
-    hoursPerWeek
+    hoursPerWeek,
+    selectedDepartments
   };
 
   const url = APIs.VOLUNTEERS_API + APIs.VOLUNTEER_ROUTE;

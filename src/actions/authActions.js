@@ -10,7 +10,7 @@ const jwtAuthentification = token => {
     }
   })
     .then(res => res.json())
-    .catch(err => console.log(err));
+    .catch(err => {});
 };
 
 export const authenticate = _ => dispatch => {
@@ -68,5 +68,5 @@ export const login = dataObj => dispatch => {
         });
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => {});
 };
