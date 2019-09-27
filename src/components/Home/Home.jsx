@@ -938,7 +938,7 @@ class Home extends Component {
                               handleChange={this.handleInputChange}
                               handleOnBlur={this.handleOnBlurChange}
                               dataError={errors.hoursPerWeek}
-                              type="text"
+                              type="number"
                               name="hoursPerWeek"
                               id="hoursPerWeek"
                               min="2"
