@@ -35,24 +35,20 @@ export default class NotFound extends Component {
                       "step-one animated fadeIn": true
                     })}
                   >
-              
-                    <div className="container-body col s12">
-                      <h3 className="header">EROARE!</h3>
-                      <h3 className="header special ">
-                      Pagina nu a fost gasita!
-                      </h3>
-                      <div className="row">
-                        <div className="col s12 m12 l4 xl6">
-                          <img
-                            className="asii-logo-right"
-                            src={
-                              process.env.PUBLIC_URL +
-                              "/assets/images/error-submit.png"
-                            }
-                            alt=""
-                          />
-                        </div>
+                    <div className="container-body center col s12 m6 offset-m3 l6 offset-l3">
+                      <div className="errorSubmitContainer col 12">
+                        <img
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/assets/images/error-submit.png"
+                          }
+                          alt=""
+                        />
                       </div>
+                      <h3 className="header">EROARE!</h3>
+                      <h3 className="header small-text">
+                        A aparut o eroare la trimiterea informatiilor!
+                      </h3>
                       <div className="row">
                         <div className="container-buttons step0 col s12 m12 l12 xl12">
                           <CustomButton

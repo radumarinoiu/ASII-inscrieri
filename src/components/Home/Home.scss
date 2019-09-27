@@ -117,6 +117,9 @@ $break-small: 600px;
     }
 
     .container-body {
+      &.center{
+        text-align: center;
+      }
       text-align: left;
       box-sizing: border-box;
       background: #fff;
@@ -126,6 +129,16 @@ $break-small: 600px;
       margin: 0;
       padding: 30px;
       box-sizing: border-box;
+      .errorSubmitContainer{
+        margin-bottom: 30px;
+        text-align: center;
+        height: 200px;
+        overflow: hidden;
+        width: 100%;
+        img{
+          height: 100%;
+        }
+      }
       .asii-logo-right {
         padding-left: 25px;
         box-sizing: border-box;
@@ -146,6 +159,12 @@ $break-small: 600px;
         text-transform: uppercase;
         margin-bottom: 10px;
         font-weight: 800;
+        &.small-text{
+          color:#777;
+          font-size: 16px;
+          text-transform:none;
+          font-weight: normal;
+        }
         &.special {
           color: $base-color;
           margin-bottom: 30px;
