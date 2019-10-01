@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./CustomInputText.scss";
+import classnames from "classnames";
 export default class CustomInputText extends Component {
   render() {
     const {
@@ -18,7 +19,11 @@ export default class CustomInputText extends Component {
     return (
       <Fragment>
         {this.props && (
-          <div className="group-items col s12">
+          <div
+            className={classnames("group-items col s12", {
+              error: dataError && dataError !== "OK"
+            })}
+          >
             <label htmlFor={name}>{label}</label>
             <input
               id={id}
@@ -34,9 +39,12 @@ export default class CustomInputText extends Component {
               value={value}
               placeholder={placeholder}
             />
-            <div className="errorMessage">
-              {dataError && dataError !== "OK" && <span>{dataError}</span>}
-            </div>
+
+            {dataError && dataError !== "OK" && (
+              <div className="errorMessage">
+                <span>{dataError}</span>
+              </div>
+            )}
           </div>
         )}
       </Fragment>

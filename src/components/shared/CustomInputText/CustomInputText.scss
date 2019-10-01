@@ -2,11 +2,20 @@
 $break-small: 600px;
 .group-items {
   .errorMessage {
-    display: block;
+    display: flex;
+    align-items: center;
     min-height: 20px;
-    color:#ef514c;
+    color: $darkRed;
     padding-left: 15px;
-    font-family: "Roboto",sans-serif;
+    font-family: "Roboto", sans-serif;
+  }
+  &.error{
+    label{
+      color:$darkRed;
+    }
+    input{
+      border:1px solid $liteRed;
+    }
   }
   label {
     position: relative;
@@ -15,6 +24,7 @@ $break-small: 600px;
     left: 10px;
     background: #fff;
     padding: 5px;
+    padding-top: 0;
     font-family: "Roboto", sans-serif;
     font-weight: 600;
     @media screen and (max-width: $break-small) {
@@ -35,7 +45,6 @@ $break-small: 600px;
     border-radius: 15px;
     box-sizing: border-box;
     border: 1px solid rgb(31, 31, 31);
-    margin-bottom: 10px;
     padding-left: 0.75em;
     @media screen and (max-width: $break-small) {
       padding-top: 1.2em;

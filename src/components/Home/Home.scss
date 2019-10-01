@@ -1,12 +1,25 @@
 @import "../../styles/fonts", "../../styles/grid", "../../styles/reset";
 $break-small: 600px;
+body {
+  @media screen and (max-width: $break-small) {
+    background: #ef514c;
+  }
+}
 .main {
   background: #ef514c;
   display: block;
   height: 700px;
-  @media screen and (max-width: $break-small) {
-    min-height: 180vh;
-  }
+  // @media screen and (max-width: $break-small) {
+  //   &.normalView {
+  //     min-height: 100vh;
+  //   }
+  //   &.mediumView {
+  //     min-height: 120vh;
+  //   }
+  //   &.largeView {
+  //     min-height: 180vh;
+  //   }
+  // }
 
   .asiiLogoLink {
     display: block;
@@ -114,28 +127,59 @@ $break-small: 600px;
     &.step-two,
     &.step-three {
       display: block;
+
+      &.finalStep {
+        margin-top: 20%;
+        .check-image-container {
+          text-align: center;
+          margin-top: -90px;
+          @media screen and (max-width: 900px) {
+            margin-top: 0;
+          }
+        }
+        .success-text {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          text-align: center;
+          h2 {
+            text-transform: uppercase;
+            font-size: 24px;
+            letter-spacing: 0;
+            color: #222121;
+            margin: 30px 0 10px 0;
+            font-family: "Roboto", sans-serif;
+            font-weight: bold;
+          }
+          p {
+            letter-spacing: 0;
+            color: #707070;
+            font-size: 14px;
+            font-family: "Roboto", sans-serif;
+          }
+        }
+      }
     }
 
     .container-body {
-      &.center{
+      &.center {
         text-align: center;
       }
       text-align: left;
       box-sizing: border-box;
       background: #fff;
       border-radius: 5px;
-      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
-        0 15px 12px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 19px 38px $liteShaddowRed, 0 15px 12px $liteShaddowRed;
       margin: 0;
       padding: 30px;
       box-sizing: border-box;
-      .errorSubmitContainer{
+      .errorSubmitContainer {
         margin-bottom: 30px;
         text-align: center;
         height: 200px;
         overflow: hidden;
         width: 100%;
-        img{
+        img {
           height: 100%;
         }
       }
@@ -159,10 +203,10 @@ $break-small: 600px;
         text-transform: uppercase;
         margin-bottom: 10px;
         font-weight: 800;
-        &.small-text{
-          color:#777;
+        &.small-text {
+          color: #777;
           font-size: 16px;
-          text-transform:none;
+          text-transform: none;
           font-weight: normal;
         }
         &.special {

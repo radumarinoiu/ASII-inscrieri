@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./CustomTextarea.scss";
+import classnames from "classnames";
 export default class CustomTextarea extends Component {
   render() {
     const {
@@ -18,7 +19,11 @@ export default class CustomTextarea extends Component {
     return (
       <Fragment>
         {this.props && (
-          <div className="group-items col s12">
+          <div
+            className={classnames("group-items col s12", {
+              error: dataError && dataError !== "OK"
+            })}
+          >
             <label htmlFor={name}>{label}</label>
             <textarea
               id={id}
@@ -35,9 +40,12 @@ export default class CustomTextarea extends Component {
               value={value}
               placeholder={placeholder}
             />
-            <div className="errorMessage">
-              {dataError && dataError !== "OK" && <span>{dataError}</span>}
-            </div>
+
+            {dataError && dataError !== "OK" && (
+              <div className="errorMessage">
+                <span>{dataError}</span>{" "}
+              </div>
+            )}
           </div>
         )}
       </Fragment>

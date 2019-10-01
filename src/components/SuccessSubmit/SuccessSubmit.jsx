@@ -10,7 +10,16 @@ export default class SuccessSubmit extends Component {
     return (
       <Fragment>
         {this.props && (
-          <div className="main">
+          <div className="main normalView">
+            <a
+              className="asiiLogoLink"
+              title="ASII Page"
+              href="https://asii.ro/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <img src="https://asii.ro/images/logo.png" alt="asii" />
+            </a>
             <div className="row">
               <div className="header-image col s12 m12 l12">
                 <img
@@ -31,46 +40,43 @@ export default class SuccessSubmit extends Component {
               <div className="row center">
                 <div className="register-form col s12 m8 offset-m2 l8 offset-l2 xl6 offset-xl3 center">
                   <div
-                    className={classnames("data-container col s12 m12 l12", {
-                      "step-one animated fadeIn": true
-                    })}
+                    className={classnames(
+                      "data-container col s12 m8 offset-m2 ",
+                      {
+                        "step-one finalStep": true
+                      }
+                    )}
                   >
-                    <div className="container-header-status col 12">
-                      <img
-                        className="progress-bar-desktop"
-                        src={
-                          process.env.PUBLIC_URL + "/assets/images/Stepper2.png"
-                        }
-                        alt=""
-                      />
-                    </div>
                     <div className="container-body col s12">
-                      <div className="container-header-status col 12">
-                        <img
-                          className="progress-bar-mobile"
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/assets/images/Stepper2.png"
-                          }
-                          alt=""
-                        />
-                      </div>
-                      <h3 className="header">Mulțumim pentru</h3>
-                      <h3 className="header special ">
-                      înscriere  <i className="fas fa-smile-beam" />
-                      </h3>
                       <div className="row">
-                        <div className="col s12 m12 l4 xl6">
+                        <div className="check-image-container col s12 m12 l12">
+                          <img
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/assets/images/Check.png"
+                            }
+                            className="checkImage"
+                            alt=""
+                          />
+                        </div>
+                        <div className="col s12 m12">
                           <img
                             className="asii-logo-right"
                             src={
                               process.env.PUBLIC_URL +
-                              "/assets/images/card" +
-                              this.props.stepNo +
-                              "@2x.png"
+                              "/assets/images/card3@2x.png"
                             }
                             alt=""
                           />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="success-text">
+                          <h2>trimis cu success!</h2>
+                          <p>
+                            Informatiile introduse au ajuns cu succes la
+                            destinatie.
+                          </p>
                         </div>
                       </div>
                       <div className="row">
