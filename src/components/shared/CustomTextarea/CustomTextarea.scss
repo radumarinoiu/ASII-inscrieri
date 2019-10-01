@@ -1,6 +1,14 @@
 @import "../../../styles/reset", "../../../styles/grid", "../../../styles/fonts";
 $break-small: 600px;
 .group-items {
+  &.error{
+    label{
+      color:$darkRed;
+    }
+    textarea{
+      border:1px solid $liteRed;
+    }
+  }
   label {
     position: relative;
     color: $dark-color;
@@ -30,7 +38,6 @@ $break-small: 600px;
     border-radius: 15px;
     box-sizing: border-box;
     border: 1px solid rgb(31, 31, 31);
-    margin-bottom: 10px;
     padding-left: 0.75em;
     @media screen and (max-width: $break-small) {
       padding-top: 1.2em;
