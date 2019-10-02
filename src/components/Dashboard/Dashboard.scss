@@ -329,12 +329,10 @@
   }
 }
 .containerDashboard {
-  width: 100%;
+  width: 100vw;
   margin: 0;
-  padding: 10px;
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
-  border-radius: 10px;
   overflow: hidden;
   height: 100vh;
 
@@ -343,16 +341,16 @@
     flex-wrap: wrap;
     border: 1px solid #f2f2f2;
     box-shadow: 0 0 10px #f2f2f2;
-    height: 100%;
+    height: 100vh;
   }
 
   .userHeaderInfo {
-    // background-image: url("https://render.fineartamerica.com/images/rendered/default/print/8.000/8.000/break/images-medium-5/seamless-minimalist-pattern-geometric-background-with-shapes-lines-black-and-white-color-retro-style-80s-90s-khjaproduction.jpg");
     display: block;
     margin: 0;
     padding: 0;
     overflow: hidden;
     max-height: calc(100% - 125px);
+
     .userInfo-name {
       background: #fff;
       padding: 10px;
@@ -369,32 +367,47 @@
         margin: 0;
       }
     }
+
     .userInfo-responses {
-      background: rgba(255, 255, 255, 0.95);
+      background: #fff;
       z-index: 999;
+      max-height: calc(100vh - 123px);
+      overflow-y: scroll;
+
       &.hideDetailsResponses {
         display: none;
       }
+
       @media screen and (max-width: 1000px) {
         width: 94%;
         margin: auto;
         padding: 20px;
-        overflow: hidden;
+        // overflow: hidden;
         box-sizing: border-box;
       }
+
       padding: 20px;
       display: block;
       overflow: hidden;
       position: absolute;
       box-sizing: border-box;
       width: calc(100% - 30%);
+
       .response {
+        padding: 10px;
+        border: 1px solid #eee;
+        margin: 5px;
+        border-radius: 5px;
+        background: #f5f5f5;
+
         span {
           font-size: 20px;
           font-weight: 500;
           color: rgb(0, 0, 0);
+          margin-bottom: 12px;
         }
-        p {
+
+        p, pre {
           font-size: 16px;
           line-height: 1.4;
           color: #000000;
@@ -521,4 +534,8 @@
 .searchZone {
   padding: 0 10px;
   box-sizing: border-box;
+}
+
+.containerDashboard .userHeaderInfo .userInfo-responses {
+  overflow-y: scroll;
 }

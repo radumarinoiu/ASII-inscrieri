@@ -38,6 +38,7 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getData();
   }
+
   componentWillReceiveProps() {
     for (let i in this.props.admin.volunteers) {
       if (
@@ -87,6 +88,7 @@ class Dashboard extends Component {
       this.handleChange(e);
     }
   };
+
   filterByString = (arr, text) => {
     return arr.filter(el => {
       if (el.name) {
@@ -97,12 +99,15 @@ class Dashboard extends Component {
       return false;
     });
   };
+
   filterByDepartment = (arr, arrOfDep) => {
     return arr.filter(el => {
       if (el.departments.length !== 0 && el.departments !== []) {
         let ok = true;
-        arrOfDep.map(dep => {
-          if (!el.departments[dep].selected) {
+        arrOfDep.map((dep, index) => {
+          if (el.selectedDepartments.length) {
+            ok = el.selectedDepartments.findIndex(item => item === dep) === index;
+          } else if (!el.departments[dep].selected) {
             ok = false;
           }
           return null;
@@ -183,6 +188,7 @@ class Dashboard extends Component {
                 <div className="filtersMeniu">
                   <div className="filtersHeader shadow1">
                     <h2>Filtre</h2>
+                    <h2>{this.props.admin.filteredUsers.length}</h2>
                   </div>
                   <div className="filterZone">
                     <div className="checkbox-container">
@@ -335,7 +341,7 @@ class Dashboard extends Component {
                                   active: volunteer.status === "accepted"
                                 })}
                               >
-                                Acceptat
+                                Anuntat
                               </button>
 
                               <button
@@ -349,7 +355,7 @@ class Dashboard extends Component {
                                   active: volunteer.status === "denided"
                                 })}
                               >
-                                Respins
+                                Nu vine
                               </button>
 
                               <button
@@ -375,57 +381,42 @@ class Dashboard extends Component {
                                 })
                               }
                             >
-                              {this.state.hideDetailsResponses ? (
-                                <Fragment>
-                                  <span className="info-button">
-                                    Informatii
-                                  </span>
-                                  <i className="fas fa-chevron-down"></i>
-                                </Fragment>
-                              ) : (
-                                <Fragment>
-                                  <span className="info-button">
-                                    Informatii
-                                  </span>
-                                  <i className="fas fa-chevron-up"></i>
-                                </Fragment>
-                              )}
+                              
                             </div>
                           </div>
                           <div
                             className={classnames("userInfo-responses ", {
-                              hideDetailsResponses: this.state
-                                .hideDetailsResponses
+                              hideDetailsResponses: false
                             })}
                           >
                             <div className="responsesContainer">
-                              <div className="response col s12 m6 l6">
+                              <div className="response col l12">
                                 <span>Email:</span>
                                 <p>{volunteer.email}</p>
                               </div>
-                              <div className="response col s12 m6 l6">
+                              <div className="response col l12">
                                 <span>Telefon:</span>
                                 <p>{volunteer.phoneNumber}</p>
                               </div>
-                              <div className="response col s12 m6 l6">
+                              <div className="response col l12">
                                 <span>Facultate si an de studiu:</span>
                                 <p>{volunteer.faculty}</p>
                               </div>
-                              <div className="response col s12 m6 l6">
+                              <div className="response col l12">
                                 <span>Descriete in minim 15 cuvinte:</span>
                                 <p>{volunteer.description}</p>
                               </div>
-                              <div className="response col s12 m6 l6">
+                              <div className="response col l12">
                                 <span>
                                   Cea mai importanta calitate si de ce?
                                 </span>
                                 <p>{volunteer.bestQuality}</p>
                               </div>
-                              <div className="response col s12 m6 l6">
+                              <div className="response col l12">
                                 <span>De ce vrei sa te inscrii in ASII?</span>
                                 <p>{volunteer.whyASII}</p>
                               </div>
-                              <div className="response col s12 m6 l6">
+                              <div className="response col l12">
                                 <span>
                                   Cate ore pe saptamana poti acorda asociatiei?
                                 </span>
@@ -437,11 +428,11 @@ class Dashboard extends Component {
                                     return value.questions.map((q, index) => {
                                       return (
                                         <Fragment>
-                                          <div className="response col s12 m6 l6">
+                                          <div className="response col l12">
                                             <span>
                                               {key}:{index + 1}.{q.title}
                                             </span>
-                                            <p>{q.answer}</p>
+                                            <pre>{q.answer}</pre>
                                           </div>
                                         </Fragment>
                                       );
@@ -470,7 +461,7 @@ class Dashboard extends Component {
                             )}
                           </div>
                         </div>
-                        <div className="inputComments col s12">
+                        {/* <div className="inputComments col s12">
                           <textarea
                             id="commentAdd"
                             type="text"
@@ -490,7 +481,7 @@ class Dashboard extends Component {
                           >
                             Adauga
                           </button>
-                        </div>
+                        </div> */}
                       </Fragment>
                     );
                   }

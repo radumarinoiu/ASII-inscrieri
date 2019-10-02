@@ -1,10 +1,25 @@
 import React, { Component, Fragment } from "react";
 import "./UserItem.scss";
 import classnames from "classnames";
+
 export default class UserItem extends Component {
   handleClickContainer = e => {
     this.props.handleClick(this.props.volunteer._id);
   };
+
+  showDepartmentsInOrder = () => {
+    const selectedDepartments = this.props.volunteer.selectedDepartments || [];
+    if (selectedDepartments.length === 0) {
+      const departments = this.props.volunteer.departments;
+      for (let dep in departments) {
+        if (departments[dep].selected) {
+          selectedDepartments.push(dep);
+        }
+      }
+    }
+    return selectedDepartments;
+  }
+
   render() {
     return (
       this.props.volunteer && (
@@ -26,17 +41,13 @@ export default class UserItem extends Component {
               <div className="qualityD">
                 <p className="quality">{this.props.volunteer.bestQuality}</p>
                 <div className="selectedDepartments">
-                  {Object.entries(this.props.volunteer.departments).map(
-                    ([key, value]) => {
-                      if (value.selected)
-                        return (
-                          <span className="departmentName" key={key}>
-                            {key}
-                          </span>
-                        );
-                      return null;
-                    }
-                  )}
+                  {this.showDepartmentsInOrder().map(element => {
+                    return (
+                      <span className="departmentName" key={element}>
+                        {element}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>
