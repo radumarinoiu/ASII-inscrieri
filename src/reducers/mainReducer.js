@@ -48,7 +48,7 @@ const initialState = {
         },
         {
           title:
-              "Te-a enervat foarte tare un coleg cand erati prin oras(mediu permisiv). Scrie aici care este prima reactie(fapte si vorbe). Injuratur permise, scrieti ce vreti.",
+              "Te-a enervat foarte tare un coleg cand erati prin oras(mediu permisiv). Scrie aici care este prima reactie(fapte si vorbe). Injuraturi permise, scrieti ce vreti.",
           answer: ""
         }
       ]
