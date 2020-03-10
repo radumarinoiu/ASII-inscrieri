@@ -241,6 +241,7 @@ class Home extends Component {
             this.checkStepZero
           );
         } else if (!validator.isEmail(value)) {
+          console.log(value, validator.isEmail(value))
           this.props.handleErrorChange(
             {
               name,

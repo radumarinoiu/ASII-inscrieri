@@ -7,26 +7,19 @@ export default class CustomMultipleAnswers extends Component {
     };
     handleInputChange = (option) => (e) => {
         const { selected } = this.state;
+        const { name, handleChange } = this.props;
         const newSelected =  {...selected, [option]: !selected[option]};
         this.setState({ selected: newSelected });
-        console.log(newSelected)
-        e.target.name = this.props.name;
+        e.target.name = name;
         e.target.value = Object.keys(newSelected).filter(e=>newSelected[e]).join(', ');
-        this.props.handleChange(e);
+        handleChange(e);
     };
     render() {
         const {
             dataError,
-            type,
             name,
-            id,
             value,
             label,
-            handleChange,
-            placeholder,
-            min,
-            handleOnBlur,
-            max,
             options,
         } = this.props;
         return (
@@ -46,40 +39,6 @@ export default class CustomMultipleAnswers extends Component {
                         onChange={this.handleInputChange(e)} />
                 </>)}
             </div>
-        );
-        return (
-            <Fragment>
-                {this.props && (
-                    <div
-                        className={classnames("group-items col s12", {
-                            error: dataError && dataError !== "OK"
-                        })}
-                    >
-                        <label htmlFor={name}>{label}</label>
-                        <textarea
-                            id={id}
-                            onChange={handleChange}
-                            name={name}
-                            minLength={min}
-                            onBlur={handleOnBlur}
-                            maxLength={max}
-                            rows={3}
-                            min={min}
-                            max={max}
-                            type={type}
-                            className="validate"
-                            value={value}
-                            placeholder={placeholder}
-                        />
-
-                        {dataError && dataError !== "OK" && (
-                            <div className="errorMessage">
-                                <span>{dataError}</span>{" "}
-                            </div>
-                        )}
-                    </div>
-                )}
-            </Fragment>
         );
     }
 }
