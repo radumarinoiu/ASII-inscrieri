@@ -8,7 +8,6 @@ export default class QuestionAnswer extends Component {
             options,
             ...props
         } = this.props;
-        console.log(this.props)
         if(options && options.length) {
             return <CustomMultipleAnswers  {...this.props} />
         }

@@ -1061,7 +1061,6 @@ class Home extends Component {
                                               const { title, answer, options } = q;
                                               const questionIndex =
                                                 "question" + index;
-                                              console.log(department, index, questionIndex)
                                               const errorForText =
                                                 errors.departments[department][
                                                   index
