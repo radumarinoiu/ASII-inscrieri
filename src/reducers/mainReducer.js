@@ -83,11 +83,19 @@ const initialState = {
       questions: [
         {
           title:
-            "Ce secțiuni importante crezi că ar trebui sa conțina un site?",
+            "Daca cel mai bun prieten al tau ar crea un design pentru proiectul tau si tie nu ti-ar placea deloc, i-ai spune?(gandeste-te ca acesta s-ar putea supara)",
           answer: ""
         },
         {
-          title: "Zi-mi cel mai nebun lucru pe care l-ai făcut.",
+          title: "Cate ore ai putea aloca pe saptamana pentru a lucra la un proiect ASII? Ai putea veni la training uri in weekend? (gandeste-te ca trebuie sa mergi si la facultate)",
+          answer: ""
+        },
+        {
+          title: "Daca lucrezi intr-o echipa de 5 oameni, iar teamlead-ul ti-a dat un task si te-ai împotmolit, preferi sa-ti intrebi colegii de echipa sau sa cauti pe internet rezolvarea? ",
+          answer: ""
+        },
+        {
+          title: "Cu ce ai mai lucrat pana acum? (ex: HTML, CSS, OOP, Angular, Java, JavaScript)",
           answer: ""
         }
       ]
@@ -147,7 +155,6 @@ const initialState = {
           ],
           answer: ""
         },
-
         {
           title: "Care este sursa ta de inspiratie cand redactezi/creezi un material?",
           answer: ""
@@ -199,28 +206,50 @@ const mainReducer = (state = initialState, { type, payload }) => {
             position: null,
             questions: [
               {
-                title: "5 lucruri de ținut cont în organizarea unei petreceri?",
+                title: "Studiu de caz: ai apartamentul plin de gunoi. Colegii de apartament au plecat la magazin sa ia materiale ca sa faceti curat. Tu cu un coleg/colega ati ramas in apartament. Ce faci pana se intorc colegii de apartament de la magazin?",
                 answer: ""
               },
               {
                 title:
-                  "Definește în stil propriu ce înseamnă o studenție reușită pentru tine",
+                    "Unde mergi sa pertreci ?",
+                answer: ""
+              },
+              {
+                title:
+                    "Care consideri ca este viata perfecta de student ?",
+                answer: ""
+              },
+              {
+                title:
+                    "Propune un plan pentru un Citybreak care sa includa metode de transport, activitati, ce ati vizita si unde ati sta, dar si cum sa motivezi prietenii sa mearga cu tine.",
+                answer: ""
+              },
+              {
+                title:
+                    "Te-a enervat foarte tare un coleg cand erati prin oras(mediu permisiv). Scrie aici care este prima reactie(fapte si vorbe). Injuratur permise, scrieti ce vreti.",
                 answer: ""
               }
             ]
           },
           RE: {
-            name: "Departamentul Relatii  Externe",
+            name: "Departamentul Relații Externe",
             selected: false,
             position: null,
             questions: [
               {
-                title:
-                  "Cum te descurci când cunoști o persoană nouă (importantă)?",
+                title: "Care sunt 3 cuvinte care te caracterizeaza ?",
                 answer: ""
               },
               {
-                title: "Ce faci dacă dai peste o situație neașteptată?",
+                title: "In cuvintele tale, ce este un contract ?",
+                answer: ""
+              },
+              {
+                title: "Prima impresie conteaza ? Argumente.",
+                answer: ""
+              },
+              {
+                title: "Daca situatia ar cere, ce ai alege dintre amanarea unui eveniment mare si pierderea relatiei cu un sponsor ? Argumente.",
                 answer: ""
               }
             ]
@@ -232,11 +261,19 @@ const mainReducer = (state = initialState, { type, payload }) => {
             questions: [
               {
                 title:
-                  "Ce secțiuni importante crezi că ar trebui să conțină un site?",
+                    "Daca cel mai bun prieten al tau ar crea un design pentru proiectul tau si tie nu ti-ar placea deloc, i-ai spune?(gandeste-te ca acesta s-ar putea supara)",
                 answer: ""
               },
               {
-                title: "Zi-mi cel mai nebun lucru pe care l-ai făcut.",
+                title: "Cate ore ai putea aloca pe saptamana pentru a lucra la un proiect ASII? Ai putea veni la training uri in weekend? (gandeste-te ca trebuie sa mergi si la facultate)",
+                answer: ""
+              },
+              {
+                title: "Daca lucrezi intr-o echipa de 5 oameni, iar teamlead-ul ti-a dat un task si te-ai împotmolit, preferi sa-ti intrebi colegii de echipa sau sa cauti pe internet rezolvarea? ",
+                answer: ""
+              },
+              {
+                title: "Cu ce ai mai lucrat pana acum? (ex: HTML, CSS, OOP, Angular, Java, JavaScript)",
                 answer: ""
               }
             ]
@@ -248,11 +285,19 @@ const mainReducer = (state = initialState, { type, payload }) => {
             questions: [
               {
                 title:
-                  "Ce consideri că te recomandă pentru a fi membru al departamentului Proiecte?",
+                    "Cum te-ar descrie prietenii tai in 3 cuvinte?",
                 answer: ""
               },
               {
-                title: "Ce consideri că ar cuprinde o mapă de proiect?",
+                title: "Cunosti tooluri de management? Daca da, care ?",
+                answer: ""
+              },
+              {
+                title: "Ce crezi ca ar contine o mapa de proiect ?",
+                answer: ""
+              },
+              {
+                title: "Descrie in cateva cuvinte ce consideri ca inseamna etapa de monitorizare a unui proiect ?",
                 answer: ""
               }
             ]
@@ -263,16 +308,45 @@ const mainReducer = (state = initialState, { type, payload }) => {
             position: null,
             questions: [
               {
-                title: "În ce constă procesul tău de creare a unui material?",
+                title: "Pe ce domenii stii sa lucrezi?",
+                options: [
+                  'Compozitie text',
+                  'Design Grafic',
+                  'Montaj video',
+                  'Fotografie/Editare foto',
+                  'Filmare/ Montaj foto-video',
+                  'Marketing',
+                  'Altele...',
+                ],
                 answer: ""
               },
               {
-                title: "De unde te inspiri atunci când lucrezi pe un proiect?",
+                title: "Pe ce domenii ai vrea sa inveti sa lucrezi ?",
+                options: [
+                  'Compozitie text',
+                  'Design Grafic',
+                  'Montaj video',
+                  'Fotografie/Editare foto',
+                  'Filmare/ Montaj foto-video',
+                  'Marketing',
+                  'Altele...',
+                ],
                 answer: ""
               },
-
               {
-                title: "Ce software-uri/tool-uri folosești? ",
+                title: "Care este sursa ta de inspiratie cand redactezi/creezi un material?",
+                answer: ""
+              },
+              {
+                title: "Intr-o reclama ce este mai important, textul sau imagine? Justifica.",
+                answer: ""
+              },
+              {
+                title: "Ce software/tool-uri folosesti ?",
+                answer: ""
+              },
+              {
+                title: "Vino cu un slogan nou pentru Coca-cola",
                 answer: ""
               }
             ]

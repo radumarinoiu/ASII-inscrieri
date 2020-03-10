@@ -18,6 +18,7 @@ import {
   submitForm,
   handleCustomErrorChange
 } from "../../actions/mainActions";
+import QuestionAnswer from "../shared/QuestionAnswer/QuestionAnswer";
 
 class Home extends Component {
   updateSelectedDepartments = (department, operation) => {
@@ -1056,15 +1057,17 @@ class Home extends Component {
                                             1}.${value.name}`}</h1>
                                           <div className="col s12 m12 l11 offset-l1">
                                             {value.questions.map((q, index) => {
-                                              const { title, answer } = q;
+                                              const { title, answer, options } = q;
                                               const questionIndex =
                                                 "question" + index;
+                                              console.log(department, index, questionIndex)
                                               const errorForText =
                                                 errors.departments[department][
                                                   index
                                                 ][questionIndex];
                                               return (
-                                                <CustomTextarea
+                                                <QuestionAnswer
+                                                  options={options}
                                                   handleChange={
                                                     this.handleCustomTextarea
                                                   }
