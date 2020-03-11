@@ -102,17 +102,9 @@ class Dashboard extends Component {
 
   filterByDepartment = (arr, arrOfDep) => {
     return arr.filter(el => {
-      if (el.departments.length !== 0 && el.departments !== []) {
-        let ok = true;
-        arrOfDep.map((dep, index) => {
-          if (el.selectedDepartments.length) {
-            ok = el.selectedDepartments.findIndex(item => item === dep) === index;
-          } else if (!el.departments[dep].selected) {
-            ok = false;
-          }
-          return null;
-        });
-        return ok;
+      elemDepartments = el.departments;
+      if (el.departments.length !== 0 && el.departments !== [] && arrOfDep.includes(el.departments[0])) {
+        return true;
       } else {
         return false;
       }
