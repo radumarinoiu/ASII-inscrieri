@@ -25,6 +25,15 @@ const initialState = {
         },
         {
           question1: ""
+        },
+        {
+          question2: ""
+        },
+        {
+          question3: ""
+        },
+        {
+          question4: ""
         }
       ],
       IT: [
@@ -33,6 +42,12 @@ const initialState = {
         },
         {
           question1: ""
+        },
+        {
+          question2: ""
+        },
+        {
+          question3: ""
         }
       ],
       RE: [
@@ -41,6 +56,12 @@ const initialState = {
         },
         {
           question1: ""
+        },
+        {
+          question2: ""
+        },
+        {
+          question3: ""
         }
       ],
       PRO: [
@@ -49,6 +70,12 @@ const initialState = {
         },
         {
           question1: ""
+        },
+        {
+          question2: ""
+        },
+        {
+          question3: ""
         }
       ],
       "PR&MEDIA": [
@@ -60,6 +87,15 @@ const initialState = {
         },
         {
           question2: ""
+        },
+        {
+          question3: ""
+        },
+        {
+          question4: ""
+        },
+        {
+          question5: ""
         }
       ]
     }
@@ -103,6 +139,15 @@ const errorReducer = (state = initialState, { type, payload }) => {
               },
               {
                 question1: ""
+              },
+              {
+                question2: ""
+              },
+              {
+                question3: ""
+              },
+              {
+                question4: ""
               }
             ],
             IT: [
@@ -119,6 +164,12 @@ const errorReducer = (state = initialState, { type, payload }) => {
               },
               {
                 question1: ""
+              },
+              {
+                question2: ""
+              },
+              {
+                question3: ""
               }
             ],
             PRO: [
@@ -127,6 +178,12 @@ const errorReducer = (state = initialState, { type, payload }) => {
               },
               {
                 question1: ""
+              },
+              {
+                question2: ""
+              },
+              {
+                question3: ""
               }
             ],
             "PR&MEDIA": [
@@ -138,6 +195,12 @@ const errorReducer = (state = initialState, { type, payload }) => {
               },
               {
                 question2: ""
+              },
+              {
+                question3: ""
+              },
+              {
+                question4: ""
               }
             ]
           }

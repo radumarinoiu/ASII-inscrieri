@@ -18,6 +18,7 @@ import {
   submitForm,
   handleCustomErrorChange
 } from "../../actions/mainActions";
+import QuestionAnswer from "../shared/QuestionAnswer/QuestionAnswer";
 
 class Home extends Component {
   updateSelectedDepartments = (department, operation) => {
@@ -240,6 +241,7 @@ class Home extends Component {
             this.checkStepZero
           );
         } else if (!validator.isEmail(value)) {
+          console.log(value, validator.isEmail(value))
           this.props.handleErrorChange(
             {
               name,
@@ -1053,7 +1055,7 @@ class Home extends Component {
                                             1}.${value.name}`}</h1>
                                           <div className="col s12 m12 l11 offset-l1">
                                             {value.questions.map((q, index) => {
-                                              const { title, answer } = q;
+                                              const { title, answer, options } = q;
                                               const questionIndex =
                                                 "question" + index;
                                               const errorForText =
@@ -1061,7 +1063,8 @@ class Home extends Component {
                                                   index
                                                 ][questionIndex];
                                               return (
-                                                <CustomTextarea
+                                                <QuestionAnswer
+                                                  options={options}
                                                   handleChange={
                                                     this.handleCustomTextarea
                                                   }
