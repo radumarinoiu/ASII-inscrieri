@@ -899,7 +899,6 @@ class Home extends Component {
                               dataError={errors.description}
                               type="text"
                               min="3"
-                              max="100"
                               name="description"
                               id="description"
                               value={description}
@@ -915,7 +914,6 @@ class Home extends Component {
                               name="bestQuality"
                               id="bestQuality"
                               min="3"
-                              max="100"
                               value={bestQuality}
                               label="Cea mai importantă calitate și de ce?"
                             />
@@ -928,7 +926,6 @@ class Home extends Component {
                               type="text"
                               name="whyASII"
                               min="3"
-                              max="100"
                               id="whyASII"
                               value={whyASII}
                               label="De ce vrei să te înscrii în ASII?"
@@ -1074,7 +1071,6 @@ class Home extends Component {
                                                   }
                                                   type="text"
                                                   min="3"
-                                                  max="100"
                                                   name={`question${index}-${department}`}
                                                   value={answer}
                                                   label={title}
